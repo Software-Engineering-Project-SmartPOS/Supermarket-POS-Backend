@@ -1,0 +1,59 @@
+
+type Query{
+    allEmployees :[Employee]
+    allAddress: [Address]
+    addressById(id:ID!) : Address
+
+}
+type Mutation{
+
+#    here the input for the mutations must be defined in the graphql schema
+#    all the inputs must be in json
+#    in the request body, input data should be in json
+#    those inputs names must be same as in the input type
+#    but no order is needed
+#    when mapping the mutation,
+#       that function
+
+    addAddress(address_input: AddressInput):Address
+    addAnAddress(rd: String): Address
+}
+
+#to get the user input for Address
+input AddressInput{
+    street_name: String!
+    house_number: String!
+    zipcode: String!
+
+
+}
+type Employee{
+
+    id:ID!
+    first_name : String
+    middle_name : String
+    last_name : String
+    address : Address
+    number : String
+    job_role : String
+    salary_type: SalaryType
+}
+
+
+type Address{
+    id : ID!
+    street_name : String!
+    house_number : String!
+    zipcode:String!
+    residing_employees :[Employee]
+
+}
+type SalaryType{
+    id : ID!
+    basic_salary : Int
+    half_day_salary: Int
+    overtime_salary: Int
+    bonus: Int
+    employees : [Employee]
+
+}
