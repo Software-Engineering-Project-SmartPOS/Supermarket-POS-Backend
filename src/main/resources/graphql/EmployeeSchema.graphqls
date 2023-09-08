@@ -4,9 +4,9 @@ type Query{
     allAddress: [Address]
     addressById(id:ID!) : Address
 
+
 }
 type Mutation{
-
 #    here the input for the mutations must be defined in the graphql schema
 #    all the inputs must be in json
 #    in the request body, input data should be in json
@@ -14,31 +14,49 @@ type Mutation{
 #    but no order is needed
 #    when mapping the mutation,
 #       that function
-
     addAddress(address_input: AddressInput):Address
     addAnAddress(rd: String): Address
+    AddEmployee(employee_input:EmployeeInput):Employee
+    isValidateEmployee(employee_input :EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 }
 
-#to get the user input for Address
+type EmployeeValidationReport{
+    is_name_okay: Boolean
+    is_number_okay: Boolean
+    is_email_okay : Boolean
+
+}
+
 input AddressInput{
     street_name: String!
     house_number: String!
     zipcode: String!
+}
 
+input EmployeeInput{
+    title: Title
+    first_name : String
+    middle_name : String
+    last_name : String
+    address : AddressInput
+    number : String
+    job_role : JobRole
+    salary_type: SalaryTypeInput
 
 }
-type Employee{
 
+type Employee{
     id:ID!
+    title: Title
     first_name : String
     middle_name : String
     last_name : String
     address : Address
     number : String
-    job_role : String
+    job_role : JobRole
     salary_type: SalaryType
+    active : Boolean
 }
-
 
 type Address{
     id : ID!
@@ -46,8 +64,8 @@ type Address{
     house_number : String!
     zipcode:String!
     residing_employees :[Employee]
-
 }
+
 type SalaryType{
     id : ID!
     basic_salary : Int
@@ -55,5 +73,23 @@ type SalaryType{
     overtime_salary: Int
     bonus: Int
     employees : [Employee]
+}
 
+input SalaryTypeInput{
+    basic_salary : Int
+    half_day_salary: Int
+    overtime_salary: Int
+    bonus: Int
+}
+enum Title{
+    MR
+    MRS
+    MISS
+}
+enum JobRole{
+    CASHIER
+    OWNER
+    MANAGER
+    STORE_MANAGER
+    SALES_ASSISTANT
 }

@@ -29,6 +29,11 @@ public class SalaryType {
     @OneToMany(mappedBy = "salary_type")
     private List<Employee> employees;
 
-
+    public SalaryType(Double basic_salary, Double half_day_salary, Double overtime_salary, Double bonus) {
+        this.basic_salary = basic_salary;
+        this.half_day_salary = half_day_salary;
+        this.overtime_salary = overtime_salary;
+        this.bonus = bonus;
+    }
 }
 

@@ -55,15 +55,8 @@ public class AddressController {
         return addressService.AddTheAddress(address_input);
 
     }
-                                                    // used for testt
-                                                    ////    @MutationMapping
-                                                    ////    public Address addAnAddress(@Argument String rd){
-                                                    ////        Address newAddress = new Address();
-                                                    ////        newAddress.setHouse_number("51/5");
-                                                    ////        newAddress.setStreet_name(rd);
-                                                    ////        newAddress.setZipcode("212121212212121");
-                                                    ////        return addressService.saveTheAddress(newAddress);
-                                                    ////    }
+
+
 
 
 }

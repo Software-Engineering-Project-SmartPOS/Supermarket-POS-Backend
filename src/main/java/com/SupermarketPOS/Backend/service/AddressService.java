@@ -32,11 +32,39 @@ public class AddressService {
 
     //function to get the address by the id
     public Address getByTheId(Integer id){
+        try{
         Address theAddress = addressRepository.getById(id);
         if (theAddress == null){
 //            return null;
             throw new IllegalArgumentException("No address for that id");
         }
         return theAddress;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    public Address getAddressByAddressInput(AddressInput addressInput){
+        try{
+            // if address available return the address
+            Address savedAddress = addressRepository.getByDetails(
+                                            addressInput.getStreet_name(),
+                                            addressInput.getHouse_number(),
+                                            addressInput.getZipcode());
+            if(savedAddress != null){
+                return savedAddress;
+            }
+            else throw new RuntimeException("no previously saved address is found in the database");
+        }
+        catch (Exception e){
+            // if an exception occured address is not added previously, so add and return the new address
+            Address new_address = new Address(
+                    addressInput.getStreet_name(),
+                    addressInput.getHouse_number(),
+                    addressInput.getZipcode()
+            );
+            return addressRepository.save(new_address);
+        }
     }
 }
