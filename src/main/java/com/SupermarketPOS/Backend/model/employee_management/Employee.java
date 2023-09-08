@@ -12,6 +12,12 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "email")}) // Define the unique constraint
+    //@Table(uniqueConstraints = {
+    //        @UniqueConstraint(columnNames = "email"),
+    //        @UniqueConstraint(columnNames = {"first_name", "middle_name", "last_name"})
+    //})
+
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +26,8 @@ public class Employee {
     private String first_name;
     private String middle_name;
     private String last_name;
+
+    @Column(unique = true)
     private String email;
 
     @ManyToOne

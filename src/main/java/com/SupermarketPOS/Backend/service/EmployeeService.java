@@ -38,20 +38,9 @@ public class EmployeeService {
         Address  availableAddress  = addressService.getAddressByAddressInput(new_employee_address_input); //get the address if address is saved previously get the saved address, if not save as a new address and get the address
 
         SalaryTypeInput new_salary_type_input = employeeInput.salary_type(); // get the salaryIput from the employeeInput
-        SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(new_salary_type_input);
+        SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(new_salary_type_input); // get the salary type : if saved before give the saved salary type if not create a new salary type
 
-
-//        SalaryType availableSalaryType = SalaryTypeService.getSalaryTypeBySalaryInput(new_salary_type_input);
-//        SalaryType new_salary_type = new SalaryType(
-//                new_salary_type_input.basic_salary(),
-//                new_salary_type_input.half_day_salary(),
-//                new_salary_type_input.overtime_salary(),
-//                new_salary_type_input.bonus()
-//        );
-//        SalaryType availableSalaryType = salaryTypeService.isSalaryTypeAvailable(new_salary_type_input);
-
-        JobRole new_job_role = JobRole.CASHIER  ;
-
+//        System.out.println(employeeInput.job_role());
         Employee new_employee = new Employee(
                 employeeInput.title(),
                 employeeInput.first_name(),
@@ -60,13 +49,35 @@ public class EmployeeService {
                 employeeInput.email(),
                 availableAddress,
                 employeeInput.number(),
-                new_job_role,
+                employeeInput.job_role(),
                 availableSalaryType,
                 true
-
         );
-
-
         return employeeRepository.save(new_employee);
+    }
+
+    public EmployeeValidationReport Validate(EmployeeInput employeeInput){
+        //  validation criteria
+        // no employee have the same 3 names (first, middle, last)
+        //phone should be unique
+        // email should be unique
+
+        boolean is_name_okay =  !employeeRepository.isEmployeeNameTaken(
+                employeeInput.first_name(),
+                employeeInput.middle_name(),
+                employeeInput.last_name()
+        ); // check the availability of the name
+
+        Boolean is_number_okay = !employeeRepository.isNumberTaken(
+                employeeInput.number()
+        );
+        Boolean is_email_okay = !employeeRepository.isEmailTaken(
+                employeeInput.email()
+        );
+        return new EmployeeValidationReport(
+                is_name_okay,
+                is_number_okay,
+                is_email_okay
+        );
     }
 }

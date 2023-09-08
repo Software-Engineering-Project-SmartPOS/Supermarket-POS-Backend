@@ -32,14 +32,13 @@ public class EmployeeController {
     //add a new employee
     @MutationMapping
     public Employee AddEmployee(@Argument EmployeeInput employee_input){
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         return employeeService.AddNewEmployee(employee_input);
     }
 
-//    @MutationMapping
-//    // this validate the given input
-//    public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employeeInput ){
-//        return employeeService.Validate(employeeInput);
-//    };
+    @MutationMapping
+    // this validate the given input and send a validation report back
+    public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employee_input ){
+        return employeeService.Validate(employee_input);
+    };
 
 }

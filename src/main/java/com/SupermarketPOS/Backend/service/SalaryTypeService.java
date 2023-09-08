@@ -1,5 +1,7 @@
 package com.SupermarketPOS.Backend.service;
 
+import com.SupermarketPOS.Backend.dto.EmployeeInput;
+import com.SupermarketPOS.Backend.dto.EmployeeValidationReport;
 import com.SupermarketPOS.Backend.dto.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.SalaryTypeRepository;
@@ -26,8 +28,7 @@ public class SalaryTypeService {
             if(savedSalaryType != null){
                 return savedSalaryType;
             }
-            else
-                throw new RuntimeException("No previous saved salary type is found in the database");
+            else throw new RuntimeException("No previous saved salary type is found in the database");
         }
         catch (Exception e){
             // no previously saved salarytype
@@ -39,7 +40,7 @@ public class SalaryTypeService {
             );
             return salaryTypeRepository.save(new_salary_type);
         }
-
-
     }
+
+
 }

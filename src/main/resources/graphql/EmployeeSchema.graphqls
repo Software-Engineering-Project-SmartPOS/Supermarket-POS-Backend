@@ -38,6 +38,7 @@ input EmployeeInput{
     first_name : String
     middle_name : String
     last_name : String
+    email:String
     address : AddressInput
     number : String
     job_role : JobRole
@@ -47,15 +48,16 @@ input EmployeeInput{
 
 type Employee{
     id:ID!
-    title: Title
-    first_name : String
+    title: Title!
+    first_name : String!
     middle_name : String
-    last_name : String
+    last_name : String!
+    email: String!
     address : Address
-    number : String
-    job_role : JobRole
+    number : String!
+    job_role : JobRole!
     salary_type: SalaryType
-    active : Boolean
+    active : Boolean!
 }
 
 type Address{
