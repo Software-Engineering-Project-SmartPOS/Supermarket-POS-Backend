@@ -1,15 +1,16 @@
 extend type Query {
-  validateNewCustomerDetail(new_customer_detail: CustomerInput): CustomerValidationReport
+  validateNewCustomerDetail(
+    newCustomerDetail: CustomerInput
+  ): CustomerValidationReport
 }
 
 extend type Mutation {
-   addCustomer(customer_input: CustomerInput): Customer
- }
-
+  addCustomer(customerInput: CustomerInput): Customer
+}
 
 type CustomerValidationReport {
-  is_telephone_okay: Boolean
-  is_email_okay: Boolean
+  isTelephoneOkay: Boolean
+  isEmailOkay: Boolean
 }
 
 input CustomerInput {
@@ -23,8 +24,8 @@ type Customer {
   name: String
   telephone: String
   email: String
-  customer_type: String
-  created_date: String
+  customerType: String
+  createdDate: String
 }
 
 enum CustomerType {

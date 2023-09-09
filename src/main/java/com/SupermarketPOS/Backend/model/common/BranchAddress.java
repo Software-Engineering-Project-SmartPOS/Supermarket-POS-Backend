@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 public class BranchAddress extends AddressMain{
     @OneToOne
-    @JoinColumn(name = "branch_id")
+    @JoinColumn(name = "branchId")
     private Branch branch;
 
 

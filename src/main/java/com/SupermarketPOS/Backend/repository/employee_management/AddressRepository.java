@@ -14,7 +14,7 @@ public interface AddressRepository extends JpaRepository<Address,Integer> {
 //            String street_name,
 //            String house_number,
 //            String zipcode);
-    @Query("SELECT a FROM Address a WHERE a.street_name = :streetName AND a.house_number = :houseNumber AND a.zipcode = :zipcode")
+    @Query("SELECT a FROM Address a WHERE a.streetName = :streetName AND a.houseNumber = :houseNumber AND a.zipcode = :zipcode")
     Address getByDetails(
             @Param("streetName") String streetName,
             @Param("houseNumber") String houseNumber,

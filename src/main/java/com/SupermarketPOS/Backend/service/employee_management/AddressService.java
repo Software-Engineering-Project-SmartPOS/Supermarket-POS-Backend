@@ -17,8 +17,8 @@ public class AddressService {
     //add new address (input must be a addressInput)
     public Address AddTheAddress(AddressInput addressInput){
         Address address = new Address(
-                addressInput.getStreet_name(),
-                addressInput.getHouse_number(),
+                addressInput.getStreetName(),
+                addressInput.getHouseNumber(),
                 addressInput.getZipcode()
         );
         // save the Address and return
@@ -49,8 +49,8 @@ public class AddressService {
         try{
             // if address available return the address
             Address savedAddress = addressRepository.getByDetails(
-                                            addressInput.getStreet_name(),
-                                            addressInput.getHouse_number(),
+                                            addressInput.getStreetName(),
+                                            addressInput.getHouseNumber(),
                                             addressInput.getZipcode());
             if(savedAddress != null){
                 return savedAddress;
@@ -59,12 +59,12 @@ public class AddressService {
         }
         catch (Exception e){
             // if an exception occured address is not added previously, so add and return the new address
-            Address new_address = new Address(
-                    addressInput.getStreet_name(),
-                    addressInput.getHouse_number(),
+            Address newAddress = new Address(
+                    addressInput.getStreetName(),
+                    addressInput.getHouseNumber(),
                     addressInput.getZipcode()
             );
-            return addressRepository.save(new_address);
+            return addressRepository.save(newAddress);
         }
     }
 }

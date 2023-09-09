@@ -16,29 +16,29 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer addCustomer(CustomerInput customer_input){
-        CustomerValidationReport customer_input_validation_report = Validate(customer_input);
+    public Customer addCustomer(CustomerInput customerInput){
+        CustomerValidationReport customerInputValidationReport = Validate(customerInput);
 
-        if(customer_input_validation_report.is_email_okay() && customer_input_validation_report.is_telephone_okay()){// if valid (customer in not already added/ email and the telephone is unique)
-                    Customer new_customer = new Customer(
-                    customer_input.name(),
-                    customer_input.telephone(),
-                    customer_input.email(),
+        if(customerInputValidationReport.isEmailOkay() && customerInputValidationReport.isTelephoneOkay()){// if valid (customer in not already added/ email and the telephone is unique)
+                    Customer newCustomer = new Customer(
+                    customerInput.name(),
+                    customerInput.telephone(),
+                    customerInput.email(),
                     LocalDateTime.now()
             );
-            return customerRepository.save(new_customer);
+            return customerRepository.save(newCustomer);
         }
         else
             return null;
     }
 
-    public CustomerValidationReport Validate(CustomerInput customer_input_detail){
-        Boolean is_telephone_okay = !customerRepository.isTelephoneTaken(customer_input_detail.telephone());
-        Boolean is_email_okay = !customerRepository.isEmailTaken(customer_input_detail.email());
+    public CustomerValidationReport Validate(CustomerInput customerInputDetail){
+        Boolean isTelephoneOkay = !customerRepository.isTelephoneTaken(customerInputDetail.telephone());
+        Boolean isEmailOkay = !customerRepository.isEmailTaken(customerInputDetail.email());
 
         return new CustomerValidationReport(
-                is_telephone_okay,
-                is_email_okay
+                isTelephoneOkay,
+                isEmailOkay
         );
 
     }

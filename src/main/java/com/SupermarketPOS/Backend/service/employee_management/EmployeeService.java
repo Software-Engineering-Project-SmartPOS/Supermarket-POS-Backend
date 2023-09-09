@@ -34,27 +34,32 @@ public class EmployeeService {
 
     @Transactional
     public Employee AddNewEmployee(EmployeeInput employeeInput){
+        EmployeeValidationReport validationReport = Validate(employeeInput);
 
-        AddressInput new_employee_address_input = employeeInput.address();// get the employee address from the employeeInput
-        Address  availableAddress  = addressService.getAddressByAddressInput(new_employee_address_input); //get the address if address is saved previously get the saved address, if not save as a new address and get the address
+        if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
+                AddressInput newEmployeeAddressInput = employeeInput.address();// get the employee address from the employeeInput
+                Address  availableAddress  = addressService.getAddressByAddressInput(newEmployeeAddressInput); //get the address if address is saved previously get the saved address, if not save as a new address and get the address
 
-        SalaryTypeInput new_salary_type_input = employeeInput.salary_type(); // get the salaryIput from the employeeInput
-        SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(new_salary_type_input); // get the salary type : if saved before give the saved salary type if not create a new salary type
+                SalaryTypeInput newSalaryTypeInput = employeeInput.salaryType(); // get the salaryIput from the employeeInput
+                SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
 
-//        System.out.println(employeeInput.job_role());
-        Employee new_employee = new Employee(
-                employeeInput.title(),
-                employeeInput.first_name(),
-                employeeInput.middle_name(),
-                employeeInput.last_name(),
-                employeeInput.email(),
-                availableAddress,
-                employeeInput.number(),
-                employeeInput.job_role(),
-                availableSalaryType,
-                true
-        );
-        return employeeRepository.save(new_employee);
+                //System.out.println(employeeInput.job_role());
+                Employee newEmployee = new Employee(
+                        employeeInput.title(),
+                        employeeInput.firstName(),
+                        employeeInput.middleName(),
+                        employeeInput.lastName(),
+                        employeeInput.email(),
+                        availableAddress,
+                        employeeInput.number(),
+                        employeeInput.jobRole(),
+                        availableSalaryType,
+                        true
+                );
+                return employeeRepository.save(newEmployee);
+        }
+        return null;
+        
     }
 
     public EmployeeValidationReport Validate(EmployeeInput employeeInput){
@@ -63,22 +68,22 @@ public class EmployeeService {
         //phone should be unique
         // email should be unique
 
-        boolean is_name_okay =  !employeeRepository.isEmployeeNameTaken(
-                employeeInput.first_name(),
-                employeeInput.middle_name(),
-                employeeInput.last_name()
+        boolean isNameOkay =  !employeeRepository.isEmployeeNameTaken(
+                employeeInput.firstName(),
+                employeeInput.middleName(),
+                employeeInput.lastName()
         ); // check the availability of the name
 
-        Boolean is_number_okay = !employeeRepository.isNumberTaken(
+        Boolean isNumberOkay = !employeeRepository.isNumberTaken(
                 employeeInput.number()
         );
-        Boolean is_email_okay = !employeeRepository.isEmailTaken(
+        Boolean isEmailOkay = !employeeRepository.isEmailTaken(
                 employeeInput.email()
         );
         return new EmployeeValidationReport(
-                is_name_okay,
-                is_number_okay,
-                is_email_okay
+                isNameOkay,
+                isNumberOkay,
+                isEmailOkay
         );
     }
 }

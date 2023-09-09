@@ -20,8 +20,8 @@ public class Address {
     @Id
     @GeneratedValue
     private Integer id;
-    private String street_name;
-    private String house_number;
+    private String streetName;
+    private String houseNumber;
     private String zipcode;
 
 
@@ -30,17 +30,17 @@ public class Address {
 
 
     //constructor without residing_employees
-    public Address(Integer id, String street_name, String house_number, String zipcode) {
+    public Address(Integer id, String streetName, String houseNumber, String zipcode) {
         this.id = id;
-        this.street_name = street_name;
-        this.house_number = house_number;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
         this.zipcode = zipcode;
     }
 
     //constructor without residing_employees and the id
-    public Address(String street_name, String house_number, String zipcode) {
-        this.street_name = street_name;
-        this.house_number = house_number;
+    public Address(String streetName, String houseNumber, String zipcode) {
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
         this.zipcode = zipcode;
     }
 }

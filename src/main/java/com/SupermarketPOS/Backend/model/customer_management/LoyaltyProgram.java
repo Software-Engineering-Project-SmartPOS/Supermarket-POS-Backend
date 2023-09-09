@@ -19,15 +19,15 @@ public class LoyaltyProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String loyalty_program_name;
+    private String loyaltyProgramName;
     private String description;
-    private Integer points_threshold;
-    private Double discount_percentage;
+    private Integer pointsThreshold;
+    private Double discountPercentage;
 
-    public LoyaltyProgram(String loyalty_program_name, String description, Integer points_threshold, Double discount_percentage) {
-        this.loyalty_program_name = loyalty_program_name;
+    public LoyaltyProgram(String loyaltyProgramName, String description, Integer pointsThreshold, Double discountPercentage) {
+        this.loyaltyProgramName = loyaltyProgramName;
         this.description = description;
-        this.points_threshold = points_threshold;
-        this.discount_percentage = discount_percentage;
+        this.pointsThreshold = pointsThreshold;
+        this.discountPercentage = discountPercentage;
     }
 }

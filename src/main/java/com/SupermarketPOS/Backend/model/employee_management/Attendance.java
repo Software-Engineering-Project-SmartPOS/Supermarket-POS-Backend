@@ -24,7 +24,7 @@ public class Attendance {
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     // Constructors, getters, setters, etc.

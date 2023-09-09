@@ -17,22 +17,22 @@ public class SalaryType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Double basic_salary;
-    private Double half_day_salary;
-    private Double overtime_salary;
+    private Double basicSalary;
+    private Double halfDaySalary;
+    private Double overTimeSalary;
     private Double bonus;
-    private LocalDateTime created_at;
-    private LocalDateTime Updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime UpdatedAt;
 
 
 
-    @OneToMany(mappedBy = "salary_type")
+    @OneToMany(mappedBy = "salaryType")
     private List<Employee> employees;
 
-    public SalaryType(Double basic_salary, Double half_day_salary, Double overtime_salary, Double bonus) {
-        this.basic_salary = basic_salary;
-        this.half_day_salary = half_day_salary;
-        this.overtime_salary = overtime_salary;
+    public SalaryType(Double basicSalary, Double halfDaySalary, Double overTimeSalary, Double bonus) {
+        this.basicSalary = basicSalary;
+        this.halfDaySalary = halfDaySalary;
+        this.overTimeSalary = overTimeSalary;
         this.bonus = bonus;
     }
 }

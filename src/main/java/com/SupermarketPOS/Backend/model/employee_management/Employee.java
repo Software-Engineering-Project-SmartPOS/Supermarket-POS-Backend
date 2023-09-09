@@ -13,7 +13,7 @@ import lombok.*;
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "email")}) // Define the unique constraint
     //@Table(uniqueConstraints = {
     //        @UniqueConstraint(columnNames = "email"),
-    //        @UniqueConstraint(columnNames = {"first_name", "middle_name", "last_name"})
+    //        @UniqueConstraint(columnNames = {"firstName", "middleName", "lastName"})
     //})
 
 public class Employee {
@@ -21,9 +21,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Title title;
-    private String first_name;
-    private String middle_name;
-    private String last_name;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 
 //    @ManyToOne
 //    @JoinColumn(name = "branch_id")
@@ -33,30 +33,30 @@ public class Employee {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "addressId")
     private Address address;
 
 
     private String number;
 
-    private JobRole job_role;
+    private JobRole jobRole;
 
     @ManyToOne
-    @JoinColumn(name = "salary_type_id")
-    private SalaryType salary_type;
+    @JoinColumn(name = "salaryTypeId")
+    private SalaryType salaryType;
 
     private Boolean active;
 
-    public Employee(Title title, String first_name, String middle_name, String last_name,  String email, Address address, String number, JobRole job_role, SalaryType salary_type, Boolean active) {
+    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active) {
         this.title = title;
-        this.first_name = first_name;
-        this.middle_name = middle_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.email = email;
         this.address = address;
         this.number = number;
-        this.job_role = job_role;
-        this.salary_type = salary_type;
+        this.jobRole = jobRole;
+        this.salaryType = salaryType;
         this.active = active;
     }
 }

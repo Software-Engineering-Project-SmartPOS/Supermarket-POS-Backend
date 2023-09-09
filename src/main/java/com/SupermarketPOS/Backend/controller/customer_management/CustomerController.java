@@ -4,7 +4,6 @@ import com.SupermarketPOS.Backend.dto.customer_management.CustomerInput;
 import com.SupermarketPOS.Backend.dto.customer_management.CustomerValidationReport;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
 import com.SupermarketPOS.Backend.service.customer_management.CustomerService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -17,15 +16,17 @@ public class CustomerController {
     public CustomerController( CustomerService customerService){
         this.customerService = customerService;
     }
+
+
     @MutationMapping
-    public Customer addCustomer(@Argument CustomerInput customer_input){
-        return customerService.addCustomer(customer_input);
+    public Customer addCustomer(@Argument CustomerInput customerInput){
+        return customerService.addCustomer(customerInput);
 
     }
 
     @QueryMapping
-    public CustomerValidationReport validateNewCustomerDetail(@Argument CustomerInput new_customer_detail){
-        return customerService.Validate(new_customer_detail);
+    public CustomerValidationReport validateNewCustomerDetail(@Argument CustomerInput newCustomerDetail){
+        return customerService.Validate(newCustomerDetail);
     }
 
 }

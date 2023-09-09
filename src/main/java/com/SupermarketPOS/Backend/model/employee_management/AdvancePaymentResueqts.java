@@ -24,15 +24,15 @@ public class AdvancePaymentResueqts {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     private String reason;
     private double Amount;
     private AdvancePaymentRequestStatus status;
 
-    private LocalDateTime created_at;
-    private LocalDate due_date;
+    private LocalDateTime createdAt;
+    private LocalDate dueDate;
     private Month month;
 
 }

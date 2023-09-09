@@ -23,16 +23,18 @@ public class Customer {
     private String name;
     private String telephone;
     private String email;
-    private CustomerType customer_type;
-    private Integer loyalty_id;
-    private LocalDateTime created_at;
+    private CustomerType customerType;
+    private Integer loyaltyId;
+    private LocalDateTime createdAt;
 
-    public Customer(String name, String telephone, String email ,LocalDateTime created_at) {
+    public Customer(String name, String telephone, String email ,LocalDateTime createdAt) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
     }
+
+
 
 
 }

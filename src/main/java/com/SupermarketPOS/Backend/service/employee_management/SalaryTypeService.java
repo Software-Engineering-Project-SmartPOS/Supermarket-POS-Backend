@@ -20,9 +20,9 @@ public class SalaryTypeService {
         //search for previously added salaryType
         try {
             SalaryType savedSalaryType = salaryTypeRepository.findByDetails(
-                    salaryTypeInput.basic_salary(),
-                    salaryTypeInput.half_day_salary(),
-                    salaryTypeInput.overtime_salary(),
+                    salaryTypeInput.basicSalary(),
+                    salaryTypeInput.halfDaySalary(),
+                    salaryTypeInput.overTimeSalary(),
                     salaryTypeInput.bonus()
             );
             if(savedSalaryType != null){
@@ -32,13 +32,13 @@ public class SalaryTypeService {
         }
         catch (Exception e){
             // no previously saved salarytype
-            SalaryType new_salary_type = new SalaryType(
-                    salaryTypeInput.basic_salary(),
-                    salaryTypeInput.half_day_salary(),
-                    salaryTypeInput.overtime_salary(),
+            SalaryType newSalaryType = new SalaryType(
+                    salaryTypeInput.basicSalary(),
+                    salaryTypeInput.halfDaySalary(),
+                    salaryTypeInput.overTimeSalary(),
                     salaryTypeInput.bonus()
             );
-            return salaryTypeRepository.save(new_salary_type);
+            return salaryTypeRepository.save(newSalaryType);
         }
     }
 

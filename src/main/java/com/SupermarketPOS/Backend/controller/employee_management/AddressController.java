@@ -50,18 +50,18 @@ public class AddressController {
     }
 
     @MutationMapping
-    public Address addAddress(@Argument AddressInput address_input){
-        if (address_input == null) {
+    public Address addAddress(@Argument AddressInput addressInput){
+        if (addressInput == null) {
             throw new IllegalArgumentException("Address input is null");
         };
-        return addressService.AddTheAddress(address_input);
+        return addressService.AddTheAddress(addressInput);
 
     }
 
     @QueryMapping
-    public List<Employee> allEmployeesByAddressId(@Argument Integer  address_id){
-        Address address_input = addressById(address_id);
-        return address_input.getResiding_employees();
+    public List<Employee> allEmployeesByAddressId(@Argument Integer  addressId){
+        Address addressInput = addressById(addressId);
+        return addressInput.getResiding_employees();
     }
 
 

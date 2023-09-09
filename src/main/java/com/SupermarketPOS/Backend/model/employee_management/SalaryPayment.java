@@ -18,18 +18,18 @@ public class SalaryPayment {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "advane_payment_request_id")
-    private AdvancePaymentResueqts advance_payment_resueqts;
+    @JoinColumn(name = "advanePaymentRequestId")
+    private AdvancePaymentResueqts advancePaymentResueqts;
 
     private Month salary_month;
 
     @ManyToOne
-    @JoinColumn(name = "salary_type_id")
-    private SalaryType salary_type;
+    @JoinColumn(name = "salaryTypeId")
+    private SalaryType salaryType;
 
 
 

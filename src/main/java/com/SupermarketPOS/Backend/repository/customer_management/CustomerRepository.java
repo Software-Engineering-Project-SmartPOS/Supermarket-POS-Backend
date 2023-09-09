@@ -9,5 +9,5 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     Boolean isTelephoneTaken(String telephone);
 
     @Query("SELECT COUNT(c) > 0 FROM Customer c WHERE c.email = ?1")
-    Boolean isEmailTaken(String telephone);
+    Boolean isEmailTaken(String email);
 }
