@@ -1,10 +1,11 @@
-package com.SupermarketPOS.Backend.controller;
+package com.SupermarketPOS.Backend.controller.employee_management;
 
 
-import com.SupermarketPOS.Backend.dto.EmployeeInput;
-import com.SupermarketPOS.Backend.dto.EmployeeValidationReport;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import com.SupermarketPOS.Backend.service.EmployeeService;
+import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

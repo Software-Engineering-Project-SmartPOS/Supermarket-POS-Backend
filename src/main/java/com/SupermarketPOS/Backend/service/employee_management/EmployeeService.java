@@ -1,9 +1,9 @@
-package com.SupermarketPOS.Backend.service;
+package com.SupermarketPOS.Backend.service.employee_management;
 
-import com.SupermarketPOS.Backend.dto.AddressInput;
-import com.SupermarketPOS.Backend.dto.EmployeeInput;
-import com.SupermarketPOS.Backend.dto.EmployeeValidationReport;
-import com.SupermarketPOS.Backend.dto.SalaryTypeInput;
+import com.SupermarketPOS.Backend.dto.employee_management.AddressInput;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
+import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
@@ -25,6 +25,7 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
         this.addressService = addressService;
         this.salaryTypeService =salaryTypeService;
+
     }
 
     public List<Employee> getAllEmployees(){

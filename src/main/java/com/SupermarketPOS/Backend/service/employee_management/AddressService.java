@@ -1,6 +1,6 @@
-package com.SupermarketPOS.Backend.service;
+package com.SupermarketPOS.Backend.service.employee_management;
 
-import com.SupermarketPOS.Backend.dto.AddressInput;
+import com.SupermarketPOS.Backend.dto.employee_management.AddressInput;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.repository.employee_management.AddressRepository;
 import org.springframework.stereotype.Service;

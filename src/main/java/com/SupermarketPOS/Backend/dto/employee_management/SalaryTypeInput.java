@@ -1,4 +1,4 @@
-package com.SupermarketPOS.Backend.dto;
+package com.SupermarketPOS.Backend.dto.employee_management;
 
 public record SalaryTypeInput(
         Double basic_salary,

@@ -1,97 +1,95 @@
 
-type Query{
-    allEmployees :[Employee]
-    allAddress: [Address]
-    addressById(id:ID!) : Address
-
-
-}
-type Mutation{
-#    here the input for the mutations must be defined in the graphql schema
-#    all the inputs must be in json
-#    in the request body, input data should be in json
-#    those inputs names must be same as in the input type
-#    but no order is needed
-#    when mapping the mutation,
-#       that function
-    addAddress(address_input: AddressInput):Address
-    addAnAddress(rd: String): Address
-    AddEmployee(employee_input:EmployeeInput):Employee
-    isValidateEmployee(employee_input :EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
-}
-
-type EmployeeValidationReport{
-    is_name_okay: Boolean
-    is_number_okay: Boolean
-    is_email_okay : Boolean
+extend type Query {
+  allEmployees: [Employee]
+  allAddress: [Address]
+  addressById(id: ID!): Address
+  allEmployeesByAddressId(address_id: ID!): [Employee]
 
 }
-
-input AddressInput{
-    street_name: String!
-    house_number: String!
-    zipcode: String!
+extend type Mutation {
+  #    here the input for the mutations must be defined in the graphql schema
+  #    all the inputs must be in json
+  #    in the request body, input data should be in json
+  #    those inputs names must be same as in the input type
+  #    but no order is needed
+  #    when mapping the mutation,
+  #       that function
+  addAddress(address_input: AddressInput): Address
+  addAnAddress(rd: String): Address
+  AddEmployee(employee_input: EmployeeInput): Employee
+  isValidateEmployee(employee_input: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 }
 
-input EmployeeInput{
-    title: Title
-    first_name : String
-    middle_name : String
-    last_name : String
-    email:String
-    address : AddressInput
-    number : String
-    job_role : JobRole
-    salary_type: SalaryTypeInput
-
+type EmployeeValidationReport {
+  is_name_okay: Boolean
+  is_number_okay: Boolean
+  is_email_okay: Boolean
 }
 
-type Employee{
-    id:ID!
-    title: Title!
-    first_name : String!
-    middle_name : String
-    last_name : String!
-    email: String!
-    address : Address
-    number : String!
-    job_role : JobRole!
-    salary_type: SalaryType
-    active : Boolean!
+input AddressInput {
+  street_name: String!
+  house_number: String!
+  zipcode: String!
 }
 
-type Address{
-    id : ID!
-    street_name : String!
-    house_number : String!
-    zipcode:String!
-    residing_employees :[Employee]
+input EmployeeInput {
+  title: Title
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String
+  address: AddressInput
+  number: String
+  job_role: JobRole
+  salary_type: SalaryTypeInput
 }
 
-type SalaryType{
-    id : ID!
-    basic_salary : Int
-    half_day_salary: Int
-    overtime_salary: Int
-    bonus: Int
-    employees : [Employee]
+type Employee {
+  id: ID!
+  title: Title!
+  first_name: String!
+  middle_name: String
+  last_name: String!
+  email: String!
+  address: Address
+  number: String!
+  job_role: JobRole!
+  salary_type: SalaryType
+  active: Boolean!
 }
 
-input SalaryTypeInput{
-    basic_salary : Int
-    half_day_salary: Int
-    overtime_salary: Int
-    bonus: Int
+type Address {
+  id: ID!
+  street_name: String!
+  house_number: String!
+  zipcode: String!
+  residing_employees: [Employee]
 }
-enum Title{
-    MR
-    MRS
-    MISS
+
+type SalaryType {
+  id: ID!
+  basic_salary: Int
+  half_day_salary: Int
+  overtime_salary: Int
+  bonus: Int
+  employees: [Employee]
 }
-enum JobRole{
-    CASHIER
-    OWNER
-    MANAGER
-    STORE_MANAGER
-    SALES_ASSISTANT
+
+input SalaryTypeInput {
+  basic_salary: Int
+  half_day_salary: Int
+  overtime_salary: Int
+  bonus: Int
+}
+enum Title {
+  MR
+  MRS
+  MISS
+}
+enum JobRole {
+  CASHIER
+  OWNER
+  MANAGER
+  STORE_MANAGER
+  SALES_ASSISTANT
 }

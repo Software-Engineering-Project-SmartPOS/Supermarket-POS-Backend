@@ -1,4 +1,4 @@
-package com.SupermarketPOS.Backend.dto;
+package com.SupermarketPOS.Backend.dto.employee_management;
 
 import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.common.Title;

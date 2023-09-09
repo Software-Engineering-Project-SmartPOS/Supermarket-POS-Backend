@@ -1,10 +1,12 @@
-package com.SupermarketPOS.Backend.controller;
+package com.SupermarketPOS.Backend.controller.employee_management;
 
 
-import com.SupermarketPOS.Backend.dto.AddressInput;
+import com.SupermarketPOS.Backend.dto.employee_management.AddressInput;
 import com.SupermarketPOS.Backend.model.common.Address;
+import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.repository.employee_management.AddressRepository;
-import com.SupermarketPOS.Backend.service.AddressService;
+import com.SupermarketPOS.Backend.service.employee_management.AddressService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -56,6 +58,11 @@ public class AddressController {
 
     }
 
+    @QueryMapping
+    public List<Employee> allEmployeesByAddressId(@Argument Integer  address_id){
+        Address address_input = addressById(address_id);
+        return address_input.getResiding_employees();
+    }
 
 
 

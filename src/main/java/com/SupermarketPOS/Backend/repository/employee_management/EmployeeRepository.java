@@ -10,7 +10,11 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    @Query("SELECT e FROM Employee e WHERE e.first_name = ?1 and e.middle_name = ?2 and e.last_name = ?3")
+//    Employee findByFirstNameAndMiddleNameAndLastName(String firstName, String middleName, String lastName);
+
+
+
+        @Query("SELECT e FROM Employee e WHERE e.first_name = ?1 and e.middle_name = ?2 and e.last_name = ?3")
     Employee findByNames(
             String first_name,
             String middle_name,
@@ -23,6 +27,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             String middle_name,
             String last_name
     );
+
 
     @Query("SELECT COUNT(e)>0 FROM Employee e WHERE e.number = ?1 ")
     Boolean isNumberTaken(String number);

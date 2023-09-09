@@ -1,0 +1,34 @@
+extend type Query {
+  validateNewCustomerDetail(new_customer_detail: CustomerInput): CustomerValidationReport
+}
+
+extend type Mutation {
+   addCustomer(customer_input: CustomerInput): Customer
+ }
+
+
+type CustomerValidationReport {
+  is_telephone_okay: Boolean
+  is_email_okay: Boolean
+}
+
+input CustomerInput {
+  name: String
+  telephone: String
+  email: String
+  # customer type is not needed when adding a new customer
+}
+type Customer {
+  id: ID
+  name: String
+  telephone: String
+  email: String
+  customer_type: String
+  created_date: String
+}
+
+enum CustomerType {
+  GRADE_A
+  GRADE_B
+  GRADE_C
+}

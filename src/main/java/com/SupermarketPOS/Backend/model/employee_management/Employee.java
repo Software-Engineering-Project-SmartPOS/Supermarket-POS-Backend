@@ -1,8 +1,6 @@
 package com.SupermarketPOS.Backend.model.employee_management;
 
-import com.SupermarketPOS.Backend.model.common.Address;
-import com.SupermarketPOS.Backend.model.common.JobRole;
-import com.SupermarketPOS.Backend.model.common.Title;
+import com.SupermarketPOS.Backend.model.common.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +25,10 @@ public class Employee {
     private String middle_name;
     private String last_name;
 
+//    @ManyToOne
+//    @JoinColumn(name = "branch_id")
+//    private Branch working_branch;
+
     @Column(unique = true)
     private String email;
 
@@ -45,12 +47,12 @@ public class Employee {
 
     private Boolean active;
 
-    public Employee(Title title, String first_name, String middle_name, String last_name,String email, Address address, String number, JobRole job_role, SalaryType salary_type, Boolean active) {
+    public Employee(Title title, String first_name, String middle_name, String last_name,  String email, Address address, String number, JobRole job_role, SalaryType salary_type, Boolean active) {
         this.title = title;
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
-        this.email= email;
+        this.email = email;
         this.address = address;
         this.number = number;
         this.job_role = job_role;

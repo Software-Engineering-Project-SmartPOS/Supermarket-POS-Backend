@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Setter
 @Getter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Address {
@@ -23,6 +23,7 @@ public class Address {
     private String street_name;
     private String house_number;
     private String zipcode;
+
 
     @OneToMany(mappedBy = "address")
     private List<Employee> residing_employees;
