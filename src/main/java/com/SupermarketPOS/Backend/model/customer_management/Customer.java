@@ -1,5 +1,6 @@
 package com.SupermarketPOS.Backend.model.customer_management;
 
+import com.SupermarketPOS.Backend.model.common.AddressMain;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,11 @@ public class Customer {
     private String name;
     private String telephone;
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "customerAddressId")
+
+    private CustomerAddress customerAddress;
     private CustomerType customerType;
     private Integer loyaltyId;
     private LocalDateTime createdAt;
@@ -34,7 +40,12 @@ public class Customer {
         this.createdAt = createdAt;
     }
 
-
-
-
+    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  LocalDateTime createdAt) {
+        this.name = name;
+        this.telephone = telephone;
+        this.email = email;
+        this.customerAddress = customerAddress;
+        this.customerType = customerType;
+        this.createdAt = createdAt;
+    }
 }

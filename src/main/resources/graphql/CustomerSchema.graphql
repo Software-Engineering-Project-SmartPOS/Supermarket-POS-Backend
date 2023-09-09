@@ -17,6 +17,8 @@ input CustomerInput {
   name: String
   telephone: String
   email: String
+  customerAddress: CustomerAddressInput #customer address input
+  customerType : CustomerType
   # customer type is not needed when adding a new customer
 }
 type Customer {
@@ -24,12 +26,30 @@ type Customer {
   name: String
   telephone: String
   email: String
-  customerType: String
+  customerAddress: CustomerAddress
+  customerType: CustomerType
+  loyaltyId : String
   createdDate: String
+
 }
 
 enum CustomerType {
   GRADE_A
   GRADE_B
   GRADE_C
+}
+
+
+input CustomerAddressInput{
+  address : String
+  city : String
+  district : String
+  postalCode: String
+}
+type CustomerAddress{
+  id : String
+  address : String
+  city : String
+  district : String
+  postalCode: String
 }
