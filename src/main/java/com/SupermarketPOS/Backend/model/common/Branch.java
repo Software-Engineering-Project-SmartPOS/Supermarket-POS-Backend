@@ -16,15 +16,16 @@ import java.util.List;
 @Entity
 public class Branch {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String telephone;
 
     @OneToOne
+    @JoinColumn(name = "branchAddressId")
     private BranchAddress branchAddress;
 
-//    @OneToMany(mappedBy = "working_branch")
-//    private List<Employee> employee_list;
+    @OneToMany(mappedBy = "working_branch")
+    private List<Employee> employee_list;
 
 }

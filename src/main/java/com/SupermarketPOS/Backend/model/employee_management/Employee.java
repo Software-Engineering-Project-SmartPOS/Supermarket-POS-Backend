@@ -25,9 +25,9 @@ public class Employee {
     private String middleName;
     private String lastName;
 
-//    @ManyToOne
-//    @JoinColumn(name = "branch_id")
-//    private Branch working_branch;
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    private Branch working_branch;
 
     @Column(unique = true)
     private String email;

@@ -115,14 +115,86 @@ mutation {
         }
         number: "1234567890"
         jobRole: CASHIER
+        salaryType: {
+            basicSalary: 50000
+            halfDaySalary: 25000
+            overTimeSalary: 10000
+            bonus: 5000
+        }
     }) {
         id
         title
         firstName
+        middleName
         lastName
         email
+        address {
+            id
+            streetName
+            houseNumber
+            zipcode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
     }
 }
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Jane"
+        middleName: "E"
+        lastName: "Smith"
+        email: "janesmith@example.com"
+        address: {
+            streetName: "456 Elm St"
+            houseNumber: "Apt 2C"
+            zipcode: "54321"
+        }
+        number: "9876543210"
+        jobRole: MANAGER
+        salaryType: {
+            basicSalary: 60000
+            halfDaySalary: 30000
+            overTimeSalary: 12000
+            bonus: 6000
+        }
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            streetName
+            houseNumber
+            zipcode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+
+
 
 
 
