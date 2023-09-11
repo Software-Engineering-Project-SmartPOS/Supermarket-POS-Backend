@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.mapping.Constraint;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Setter
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO )
     private Integer id;
     private String name;
     private String telephone;
@@ -31,16 +32,16 @@ public class Customer {
     private CustomerAddress customerAddress;
     private CustomerType customerType;
     private Integer loyaltyId;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
-    public Customer(String name, String telephone, String email ,LocalDateTime createdAt) {
+    public Customer(String name, String telephone, String email ,Timestamp createdAt) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.createdAt = createdAt;
     }
 
-    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  LocalDateTime createdAt) {
+    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  Timestamp createdAt) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;

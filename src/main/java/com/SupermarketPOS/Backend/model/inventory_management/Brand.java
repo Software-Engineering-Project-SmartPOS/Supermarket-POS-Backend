@@ -17,22 +17,25 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class
-Brand {
+public class Brand {
     // brand of the items
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private String name;
     private String description;
 
-    private Integer updateUserId;
+//    private Integer updateUserId;
 
     private Timestamp updateAt;
 
     @OneToMany(mappedBy = "brand")
     private List<Item> itemList;
 
-
+    public Brand(String name, String description, Timestamp updateAt) {
+        this.name = name;
+        this.description = description;
+        this.updateAt = updateAt;
+    }
 }

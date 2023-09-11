@@ -46,5 +46,5 @@ public class StockLevel {
     private Double cost;
     private Double sellingPrice;
 
-    // Getters and setters
+
 }

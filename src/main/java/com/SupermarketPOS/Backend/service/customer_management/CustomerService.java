@@ -10,6 +10,7 @@ import com.SupermarketPOS.Backend.repository.customer_management.CustomerReposit
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
@@ -39,7 +40,7 @@ public class CustomerService {
                     customerInput.email(),
                     customerAddress,
                     customerInput.customerType(),
-                    LocalDateTime.now()
+                    new Timestamp(System.currentTimeMillis())
             );
             customerAddressRepository.save(customerAddress);
 
@@ -58,5 +59,8 @@ public class CustomerService {
                 isEmailOkay
         );
 
+    }
+    public Customer GetCustomerById( Integer id){
+        return customerRepository.findById( Integer.toString(id));
     }
 }

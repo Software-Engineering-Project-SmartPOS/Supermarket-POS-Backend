@@ -1,0 +1,16 @@
+extend type Mutation {
+    CreateBrand(brandInput: BrandInput!): Brand
+}
+
+input BrandInput {
+    name: String!
+    description: String
+}
+
+type Brand {
+    id: ID!
+    name: String!
+    description: String
+    updatedAt : String
+
+}

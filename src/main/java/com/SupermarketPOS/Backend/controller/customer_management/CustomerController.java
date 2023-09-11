@@ -35,7 +35,7 @@ public class CustomerController {
                     savedCustomer.getCustomerAddress(),
                     savedCustomer.getCustomerType(),
                     savedCustomer.getLoyaltyId(),
-                    dateTimeService.convertLocalDateTimeIntoString(savedCustomer.getCreatedAt())
+                    dateTimeService.convertTimeStampIntoString(savedCustomer.getCreatedAt())
 
             );
         }
@@ -48,5 +48,36 @@ public class CustomerController {
     public CustomerValidationReport validateNewCustomerDetail(@Argument CustomerInput newCustomerDetail){
         return customerService.Validate(newCustomerDetail);
     }
+    //  customerById(customerId :Integer):Customer
+    @QueryMapping
+    public CustomerOutput customerById(@Argument Integer customerId){
+        Customer customer = customerService.GetCustomerById(customerId);
+        if(customer ==null){
+            return null;
+        }
+        else {
+            return new CustomerOutput(
+                    customer.getId(),
+                    customer.getName(),
+                    customer.getTelephone(),
+                    customer.getEmail(),
+                    customer.getCustomerAddress(),
+                    customer.getCustomerType(),
+                    customer.getLoyaltyId(),
+                    dateTimeService.convertTimeStampIntoString(customer.getCreatedAt())
+
+
+            );
+        }
+
+    }
 
 }
+//avedCustomer.getId(),
+//                    savedCustomer.getName(),
+//                    savedCustomer.getTelephone(),
+//                    savedCustomer.getEmail(),
+//                    savedCustomer.getCustomerAddress(),
+//                    savedCustomer.getCustomerType(),
+//                    savedCustomer.getLoyaltyId(),
+//                    dateTimeService.convertLocalDateTimeIntoString(savedCustomer.getCreatedAt())

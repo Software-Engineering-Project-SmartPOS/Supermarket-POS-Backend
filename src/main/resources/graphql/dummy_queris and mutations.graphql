@@ -18,7 +18,7 @@ query {
     }
 }
 query {
-    addressById(id: "your-address-id") {
+    addressById(id: 1) {
         id
         streetName
         houseNumber
@@ -26,7 +26,7 @@ query {
     }
 }
 query {
-    allEmployeesByAddressId(addressId: "your-address-id") {
+    allEmployeesByAddressId(addressId: 1) {
         id
         title
         firstName
@@ -78,27 +78,6 @@ mutation {
         streetName
         houseNumber
         zipcode
-    }
-}
-mutation {
-    AddEmployee(employeeInput: {
-        title: MR
-        firstName: "John"
-        lastName: "Doe"
-        email: "johndoe@example.com"
-        address: {
-            streetName: "456 Elm St"
-            houseNumber: "Suite 200"
-            zipcode: "54321"
-        }
-        number: "1234567890"
-        jobRole: CASHIER
-    }) {
-        id
-        title
-        firstName
-        lastName
-        email
     }
 }
 mutation {
@@ -242,3 +221,13 @@ mutation {
     }
 }
 
+mutation {
+    CreateBrand(brandInput: {
+        name: "demo Brnad",
+        description: "here is the first demo brand"
+    }) {
+        id
+        name
+        description
+    }
+}

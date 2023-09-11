@@ -2,6 +2,9 @@ package com.SupermarketPOS.Backend.service.common_services;
 
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +12,13 @@ import java.time.LocalDateTime;
 
 @Service
 public class DateTimeService {
+    public String convertTimeStampIntoString(Timestamp timestamp){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timpeStampInString = sdf.format(timestamp);
+        return timpeStampInString;
+    }
+
+
     public String convertLocalDateTimeIntoString(LocalDateTime timeStamp){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timeStampInString = timeStamp.format(formatter); // format the time stamp(LocalDateTime)
