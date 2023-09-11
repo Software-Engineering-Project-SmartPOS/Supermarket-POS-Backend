@@ -11,6 +11,8 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.Optional;
+
 @Controller
 public class CustomerController {
     private final CustomerService customerService;
@@ -51,20 +53,20 @@ public class CustomerController {
     //  customerById(customerId :Integer):Customer
     @QueryMapping
     public CustomerOutput customerById(@Argument Integer customerId){
-        Customer customer = customerService.GetCustomerById(customerId);
-        if(customer ==null){
+        Optional<Customer> customer = customerService.GetCustomerById(customerId);
+        if(!customer.isPresent()){
             return null;
         }
         else {
             return new CustomerOutput(
-                    customer.getId(),
-                    customer.getName(),
-                    customer.getTelephone(),
-                    customer.getEmail(),
-                    customer.getCustomerAddress(),
-                    customer.getCustomerType(),
-                    customer.getLoyaltyId(),
-                    dateTimeService.convertTimeStampIntoString(customer.getCreatedAt())
+                    customer.get().getId(),
+                    customer.get().getName(),
+                    customer.get().getTelephone(),
+                    customer.get().getEmail(),
+                    customer.get().getCustomerAddress(),
+                    customer.get().getCustomerType(),
+                    customer.get().getLoyaltyId(),
+                    dateTimeService.convertTimeStampIntoString(customer.get().getCreatedAt())
 
 
             );

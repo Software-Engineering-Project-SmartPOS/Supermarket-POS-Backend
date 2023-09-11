@@ -231,3 +231,42 @@ mutation {
         description
     }
 }
+
+
+
+
+////// customer management
+
+mutation {
+createLoyaltyProgram(newProgramInput: {
+loyaltyProgramName: "Gold Membership"
+description: "Premium loyalty program"
+pointsThreshold: 500
+discountPercentage: 10.0
+}) {
+id
+loyaltyProgramName
+description
+pointsThreshold
+discountPercentage
+}
+}
+
+mutation {
+updateLoyaltyProgram(
+# Replace with the actual LoyaltyProgram ID you want to update
+updateDetail: {
+id :1
+loyaltyProgramName: "Updated Prjjjjjogram Name"
+description: "Updated Program Description"
+pointsThreshold: 100
+discountPercentage: 10.0
+}
+) {
+id
+loyaltyProgramName
+description
+pointsThreshold
+discountPercentage
+}
+}

@@ -22,9 +22,9 @@ public class LoyaltyProgram {
     private String loyaltyProgramName;
     private String description;
     private Integer pointsThreshold;
-    private Double discountPercentage;
+    private Float discountPercentage;
 
-    public LoyaltyProgram(String loyaltyProgramName, String description, Integer pointsThreshold, Double discountPercentage) {
+    public LoyaltyProgram(String loyaltyProgramName, String description, Integer pointsThreshold, Float discountPercentage) {
         this.loyaltyProgramName = loyaltyProgramName;
         this.description = description;
         this.pointsThreshold = pointsThreshold;

@@ -3,10 +3,22 @@ extend type Query {
     newCustomerDetail: CustomerInput
   ): CustomerValidationReport
   customerById(customerId :ID):Customer
+
+
+  #loyalty Program
+  getAllLoyaltyPrograms: [LoyaltyProgram]!
+  getLoyaltyProgramById(loyaltyProgramId: ID!): LoyaltyProgram
+
+
 }
 
 extend type Mutation {
   addCustomer(customerInput: CustomerInput): Customer
+
+
+  #creat a new loyalty program
+  createLoyaltyProgram(newProgramInput: LoyaltyProgramInput!): LoyaltyProgram!
+  updateLoyaltyProgram(updateDetail: LoyaltyProgramInput!) :LoyaltyProgram!
 }
 
 type CustomerValidationReport {
@@ -53,4 +65,20 @@ type CustomerAddress{
   city : String
   district : String
   postalCode: String
+}
+
+
+type LoyaltyProgram {
+  id: ID!
+  loyaltyProgramName: String!
+  description: String
+  pointsThreshold: Int!
+  discountPercentage: Float!
+}
+input LoyaltyProgramInput {
+  id :ID
+  loyaltyProgramName: String!
+  description: String
+  pointsThreshold: Int!
+  discountPercentage: Float!
 }

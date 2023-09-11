@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -60,7 +61,10 @@ public class CustomerService {
         );
 
     }
-    public Customer GetCustomerById( Integer id){
-        return customerRepository.findById( Integer.toString(id));
+//    public Customer GetCustomerById( Integer id){
+//        return customerRepository.findById( Integer.toString(id));
+//    }
+    public Optional<Customer> GetCustomerById(Integer id){
+        return customerRepository.findById( id);
     }
 }
