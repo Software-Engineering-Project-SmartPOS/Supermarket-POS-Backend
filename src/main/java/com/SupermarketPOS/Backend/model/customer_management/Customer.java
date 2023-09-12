@@ -33,20 +33,36 @@ public class Customer {
     private CustomerType customerType;
     private Integer loyaltyId;
     private Timestamp createdAt;
+    private Timestamp firstVisited;
+    private Timestamp lastVisited;
 
     public Customer(String name, String telephone, String email ,Timestamp createdAt) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.createdAt = createdAt;
+        this.firstVisited =createdAt; //first visit allways be the created time
     }
 
-    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  Timestamp createdAt) {
+    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType, Integer loyaltyId, Timestamp createdAt, Timestamp firstVisited, Timestamp lastVisited) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.customerAddress = customerAddress;
         this.customerType = customerType;
+        this.loyaltyId = loyaltyId;
         this.createdAt = createdAt;
+        this.firstVisited = firstVisited;
+        this.lastVisited = lastVisited;
     }
+
+    //    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  Timestamp createdAt) {
+//        this.name = name;
+//        this.telephone = telephone;
+//        this.email = email;
+//        this.customerAddress = customerAddress;
+//        this.customerType = customerType;
+//        this.createdAt = createdAt;
+//        this.firstVisited = createdAt; //first visit allways be the created time
+//    }
 }

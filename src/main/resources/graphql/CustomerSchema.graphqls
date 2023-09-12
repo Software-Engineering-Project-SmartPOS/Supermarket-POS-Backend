@@ -3,6 +3,7 @@ extend type Query {
     newCustomerDetail: CustomerInput
   ): CustomerValidationReport
   customerById(customerId :ID):Customer
+  allCustomer: Customer
 
 
   #loyalty Program

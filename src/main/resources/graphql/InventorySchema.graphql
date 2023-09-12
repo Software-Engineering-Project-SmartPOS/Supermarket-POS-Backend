@@ -1,5 +1,6 @@
 extend type Mutation {
     CreateBrand(brandInput: BrandInput!): Brand
+    CreateCategory: Category!
 }
 
 input BrandInput {
@@ -14,3 +15,10 @@ type Brand {
     updatedAt : String
 
 }
+type Category{
+    id: ID
+    description :String
+    updatedUser: Employee
+
+}
+

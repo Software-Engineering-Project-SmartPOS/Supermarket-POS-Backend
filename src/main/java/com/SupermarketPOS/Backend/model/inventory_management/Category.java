@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,9 @@ public class Category {
 
     private Timestamp addedDate;
 
-    private Integer updatedUserId;
+    @ManyToOne
+    @JoinColumn(name = "updatedEmployeeId")
+    private Employee updatedEmployee;
 
     private Timestamp updatedDate;
 

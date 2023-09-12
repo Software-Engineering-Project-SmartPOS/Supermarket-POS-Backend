@@ -5,8 +5,12 @@ extend type Query {
   customerById(customerId :ID):Customer
 
 
+  allCustomer: Customer
+
+
   #loyalty Program
   getAllLoyaltyPrograms: [LoyaltyProgram]!
+
   getLoyaltyProgramById(loyaltyProgramId: ID!): LoyaltyProgram
 
 
@@ -43,7 +47,8 @@ type Customer {
   customerType: CustomerType
   loyaltyId : String
   createdDate: String
-
+  firstVisited: String
+  lastVisited :String
 }
 
 enum CustomerType {

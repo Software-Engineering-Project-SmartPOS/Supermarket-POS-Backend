@@ -2,7 +2,6 @@ package com.SupermarketPOS.Backend.repository.employee_management;
 
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 
-import org.hibernate.mapping.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

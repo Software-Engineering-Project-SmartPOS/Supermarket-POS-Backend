@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,11 @@ public class CustomerService {
                     customerInput.email(),
                     customerAddress,
                     customerInput.customerType(),
+                    1,
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())
+
             );
             customerAddressRepository.save(customerAddress);
 
@@ -66,5 +71,9 @@ public class CustomerService {
 //    }
     public Optional<Customer> GetCustomerById(Integer id){
         return customerRepository.findById( id);
+    }
+
+    public List<Customer> getAllCustomers(){
+        return customerRepository.findAll();
     }
 }
