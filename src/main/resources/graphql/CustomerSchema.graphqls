@@ -1,9 +1,7 @@
 extend type Query {
-  validateNewCustomerDetail(
-    newCustomerDetail: CustomerInput
-  ): CustomerValidationReport
+  validateNewCustomerDetail(newCustomerDetail: CustomerInput): CustomerValidationReport
   customerById(customerId :ID):Customer
-  allCustomer: Customer
+  allCustomer: [Customer]
 
 
   #loyalty Program
@@ -15,6 +13,7 @@ extend type Query {
 
 extend type Mutation {
   addCustomer(customerInput: CustomerInput): Customer
+  updateCustomer(customerUpdateInput : CustomerInput) : Customer
 
 
   #creat a new loyalty program
@@ -28,23 +27,28 @@ type CustomerValidationReport {
 }
 
 input CustomerInput {
+  id : ID  # this is used when updating an customer
   name: String
   telephone: String
   email: String
   customerAddress: CustomerAddressInput #customer address input
   customerType : CustomerType
   # customer type is not needed when adding a new customer
+  password : String
 }
+
+
 type Customer {
   id: ID
   name: String
   telephone: String
   email: String
   customerAddress: CustomerAddress
-  customerType: CustomerType
+    customerType: CustomerType
   loyaltyId : String
   createdDate: String
-
+  firstVisited: String
+  lastVisited :String
 }
 
 enum CustomerType {
@@ -55,11 +59,13 @@ enum CustomerType {
 
 
 input CustomerAddressInput{
+  id : ID # used when updating the address
   address : String
   city : String
   district : String
   postalCode: String
 }
+
 type CustomerAddress{
   id : String
   address : String
@@ -77,7 +83,7 @@ type LoyaltyProgram {
   discountPercentage: Float!
 }
 input LoyaltyProgramInput {
-  id :ID
+  id :ID  #used when updating
   loyaltyProgramName: String!
   description: String
   pointsThreshold: Int!

@@ -30,4 +30,11 @@ public class CustomerAddress {
         this.district = district;
         this.postalCode = postalCode;
     }
+    public void UpdateAddress(String address, String city, String district, String postalCode) {
+        this.address = address;
+        this.city = city;
+        this.district = district;
+        this.postalCode = postalCode;
+    }
+
 }

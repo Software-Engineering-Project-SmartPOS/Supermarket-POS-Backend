@@ -27,58 +27,40 @@ public class CustomerController {
 
 
     @MutationMapping
-    public CustomerOutput addCustomer(@Argument CustomerInput customerInput){
-        Customer savedCustomer= customerService.addCustomer(customerInput);
-        // change the type
-        if (savedCustomer !=null){
-            return CustomerToCustomerOutput(savedCustomer);
-        }
-        else
-            return null;
-
+    public Optional<CustomerOutput> addCustomer(@Argument CustomerInput customerInput ){
+        //check the customer list using the customerInput and get the customer if available
+        Optional<CustomerOutput> savedCustomerOutput = customerService.addCustomer(customerInput);
+        return savedCustomerOutput;
     }
 
+    @MutationMapping
+    public Optional<CustomerOutput> updateCustomer(@Argument CustomerInput customerUpdateInput){
+        return customerService.UpdateCustomer(customerUpdateInput);
+    }
+
+
+
+    //validate the customer details
     @QueryMapping
     public CustomerValidationReport validateNewCustomerDetail(@Argument CustomerInput newCustomerDetail){
         return customerService.Validate(newCustomerDetail);
     }
     //  customerById(customerId :Integer):Customer
     @QueryMapping
-    public CustomerOutput customerById(@Argument Integer customerId){
-        Optional<Customer> customer = customerService.GetCustomerById(customerId);
-        if(!customer.isPresent()){
-            return null;
-        }
-        else {
-            return CustomerToCustomerOutput(customer.get());
-        }
+    public Optional<CustomerOutput> customerById(@Argument Integer customerId){
+        return customerService.GetCustomerById(customerId);
+
     }
-    public CustomerOutput CustomerToCustomerOutput(Customer customer){
-        return new CustomerOutput(
-                customer.getId(),
-                customer.getName(),
-                customer.getTelephone(),
-                customer.getEmail(),
-                customer.getCustomerAddress(),
-                customer.getCustomerType(),
-                customer.getLoyaltyId(),
-                dateTimeService.convertTimeStampIntoString(customer.getCreatedAt()),
-                dateTimeService.convertTimeStampIntoString(customer.getFirstVisited()),
-                dateTimeService.convertTimeStampIntoString(customer.getLastVisited())
-        );
-    }
+
 
 
 
     @QueryMapping
     public List<CustomerOutput> allCustomer(){
-        List<Customer> customers = customerService.getAllCustomers();
-        List<CustomerOutput> customerOutputs = new ArrayList<>();
+        return  customerService.getAllCustomers();
 
-        for (Customer customer : customers){
-            customerOutputs.add(CustomerToCustomerOutput(customer));
-        }
-        return  customerOutputs;
     }
+
+
 
 }

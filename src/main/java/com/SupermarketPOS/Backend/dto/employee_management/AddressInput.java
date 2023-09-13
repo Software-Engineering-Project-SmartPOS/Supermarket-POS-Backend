@@ -22,6 +22,7 @@ public class AddressInput{
     private String zipcode;
 
 
+
     //here the parameter names for this class must be exactly same as the graphql
     // schemas input attributes names
     // but there is not a particular order for those parameters as well

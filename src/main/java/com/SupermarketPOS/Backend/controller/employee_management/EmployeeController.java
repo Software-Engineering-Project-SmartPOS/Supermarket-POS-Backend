@@ -3,6 +3,7 @@ package com.SupermarketPOS.Backend.controller.employee_management;
 
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
+import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -29,6 +31,11 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+
+    @SchemaMapping(typeName = "Address", field = "residingEmployees")
+    public List<Employee> allEmployeesByAddressId(@Argument Address address){
+        return ;
+    }
 
     //add a new employee
     @MutationMapping

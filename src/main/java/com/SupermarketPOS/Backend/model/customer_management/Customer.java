@@ -35,6 +35,7 @@ public class Customer {
     private Timestamp createdAt;
     private Timestamp firstVisited;
     private Timestamp lastVisited;
+    private String password;
 
     public Customer(String name, String telephone, String email ,Timestamp createdAt) {
         this.name = name;
@@ -44,7 +45,7 @@ public class Customer {
         this.firstVisited =createdAt; //first visit allways be the created time
     }
 
-    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType, Integer loyaltyId, Timestamp createdAt, Timestamp firstVisited, Timestamp lastVisited) {
+    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType, Integer loyaltyId, Timestamp createdAt, Timestamp firstVisited, Timestamp lastVisited, String password) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -54,15 +55,16 @@ public class Customer {
         this.createdAt = createdAt;
         this.firstVisited = firstVisited;
         this.lastVisited = lastVisited;
+        this.password = password;
     }
 
-    //    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType,  Timestamp createdAt) {
-//        this.name = name;
-//        this.telephone = telephone;
-//        this.email = email;
-//        this.customerAddress = customerAddress;
-//        this.customerType = customerType;
-//        this.createdAt = createdAt;
-//        this.firstVisited = createdAt; //first visit allways be the created time
-//    }
+    public void UpdateNameAndCustomerType(String name, CustomerType customerType){
+        // name is not the same and not null
+        if (this.name != name && name != null ){
+        this.name = name;
+        }
+        // if the customer Type is not the same and not null
+        if (this.customerType != customerType && customerType != null)
+        this.customerType = customerType;
+    }
 }

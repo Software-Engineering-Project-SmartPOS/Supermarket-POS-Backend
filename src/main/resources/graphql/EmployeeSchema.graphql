@@ -29,6 +29,13 @@ input AddressInput {
   houseNumber: String!
   zipcode: String!
 }
+type Address {
+  id: ID!
+  streetName: String!
+  houseNumber: String!
+  zipcode: String!
+  residingEmployees: [Employee]
+}
 
 input EmployeeInput {
   title: Title
@@ -56,13 +63,7 @@ type Employee {
   active: Boolean!
 }
 
-type Address {
-  id: ID!
-  streetName: String!
-  houseNumber: String!
-  zipcode: String!
-  residingEmployees: [Employee]
-}
+
 
 type SalaryType {
   id: ID!

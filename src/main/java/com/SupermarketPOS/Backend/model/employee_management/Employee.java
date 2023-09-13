@@ -38,16 +38,15 @@ public class Employee {
 
 
     private String number;
-
     private JobRole jobRole;
 
     @ManyToOne
     @JoinColumn(name = "salaryTypeId")
     private SalaryType salaryType;
-
     private Boolean active;
+    private String password;
 
-    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active) {
+    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active , String password) {
         this.title = title;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -58,5 +57,6 @@ public class Employee {
         this.jobRole = jobRole;
         this.salaryType = salaryType;
         this.active = active;
+        this.password = password;
     }
 }

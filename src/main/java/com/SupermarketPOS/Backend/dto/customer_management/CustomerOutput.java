@@ -13,8 +13,8 @@ public record CustomerOutput(
         CustomerAddress customerAddress,
         CustomerType customerType,
         Integer loyaltyId,
-        String createdDate,
-        String firstVisited,
-        String lastVisited
+        Timestamp createdDate,
+        Timestamp firstVisited,
+        Timestamp lastVisited
 ) {
 }

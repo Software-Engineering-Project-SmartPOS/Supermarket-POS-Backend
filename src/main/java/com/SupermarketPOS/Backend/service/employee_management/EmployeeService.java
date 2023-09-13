@@ -54,7 +54,8 @@ public class EmployeeService {
                         employeeInput.number(),
                         employeeInput.jobRole(),
                         availableSalaryType,
-                        true
+                        true,
+                        "aaaa"
                 );
                 return employeeRepository.save(newEmployee);
         }

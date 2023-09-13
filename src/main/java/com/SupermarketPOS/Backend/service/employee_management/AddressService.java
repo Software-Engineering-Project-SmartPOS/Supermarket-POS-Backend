@@ -2,10 +2,13 @@ package com.SupermarketPOS.Backend.service.employee_management;
 
 import com.SupermarketPOS.Backend.dto.employee_management.AddressInput;
 import com.SupermarketPOS.Backend.model.common.Address;
+import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.repository.employee_management.AddressRepository;
+import lombok.ToString;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressService {
@@ -66,5 +69,9 @@ public class AddressService {
             );
             return addressRepository.save(newAddress);
         }
+    }
+
+    public List<Employee> getResidingEmployeeByAddressId(Integer id){
+        Optional<Address> address = addressRepository.findBy(id);
     }
 }
