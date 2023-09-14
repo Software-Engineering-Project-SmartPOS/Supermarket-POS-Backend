@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class BranchAddress extends AddressMain{
+public class BranchAddress extends Address{
     @OneToOne
     @JoinColumn(name = "branchId")
     private Branch branch;

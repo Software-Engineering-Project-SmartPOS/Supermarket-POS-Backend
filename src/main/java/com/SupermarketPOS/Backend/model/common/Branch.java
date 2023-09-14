@@ -25,7 +25,7 @@ public class Branch {
     @JoinColumn(name = "branchAddressId")
     private BranchAddress branchAddress;
 
-    @OneToMany(mappedBy = "working_branch")
+    @OneToMany(mappedBy = "branch")
     private List<Employee> employee_list;
 
 }

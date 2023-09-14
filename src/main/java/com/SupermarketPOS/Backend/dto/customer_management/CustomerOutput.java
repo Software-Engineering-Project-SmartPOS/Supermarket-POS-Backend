@@ -1,6 +1,5 @@
 package com.SupermarketPOS.Backend.dto.customer_management;
 
-import com.SupermarketPOS.Backend.model.customer_management.CustomerAddress;
 import com.SupermarketPOS.Backend.model.customer_management.CustomerType;
 
 import java.sql.Timestamp;
@@ -10,7 +9,12 @@ public record CustomerOutput(
         String name,
         String telephone,
         String email,
-        CustomerAddress customerAddress,
+        Integer addressId,
+        String houseNumber,
+        String street,
+        String city,
+        String district,
+        String postalCode,
         CustomerType customerType,
         Integer loyaltyId,
         Timestamp createdDate,

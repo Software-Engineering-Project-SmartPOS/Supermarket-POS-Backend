@@ -9,8 +9,13 @@ public record EmployeeInput(
         String middleName,
         String lastName,
         String email,
-        AddressInput address,
-        String number,
+        Integer addressId,
+        String houseNumber,
+        String street,
+        String city,
+        String district,
+        String postalCode,
+        String phoneNumber,
         JobRole jobRole,
         SalaryTypeInput salaryType
 ) {}

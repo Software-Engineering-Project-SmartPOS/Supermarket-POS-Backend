@@ -1,7 +1,7 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 
-import com.SupermarketPOS.Backend.model.common.AddressMain;
+import com.SupermarketPOS.Backend.model.common.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +29,7 @@ public class Supplier {
 
     @OneToOne
     @JoinColumn(name = "supplierAddressId")
-    private AddressMain supplierAddress;
+    private Address supplierAddress;
 
     @Column(name = "createdAt", updatable = false, nullable = false)
     private Timestamp createdAt;

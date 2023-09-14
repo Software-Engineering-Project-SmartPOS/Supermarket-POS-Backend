@@ -2,7 +2,6 @@ package com.SupermarketPOS.Backend.controller.customer_management;
 
 import com.SupermarketPOS.Backend.dto.customer_management.CustomerInput;
 import com.SupermarketPOS.Backend.dto.customer_management.CustomerValidationReport;
-import com.SupermarketPOS.Backend.model.customer_management.Customer;
 import com.SupermarketPOS.Backend.dto.customer_management.CustomerOutput;
 import com.SupermarketPOS.Backend.service.common_services.DateTimeService;
 import com.SupermarketPOS.Backend.service.customer_management.CustomerService;
@@ -11,18 +10,15 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class CustomerController {
     private final CustomerService customerService;
-    private final DateTimeService dateTimeService;
 
-    public CustomerController( CustomerService customerService , DateTimeService dateTimeService){
+    public CustomerController( CustomerService customerService ){
         this.customerService = customerService;
-        this.dateTimeService =dateTimeService;
     }
 
 

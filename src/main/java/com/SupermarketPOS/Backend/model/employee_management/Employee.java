@@ -27,7 +27,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "branch_id")
-    private Branch working_branch;
+    private Branch branch;
 
     @Column(unique = true)
     private String email;

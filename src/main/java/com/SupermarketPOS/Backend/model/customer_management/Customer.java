@@ -1,6 +1,6 @@
 package com.SupermarketPOS.Backend.model.customer_management;
 
-import com.SupermarketPOS.Backend.model.common.AddressMain;
+import com.SupermarketPOS.Backend.model.common.Address;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -26,10 +26,9 @@ public class Customer {
     private String telephone;
     private String email;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customerAddressId")
-
-    private CustomerAddress customerAddress;
+    private Address customerAddress;
     private CustomerType customerType;
     private Integer loyaltyId;
     private Timestamp createdAt;
@@ -45,7 +44,7 @@ public class Customer {
         this.firstVisited =createdAt; //first visit allways be the created time
     }
 
-    public Customer(String name, String telephone, String email, CustomerAddress customerAddress, CustomerType customerType, Integer loyaltyId, Timestamp createdAt, Timestamp firstVisited, Timestamp lastVisited, String password) {
+    public Customer(String name, String telephone, String email, Address customerAddress, CustomerType customerType, Integer loyaltyId, Timestamp createdAt, Timestamp firstVisited, Timestamp lastVisited, String password) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;

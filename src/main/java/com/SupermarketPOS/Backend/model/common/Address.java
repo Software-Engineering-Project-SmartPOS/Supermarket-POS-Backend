@@ -1,46 +1,46 @@
 package com.SupermarketPOS.Backend.model.common;
 
-import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.*;
 
-import java.util.List;
 
 @Data
 @Setter
 @Getter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Address {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String streetName;
     private String houseNumber;
-    private String zipcode;
+    private String street;
+    private String city;
+    private String district;
+    private String postalCode;
 
-
-    @OneToMany(mappedBy = "address")
-    private List<Employee> residing_employees;
-
-
-    //constructor without residing_employees
-    public Address(Integer id, String streetName, String houseNumber, String zipcode) {
-        this.id = id;
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
-        this.zipcode = zipcode;
+    public void UpdateAddress(String houseNumber,String street, String city, String district, String postalCode) {
+                this.houseNumber = houseNumber;
+                this.street = street;
+                this.city = city;
+                this.district = district;
+                this.postalCode = postalCode;
     }
 
-    //constructor without residing_employees and the id
-    public Address(String streetName, String houseNumber, String zipcode) {
-        this.streetName = streetName;
+
+    public Address(String houseNumber, String street, String city, String district, String postalCode) {
         this.houseNumber = houseNumber;
-        this.zipcode = zipcode;
+        this.street = street;
+        this.city = city;
+        this.district = district;
+        this.postalCode = postalCode;
     }
+
+    
+    
 }

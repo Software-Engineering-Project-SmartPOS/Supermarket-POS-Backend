@@ -1,16 +1,16 @@
 package com.SupermarketPOS.Backend.service.employee_management;
 
-import com.SupermarketPOS.Backend.dto.employee_management.AddressInput;
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
 import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.common.Address;
-import com.SupermarketPOS.Backend.model.common.JobRole;
+import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
+import com.SupermarketPOS.Backend.service.common_services.AddressService;
+
 import jakarta.transaction.Transactional;
-import org.hibernate.grammars.hql.HqlParser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +18,10 @@ import java.util.List;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    private final AddressService addressService;
     private final SalaryTypeService salaryTypeService;
 
     public EmployeeService(EmployeeRepository employeeRepository, AddressService addressService ,SalaryTypeService salaryTypeService){
         this.employeeRepository = employeeRepository;
-        this.addressService = addressService;
         this.salaryTypeService =salaryTypeService;
 
     }
@@ -32,14 +30,25 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Branch getBranchByEmployeeId(Integer id){
+        return employeeRepository.findById(id).get().getBranch();
+    }
+
+
     @Transactional
     public Employee AddNewEmployee(EmployeeInput employeeInput){
         EmployeeValidationReport validationReport = Validate(employeeInput);
 
         if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
-                AddressInput newEmployeeAddressInput = employeeInput.address();// get the employee address from the employeeInput
-                Address  availableAddress  = addressService.getAddressByAddressInput(newEmployeeAddressInput); //get the address if address is saved previously get the saved address, if not save as a new address and get the address
+                Address newEmployeeAddress = new Address(
+                        employeeInput.houseNumber(),
+                        employeeInput.street(),
+                        employeeInput.city(),
+                        employeeInput.district(),
+                        employeeInput.postalCode()
+                );
 
+                
                 SalaryTypeInput newSalaryTypeInput = employeeInput.salaryType(); // get the salaryIput from the employeeInput
                 SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
 
@@ -50,8 +59,8 @@ public class EmployeeService {
                         employeeInput.middleName(),
                         employeeInput.lastName(),
                         employeeInput.email(),
-                        availableAddress,
-                        employeeInput.number(),
+                        newEmployeeAddress,
+                        employeeInput.phoneNumber(),
                         employeeInput.jobRole(),
                         availableSalaryType,
                         true,
@@ -76,7 +85,7 @@ public class EmployeeService {
         ); // check the availability of the name
 
         Boolean isNumberOkay = !employeeRepository.isNumberTaken(
-                employeeInput.number()
+                employeeInput.phoneNumber()
         );
         Boolean isEmailOkay = !employeeRepository.isEmailTaken(
                 employeeInput.email()

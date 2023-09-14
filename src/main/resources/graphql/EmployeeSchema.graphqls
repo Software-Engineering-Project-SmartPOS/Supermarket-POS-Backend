@@ -12,7 +12,8 @@ extend type Mutation {
   #    but no order is needed
   #    when mapping the mutation,
   #       that function
-  addAddress(addressInput: AddressInput): Address
+  # addAddress(addressInput: AddressInput): Address
+
   addAnAddress(rd: String): Address
   AddEmployee(employeeInput: EmployeeInput): Employee
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
@@ -48,6 +49,7 @@ type Employee {
   firstName: String!
   middleName: String
   lastName: String!
+  branch: Branch
   email: String!
   address: Address
   number: String!
@@ -56,12 +58,19 @@ type Employee {
   active: Boolean!
 }
 
+type Branch {
+  id: ID
+  name: String
+  telephone: String
+}
+
 type Address {
-  id: ID!
-  streetName: String!
-  houseNumber: String!
-  zipcode: String!
-  residingEmployees: [Employee]
+  id: ID
+  houseNumber: String
+  street: String
+  city: String
+  district: String
+  postalCode: String
 }
 
 type SalaryType {

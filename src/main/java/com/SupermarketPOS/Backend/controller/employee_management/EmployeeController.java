@@ -2,9 +2,12 @@ package com.SupermarketPOS.Backend.controller.employee_management;
 
 
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeOutput;
+import com.SupermarketPOS.Backend.dto.employee_management.EmployeeOutputMapper;
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
-import com.SupermarketPOS.Backend.model.common.Address;
+import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +18,17 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final EmployeeOutputMapper employeeOutputMapper;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService){
-        this.employeeService =employeeService;
+    public EmployeeController(EmployeeService employeeService , EmployeeOutputMapper employeeOutputMapper){
+        this.employeeService = employeeService;
+        this.employeeOutputMapper = employeeOutputMapper;
     }
 
     //get all employees
@@ -32,10 +38,6 @@ public class EmployeeController {
     }
 
 
-    @SchemaMapping(typeName = "Address", field = "residingEmployees")
-    public List<Employee> allEmployeesByAddressId(@Argument Address address){
-        return ;
-    }
 
     //add a new employee
     @MutationMapping
@@ -49,4 +51,22 @@ public class EmployeeController {
         return employeeService.Validate(employeeInput);
     };
 
+    @SchemaMapping(typeName = "Employee" , field = "Branch")
+    public Branch getEmployeeBranch(Employee employee){
+        return employeeService.getBranchByEmployeeId(employee.getId());
+    }
+
+
+
+    //map the employee field to 
+    @SchemaMapping(typeName = "SalaryType", field = "employees")
+    public List<EmployeeOutput> getEmployeesWithSameSalary(SalaryType salaryType) {
+        return allEmployees()
+                    .stream()
+                    .filter(e -> e.getSalaryType().equals(salaryType))
+                    .map(employeeOutputMapper)
+                    .collect(Collectors.toList());
+    }
 }
+
+

@@ -7,7 +7,12 @@ public record CustomerInput (
         String name,
         String telephone,
         String email,
-        CustomerAddressInput customerAddress,
+        Integer addressId,
+        String houseNumber,
+        String street,
+        String city,
+        String district,
+        String postalCode,
         CustomerType customerType,
         String password
 ){

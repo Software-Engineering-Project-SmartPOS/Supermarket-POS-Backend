@@ -1,16 +1,14 @@
 package com.SupermarketPOS.Backend.service.customer_management;
 
 import com.SupermarketPOS.Backend.dto.customer_management.*;
+import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
-import com.SupermarketPOS.Backend.model.customer_management.CustomerAddress;
-import com.SupermarketPOS.Backend.repository.customer_management.CustomerAddressRepository;
+import com.SupermarketPOS.Backend.repository.AddressRepository;
 import com.SupermarketPOS.Backend.repository.customer_management.CustomerRepository;
-import graphql.GraphQLException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,12 +16,12 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
-    private final CustomerAddressRepository customerAddressRepository;
+    private final AddressRepository addressRepository;
     private final CustomerOutputMapper customerOutputMapper;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerAddressRepository customerAddressRepository, CustomerOutputMapper customerOutputMapper) {
+    public CustomerService(CustomerRepository customerRepository,AddressRepository addressRepository, CustomerOutputMapper customerOutputMapper) {
         this.customerRepository = customerRepository;
-        this.customerAddressRepository = customerAddressRepository;
+        this.addressRepository = addressRepository;
         this.customerOutputMapper = customerOutputMapper;
     }
 
@@ -36,14 +34,17 @@ public class CustomerService {
 
         //if not previously saved customer create new customer
         if(customerInputValidationReport.isEmailOkay() && customerInputValidationReport.isTelephoneOkay()){// if valid (customer in not already added/ email and the telephone is unique)
-            CustomerAddress customerAddress = new CustomerAddress(
-                    customerInput.customerAddress().address(),
-                    customerInput.customerAddress().city(),
-                    customerInput.customerAddress().district(),
-                    customerInput.customerAddress().postalCode()
+            //create new address & save
+            Address customerAddress = new Address(
+                    customerInput.houseNumber(),
+                    customerInput.street(),
+                    customerInput.city(),
+                    customerInput.district(),
+                    customerInput.postalCode()
             );
-            customerAddressRepository.save(customerAddress);
+            addressRepository.save(customerAddress);
 
+            // new customer is created and saved
             Customer newCustomer = new Customer(
                     customerInput.name(),
                     customerInput.telephone(),
@@ -77,12 +78,13 @@ public class CustomerService {
         c.UpdateNameAndCustomerType(customerUpdateDetails.name(),customerUpdateDetails.customerType());
         //update the customer address details
         c.getCustomerAddress().UpdateAddress(
-                customerUpdateDetails.customerAddress().address(),
-                customerUpdateDetails.customerAddress().city(),
-                customerUpdateDetails.customerAddress().district(),
-                customerUpdateDetails.customerAddress().postalCode()
+                customerUpdateDetails.houseNumber(),
+                customerUpdateDetails.street(),
+                customerUpdateDetails.city(),
+                customerUpdateDetails.district(),
+                customerUpdateDetails.postalCode()
         );
-        customerAddressRepository.save(c.getCustomerAddress());
+        addressRepository.save(c.getCustomerAddress());
         customerRepository.save(c);
 
         return Optional.of(customerOutputMapper.apply(c));
