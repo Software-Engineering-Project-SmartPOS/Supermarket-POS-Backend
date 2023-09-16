@@ -17,10 +17,10 @@ public class SalaryType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Double basicSalary;
-    private Double halfDaySalary;
-    private Double overTimeSalary;
-    private Double bonus;
+    private Float basicSalary;
+    private Float halfDaySalary;
+    private Float overTimeSalary;
+    private Float bonus;
     private LocalDateTime createdAt;
     private LocalDateTime UpdatedAt;
 
@@ -29,7 +29,7 @@ public class SalaryType {
     @OneToMany(mappedBy = "salaryType")
     private List<Employee> employees;
 
-    public SalaryType(Double basicSalary, Double halfDaySalary, Double overTimeSalary, Double bonus) {
+    public SalaryType(Float basicSalary, Float halfDaySalary, Float overTimeSalary, Float bonus) {
         this.basicSalary = basicSalary;
         this.halfDaySalary = halfDaySalary;
         this.overTimeSalary = overTimeSalary;

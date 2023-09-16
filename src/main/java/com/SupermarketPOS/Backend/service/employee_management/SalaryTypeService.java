@@ -1,10 +1,10 @@
 package com.SupermarketPOS.Backend.service.employee_management;
-
-import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
-import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
 import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.SalaryTypeRepository;
+import java.util.Optional;
+
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,5 +42,21 @@ public class SalaryTypeService {
         }
     }
 
+
+
+    public SalaryType AddNewSalaryType (SalaryTypeInput salaryTypeInput){
+        SalaryType salaryType = new SalaryType(
+            salaryTypeInput.basicSalary(),
+            salaryTypeInput.halfDaySalary(),
+            salaryTypeInput.overTimeSalary(),
+            salaryTypeInput.bonus()
+        );
+        return salaryTypeRepository.save(salaryType);
+
+    }
+
+    public SalaryType FindById(Integer id){
+        return salaryTypeRepository.getById(id);
+    }
 
 }

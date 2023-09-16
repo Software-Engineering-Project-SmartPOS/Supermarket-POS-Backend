@@ -4,6 +4,7 @@ import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.common.Title;
 
 public record EmployeeInput(
+        Integer id,
         Title title,
         String firstName,
         String middleName,
@@ -17,5 +18,5 @@ public record EmployeeInput(
         String postalCode,
         String phoneNumber,
         JobRole jobRole,
-        SalaryTypeInput salaryType
+        Integer salaryTypeId
 ) {}

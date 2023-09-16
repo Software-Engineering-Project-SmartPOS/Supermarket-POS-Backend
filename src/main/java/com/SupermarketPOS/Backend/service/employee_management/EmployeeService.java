@@ -7,6 +7,7 @@ import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
+import com.SupermarketPOS.Backend.repository.AddressRepository;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
 import com.SupermarketPOS.Backend.service.common_services.AddressService;
 
@@ -14,17 +15,20 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final SalaryTypeService salaryTypeService;
+    private  final AddressService addressService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, AddressService addressService ,SalaryTypeService salaryTypeService){
+    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService) {
         this.employeeRepository = employeeRepository;
-        this.salaryTypeService =salaryTypeService;
-
+        this.salaryTypeService = salaryTypeService;
+        this.addressService = addressService ;
     }
+
 
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
@@ -40,17 +44,29 @@ public class EmployeeService {
         EmployeeValidationReport validationReport = Validate(employeeInput);
 
         if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
-                Address newEmployeeAddress = new Address(
-                        employeeInput.houseNumber(),
-                        employeeInput.street(),
-                        employeeInput.city(),
-                        employeeInput.district(),
-                        employeeInput.postalCode()
+                Address newEmployeeAddress = addressService.SaveAddres(
+                        new Address(
+                                employeeInput.houseNumber(),
+                                employeeInput.street(),
+                                employeeInput.city(),
+                                employeeInput.district(),
+                                employeeInput.postalCode()
+                        )
                 );
 
-                
-                SalaryTypeInput newSalaryTypeInput = employeeInput.salaryType(); // get the salaryIput from the employeeInput
-                SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
+                 SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
+//            SalaryType availableSalaryType = salaryTypeService.AddNewSalaryType(
+//                    new SalaryTypeInput(
+//                            100.0f,  // Convert to Float
+//                            100.0f,  // Convert to Float
+//                            100.0f,  // Convert to Float
+//                            100.0f   // Convert to Float
+//                    )
+//            );
+
+
+            // SalaryTypeInput newSalaryTypeInput = employeeInput.salaryType(); // get the salaryIput from the employeeInput
+                // SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
 
                 //System.out.println(employeeInput.job_role());
                 Employee newEmployee = new Employee(

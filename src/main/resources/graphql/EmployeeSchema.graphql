@@ -3,6 +3,9 @@ extend type Query {
   allAddress: [Address]
   addressById(id: ID!): Address
   allEmployeesByAddressId(addressId: ID!): [Employee]
+  isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
+
+  salaryTypeById(id : ID): SalaryType
 }
 extend type Mutation {
   #    here the input for the mutations must be defined in the graphql schema
@@ -12,10 +15,13 @@ extend type Mutation {
   #    but no order is needed
   #    when mapping the mutation,
   #       that function
-  addAddress(addressInput: AddressInput): Address
-  addAnAddress(rd: String): Address
+  # addAddress(addressInput: AddressInput): Address
+  #add new Salary Type
+
+
+  AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
+
   AddEmployee(employeeInput: EmployeeInput): Employee
-  isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 }
 
 type EmployeeValidationReport {
@@ -29,13 +35,6 @@ input AddressInput {
   houseNumber: String!
   zipcode: String!
 }
-type Address {
-  id: ID!
-  streetName: String!
-  houseNumber: String!
-  zipcode: String!
-  residingEmployees: [Employee]
-}
 
 input EmployeeInput {
   title: Title
@@ -43,10 +42,15 @@ input EmployeeInput {
   middleName: String
   lastName: String
   email: String
-  address: AddressInput
-  number: String
+  addressId: Int # Updated field name and type
+  houseNumber: String
+  street: String
+  city: String
+  district: String
+  postalCode: String
+  phoneNumber: String # Added phoneNumber field
   jobRole: JobRole
-  salaryType: SalaryTypeInput
+  salaryTypeId: Int
 }
 
 type Employee {
@@ -55,6 +59,7 @@ type Employee {
   firstName: String!
   middleName: String
   lastName: String!
+  branch: Branch
   email: String!
   address: Address
   number: String!
@@ -63,23 +68,37 @@ type Employee {
   active: Boolean!
 }
 
+type Branch {
+  id: ID
+  name: String
+  telephone: String
+}
 
+type Address {
+  id: ID
+  houseNumber: String
+  street: String
+  city: String
+  district: String
+  postalCode: String
+}
 
 type SalaryType {
   id: ID!
-  basicSalary: Int
-  halfDaySalary: Int
-  overTimeSalary: Int
-  bonus: Int
+  basicSalary: Float
+  halfDaySalary: Float
+  overTimeSalary: Float
+  bonus: Float
   employees: [Employee]
 }
 
 input SalaryTypeInput {
-  basicSalary: Int
-  halfDaySalary: Int
-  overTimeSalary: Int
-  bonus: Int
+  basicSalary: Float
+  halfDaySalary: Float
+  overTimeSalary: Float
+  bonus: Float
 }
+
 enum Title {
   MR
   MRS
@@ -91,5 +110,4 @@ enum JobRole {
   MANAGER
   STORE_MANAGER
   SALES_ASSISTANT
-  ADMINISTRATOR
 }

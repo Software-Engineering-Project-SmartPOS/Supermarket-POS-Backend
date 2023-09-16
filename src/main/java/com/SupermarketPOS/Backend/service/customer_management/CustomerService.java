@@ -26,7 +26,6 @@ public class CustomerService {
     }
 
 
-
     @Transactional
     public Optional<CustomerOutput> addCustomer(CustomerInput customerInput){
         //check whether there are customers for the given customerInput /get the validation report
@@ -91,9 +90,6 @@ public class CustomerService {
     }
 
 
-
-
-
     public CustomerValidationReport Validate(CustomerInput customerInputDetail){
         Boolean isTelephoneOkay = !customerRepository.isTelephoneTaken(customerInputDetail.telephone());
         Boolean isEmailOkay = !customerRepository.isEmailTaken(customerInputDetail.email());
@@ -111,7 +107,6 @@ public class CustomerService {
     }
 
     public List<CustomerOutput> getAllCustomers(){
-
         return customerRepository.findAll()
                 .stream()
                 .map(customerOutputMapper)

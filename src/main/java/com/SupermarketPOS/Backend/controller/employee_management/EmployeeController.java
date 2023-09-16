@@ -10,8 +10,8 @@ import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.graphql.data.method.annotation.Argument;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -45,7 +45,7 @@ public class EmployeeController {
         return employeeService.AddNewEmployee(employeeInput);
     }
 
-    @MutationMapping
+    @QueryMapping
     // this validate the given input and send a validation report back
     public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employeeInput ){
         return employeeService.Validate(employeeInput);
