@@ -12,10 +12,13 @@ import com.SupermarketPOS.Backend.repository.employee_management.EmployeeReposit
 import com.SupermarketPOS.Backend.service.common_services.AddressService;
 
 import jakarta.transaction.Transactional;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -77,7 +80,7 @@ public class EmployeeService {
                         employeeInput.email(),
                         newEmployeeAddress,
                         employeeInput.phoneNumber(),
-                        employeeInput.jobRole(),
+                        Arrays.asList(employeeInput.jobRole()),
                         availableSalaryType,
                         true,
                         "aaaa"

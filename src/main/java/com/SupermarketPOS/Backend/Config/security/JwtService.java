@@ -17,26 +17,26 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "";
+    private static final String SECRET_KEY = "Yc6L8rnWqb4ezx7bmoksxpSXmvlxkcBKb94xPN+ajTLRMGEaTXx69Ads/Hnw3NSp";
     private static final Integer EXPIRATION = 1000*60*60;
 
     public String extractUsername(String token){
         return  extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>() , userDetails);
+    public String generateToken(String username){
+        return generateToken(new HashMap<>() , username);
     }
 
 
 
     public String generateToken(
             Map<String , Object> extraClaims,
-            UserDetails userDetails){
+            String username){
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION))
                 .signWith(getSignInKey() , SignatureAlgorithm.HS256)

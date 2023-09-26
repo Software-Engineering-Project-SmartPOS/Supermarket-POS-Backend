@@ -4,6 +4,8 @@ import com.SupermarketPOS.Backend.model.common.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -38,7 +40,7 @@ public class Employee {
 
 
     private String number;
-    private JobRole jobRole;
+    private List<JobRole> jobRole;
 
     @ManyToOne
     @JoinColumn(name = "salaryTypeId")
@@ -46,7 +48,7 @@ public class Employee {
     private Boolean active;
     private String password;
 
-    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active , String password) {
+    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, List<JobRole> jobRole, SalaryType salaryType, Boolean active , String password) {
         this.title = title;
         this.firstName = firstName;
         this.middleName = middleName;

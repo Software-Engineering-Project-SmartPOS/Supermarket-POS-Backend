@@ -24,7 +24,7 @@ public class EmployeeOutputMapper implements Function<Employee, EmployeeOutput> 
             employee.getLastName(),
             employee.getEmail(),
             employee.getNumber(),
-            employee.getJobRole(),
+            employee.getJobRole().get(0),
             employee.getSalaryType(),
             employee.getActive()
         );

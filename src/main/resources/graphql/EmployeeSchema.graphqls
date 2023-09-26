@@ -6,6 +6,10 @@ extend type Query {
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 
   salaryTypeById(id : ID): SalaryType
+
+
+  #to login the user and give the jwt token
+  loginEmployee(credentials : EmployeeInput) : Employee
 }
 extend type Mutation {
   #    here the input for the mutations must be defined in the graphql schema
@@ -22,6 +26,11 @@ extend type Mutation {
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
   AddEmployee(employeeInput: EmployeeInput): Employee
+}
+
+input LoginDetails{
+  userName: String
+  password: String
 }
 
 type EmployeeValidationReport {
