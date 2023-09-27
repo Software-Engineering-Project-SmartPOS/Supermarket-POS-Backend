@@ -4,7 +4,6 @@ extend type Query {
   addressById(id: ID!): Address
   allEmployeesByAddressId(addressId: ID!): [Employee]
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
-
   salaryTypeById(id : ID): SalaryType
 }
 extend type Mutation {
@@ -17,10 +16,7 @@ extend type Mutation {
   #       that function
   # addAddress(addressInput: AddressInput): Address
   #add new Salary Type
-
-
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
-
   AddEmployee(employeeInput: EmployeeInput): Employee
 }
 
