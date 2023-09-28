@@ -22,12 +22,12 @@ public class EmployeeOutputMapper implements Function<Employee, EmployeeOutput> 
             employee.getFirstName(),
             employee.getMiddleName(),
             employee.getLastName(),
+            employee.getBranch(),
             employee.getEmail(),
             employee.getNumber(),
             employee.getJobRole(),
             employee.getSalaryType(),
-            employee.getActive(),
-            employee.getBranch()
+            employee.getActive()
         );
     }
 

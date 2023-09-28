@@ -1,0 +1,26 @@
+
+INSERT INTO salary_type (id, basic_salary, half_day_salary, over_time_salary, bonus, created_at, updated_at) VALUES (1,1000.00, 500.00, 200.00, 50.00, now(), now());
+INSERT INTO address (id,house_number, street, city, district, postal_code) VALUES (1,'123', 'Main Street', 'Cityville', 'District 1', '12345');
+INSERT INTO branch (id,name, telephone, branch_address_id) VALUES (1,'Colombo Branch', '123-456-7890', (SELECT id FROM address WHERE house_number = '123' AND street = 'Main Street'));
+
+
+request to add a new owner
+http://localhost:8080/RegisterOwner
+{
+    "id": null,  // Leave as null to let the system generate the ID
+    "title": "MR",
+    "firstName": "Admin",
+    "middleName": "M",
+    "lastName": "Doe",
+    "email": "Admin@gmail.com",
+    "houseNumber": "111",
+    "street": "Main Street",
+    "city": "Moratuwa",
+    "district": "Colomo 1",
+    "postalCode": "121212",
+    "phoneNumber": "0717171717",
+    "jobRole": "OWNER",
+    "salaryTypeId": 1,  // Replace with the actual salary type ID
+    "password": "admin",
+    "branchId": 1  // Replace with the actual branch ID
+}

@@ -43,7 +43,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("logging","/register","/authenticate").permitAll())
+                        .requestMatchers("/getToken","/RegisterOwner","/authenticate").permitAll())
 
                 .authorizeHttpRequests((auth)-> auth
                         .requestMatchers("graphql").authenticated())
