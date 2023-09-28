@@ -1,5 +1,6 @@
 package com.SupermarketPOS.Backend.dto.employee_management;
 
+import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.common.Title;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
@@ -10,6 +11,7 @@ public record EmployeeOutput (
     String firstName,
     String middleName,
     String lastName,
+    Branch branch,
     String email,
     String number,
     JobRole jobRole,

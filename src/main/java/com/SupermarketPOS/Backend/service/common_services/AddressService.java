@@ -1,16 +1,11 @@
 package com.SupermarketPOS.Backend.service.common_services;
 
 import com.SupermarketPOS.Backend.model.common.Address;
-import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import com.SupermarketPOS.Backend.repository.AddressRepository;
+import com.SupermarketPOS.Backend.repository.common.AddressRepository;
 
-import lombok.ToString;
-
-import org.checkerframework.checker.units.qual.radians;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AddressService {

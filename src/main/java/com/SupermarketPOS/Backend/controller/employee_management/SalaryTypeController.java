@@ -11,7 +11,6 @@ import com.SupermarketPOS.Backend.service.employee_management.SalaryTypeService;
 @Controller
 public class SalaryTypeController {
     private final SalaryTypeService salaryTypeService;
-
     public SalaryTypeController(SalaryTypeService salaryTypeService){
         this.salaryTypeService = salaryTypeService;
     }

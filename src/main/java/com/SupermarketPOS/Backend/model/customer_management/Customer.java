@@ -35,6 +35,8 @@ public class Customer {
     private Timestamp firstVisited;
     private Timestamp lastVisited;
     private String password;
+    private Boolean active = true;
+
 
     public Customer(String name, String telephone, String email ,Timestamp createdAt) {
         this.name = name;

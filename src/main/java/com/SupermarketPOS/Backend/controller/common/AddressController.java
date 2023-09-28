@@ -23,10 +23,10 @@ public class AddressController {
 
 
     @QueryMapping
+
 //    mapping the graphql query : allAddresses to get all the addresses in the database
     public List<Address> allAddress(){
         return addressService.allTheAddresses();
-                                        
     }
     @QueryMapping
     public Address addressById(@Argument Integer id){;

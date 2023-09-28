@@ -1,4 +1,4 @@
-package com.SupermarketPOS.Backend.repository;
+package com.SupermarketPOS.Backend.repository.common;
 import com.SupermarketPOS.Backend.model.common.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -18,5 +18,7 @@ public record EmployeeInput(
         String postalCode,
         String phoneNumber,
         JobRole jobRole,
-        Integer salaryTypeId
+        Integer salaryTypeId,
+        String password,
+        Integer branchId
 ) {}

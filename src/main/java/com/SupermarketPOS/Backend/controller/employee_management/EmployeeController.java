@@ -1,22 +1,18 @@
 package com.SupermarketPOS.Backend.controller.employee_management;
 
 
-import com.SupermarketPOS.Backend.Config.security.JwtService;
 import com.SupermarketPOS.Backend.dto.employee_management.*;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,38 +26,37 @@ import java.util.stream.Collectors;
 
 public class EmployeeController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
     private final EmployeeService employeeService;
     private final EmployeeOutputMapper employeeOutputMapper;
 
+//   @SchemaMapping(typeName = "Employee" , field = "Branch")
+//    public Branch getEmployeeBranch(Employee employee){
+//        return employeeService.getBranchByEmployeeId(employee.getId());
+//    }
+
+//    @SchemaMapping(typeName = "Employee", field = "branch")
+//    public Branch getEmployeeBranch1(Employee employee){
+//        return employee.getBranch();
+//    }
 
 
-    @PostMapping("/authenticate")
-    public String loginEmployee(@RequestBody LoginDetails loginDetails){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDetails.getUsername(),loginDetails.getPassword()));
-        if (authentication.isAuthenticated()){
-            return jwtService.generateToken(loginDetails.getUsername());
-        }
-        else{
-            throw new UsernameNotFoundException("Invalid username or password");
-        }
-    }
+
+
+
+
+
 
 
     @Autowired
     public EmployeeController(EmployeeService employeeService ,
-                              EmployeeOutputMapper employeeOutputMapper,
-                              JwtService jwtService,
-                              AuthenticationManager authenticationManager){
+                              EmployeeOutputMapper employeeOutputMapper ){
         this.employeeService = employeeService;
         this.employeeOutputMapper = employeeOutputMapper;
-        this.jwtService = jwtService;
-        this.authenticationManager =authenticationManager;
     }
 
     //get all employees
     @QueryMapping
+    @PreAuthorize("has_Role(ADMIN")
     public List<Employee> allEmployees(){
         return employeeService.getAllEmployees();
     }
@@ -72,17 +67,16 @@ public class EmployeeController {
 
     //add a new employee
     @MutationMapping
-    public Employee AddEmployee(@Argument EmployeeInput employeeInput){
+    public Employee AddEmployee(@Argument EmployeeInput employeeInput) {
         return employeeService.AddNewEmployee(employeeInput);
     }
-
     @QueryMapping
     // this validate the given input and send a validation report back
     public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employeeInput ){
         return employeeService.Validate(employeeInput);
     };
 
-    @SchemaMapping(typeName = "Employee" , field = "Branch")
+    @SchemaMapping(typeName = "Employee" , field = "branch")
     public Branch getEmployeeBranch(Employee employee){
         return employeeService.getBranchByEmployeeId(employee.getId());
     }

@@ -3,7 +3,7 @@ package com.SupermarketPOS.Backend.service.customer_management;
 import com.SupermarketPOS.Backend.dto.customer_management.*;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
-import com.SupermarketPOS.Backend.repository.AddressRepository;
+import com.SupermarketPOS.Backend.repository.common.AddressRepository;
 import com.SupermarketPOS.Backend.repository.customer_management.CustomerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

@@ -7,9 +7,6 @@ extend type Query {
 
   salaryTypeById(id : ID): SalaryType
 
-
-  #to login the user and give the jwt token
-  loginEmployee(credentials : EmployeeInput) : Employee
 }
 extend type Mutation {
   #    here the input for the mutations must be defined in the graphql schema
@@ -60,6 +57,8 @@ input EmployeeInput {
   phoneNumber: String # Added phoneNumber field
   jobRole: JobRole
   salaryTypeId: Int
+  password: String
+  branchId : ID
 }
 
 type Employee {
@@ -77,11 +76,6 @@ type Employee {
   active: Boolean!
 }
 
-type Branch {
-  id: ID
-  name: String
-  telephone: String
-}
 
 type Address {
   id: ID

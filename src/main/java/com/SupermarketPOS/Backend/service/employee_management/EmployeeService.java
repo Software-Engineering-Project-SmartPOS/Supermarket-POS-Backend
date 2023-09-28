@@ -2,34 +2,34 @@ package com.SupermarketPOS.Backend.service.employee_management;
 
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeInput;
 import com.SupermarketPOS.Backend.dto.employee_management.EmployeeValidationReport;
-import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
-import com.SupermarketPOS.Backend.repository.AddressRepository;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
 import com.SupermarketPOS.Backend.service.common_services.AddressService;
 
+import com.SupermarketPOS.Backend.service.common_services.BranchService;
 import jakarta.transaction.Transactional;
-import org.checkerframework.checker.units.qual.A;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final SalaryTypeService salaryTypeService;
     private  final AddressService addressService;
+    private final PasswordEncoder passwordEncoder;
+    private final BranchService branchService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService) {
+    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
         this.employeeRepository = employeeRepository;
         this.salaryTypeService = salaryTypeService;
         this.addressService = addressService ;
+        this.passwordEncoder = passwordEncoder;
+        this.branchService = branchService;
     }
 
 
@@ -45,7 +45,7 @@ public class EmployeeService {
     @Transactional
     public Employee AddNewEmployee(EmployeeInput employeeInput){
         EmployeeValidationReport validationReport = Validate(employeeInput);
-
+        System.out.println(validationReport);
         if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
                 Address newEmployeeAddress = addressService.SaveAddres(
                         new Address(
@@ -72,6 +72,9 @@ public class EmployeeService {
                 // SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
 
                 //System.out.println(employeeInput.job_role());
+
+                Branch branch = branchService.findBranchById(employeeInput.branchId());
+
                 Employee newEmployee = new Employee(
                         employeeInput.title(),
                         employeeInput.firstName(),
@@ -80,14 +83,16 @@ public class EmployeeService {
                         employeeInput.email(),
                         newEmployeeAddress,
                         employeeInput.phoneNumber(),
-                        Arrays.asList(employeeInput.jobRole()),
+                        employeeInput.jobRole(),
                         availableSalaryType,
                         true,
-                        "aaaa"
+                        passwordEncoder.encode("aaaa"),
+                        branch
                 );
+                System.out.println(employeeInput);
                 return employeeRepository.save(newEmployee);
         }
-        return null;
+        throw new RuntimeException("User is already there");
         
     }
 

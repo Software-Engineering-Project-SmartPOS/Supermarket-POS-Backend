@@ -21,11 +21,18 @@ public class Branch {
     private String name;
     private String telephone;
 
+    public Branch(String name, String telephone, Address branchAddress) {
+        this.name = name;
+        this.telephone = telephone;
+        this.branchAddress = branchAddress;
+    }
+
     @OneToOne
     @JoinColumn(name = "branchAddressId")
-    private BranchAddress branchAddress;
+    private Address branchAddress;
+
 
     @OneToMany(mappedBy = "branch")
-    private List<Employee> employee_list;
+    private List<Employee> employeeList;
 
 }
