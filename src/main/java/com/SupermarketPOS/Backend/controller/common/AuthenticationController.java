@@ -34,6 +34,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest){
+        System.out.println("came to the first place");
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
         System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
         if (authentication.isAuthenticated()){
@@ -62,5 +63,13 @@ public class AuthenticationController {
         // Use the "id" query parameter to retrieve the employee
         return employeeService.findById(id);
     }
+
+
+    @GetMapping("/getOwner")
+    public Owner getOwner(@RequestParam String username) {
+        return ownerService.findOwnerByEmail(username);
+    }
+
+
 
 }

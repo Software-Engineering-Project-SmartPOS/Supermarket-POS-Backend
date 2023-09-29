@@ -1,8 +1,8 @@
 package com.SupermarketPOS.Backend.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.SupermarketPOS.Backend.model.Owner;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 

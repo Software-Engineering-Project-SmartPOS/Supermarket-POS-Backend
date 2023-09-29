@@ -30,4 +30,10 @@ public class OwnerService {
         );
         return ownerRepository.save(newOwner);
     }
+
+    public Owner findOwnerByEmail(String email){
+        Owner owner=  ownerRepository.findByEmail(email).get();
+        System.out.println(owner);
+        return owner;
+    }
 }

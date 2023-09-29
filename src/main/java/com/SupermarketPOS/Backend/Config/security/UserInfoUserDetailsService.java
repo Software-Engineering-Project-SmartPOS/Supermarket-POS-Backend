@@ -19,47 +19,59 @@ import java.util.Optional;
 public class UserInfoUserDetailsService implements UserDetailsService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
     private OwnerRepository ownerRepository;
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        System.out.println("fffffffffffffffffff");
+//        Optional<Employee> employee1 = employeeRepository.findByEmail(username);
+//        System.out.println("jjjjjjjjjjjjj");
+//        System.out.println(employee1);
+//        return employee1.map(employee -> new UserInfoUserDetails(
+//                        employee.getEmail(),
+//                        employee.getPassword(),
+//                        Collections.singletonList(employee.getJobRole()),
+//                        employee.getActive()))
+//                .orElseThrow(()-> new UsernameNotFoundException("user not found"));
+//
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("fffffffffffffffffff");
-        Optional<Employee> employee1 = employeeRepository.findByEmail(username);
-        System.out.println("jjjjjjjjjjjjj");
-        System.out.println(employee1);
-        return employee1.map(employee -> new UserInfoUserDetails(
-                        employee.getEmail(),
-                        employee.getPassword(),
-                        Collections.singletonList(employee.getJobRole()),
-                        employee.getActive()))
-                .orElseThrow(()-> new UsernameNotFoundException("user not found"));
+        System.out.println(username);
+        Optional<Owner> owner = ownerRepository.findByEmail(username);
+        System.out.println("searched for the owner");
+        System.out.println(owner);
 
+        Optional<Employee> employee = employeeRepository.findByEmail(username);
+        System.out.println(employee);
+//        System.out.println(owner.get());
+        System.out.println(owner.isPresent());
+        System.out.println(employee.isPresent());
+
+//        if(true){
+
+        if (owner.isPresent()) {
+            Owner ownerUser = owner.get();
+            System.out.println("'im in the owner");
+            return new UserInfoUserDetails(
+                    ownerUser.getEmail(),
+                    ownerUser.getPassword(),
+                    Collections.singletonList(JobRole.OWNER), // Assuming Owner has a role field
+                    true // You can set the active status as needed
+            );
+        } else if (employee.isPresent()) {
+            Employee employeeUser = employee.get();
+            System.out.println("'im in the employee");
+            return new UserInfoUserDetails(
+                    employeeUser.getEmail(),
+                    employeeUser.getPassword(),
+                    Collections.singletonList(employeeUser.getJobRole()),
+                    employeeUser.getActive()
+            );
+        } else {
+            throw new UsernameNotFoundException("User not found");
+        }
     }
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        System.out.println(username);
-//        Optional<Employee> employee = employeeRepository.findByEmail(username);
-//        System.out.println(employee.get());
-//        Optional<Owner> owner = ownerRepository.findByEmail(username);
-//        if (owner.isPresent()) {
-//            Owner ownerUser = owner.get();
-//            return new UserInfoUserDetails(
-//                    ownerUser.getEmail(),
-//                    ownerUser.getPassword(),
-//                    Collections.singletonList(JobRole.OWNER), // Assuming Owner has a role field
-//                    true // You can set the active status as needed
-//            );
-//        } else if (employee.isPresent()) {
-//            Employee employeeUser = employee.get();
-//            return new UserInfoUserDetails(
-//                    employeeUser.getEmail(),
-//                    employeeUser.getPassword(),
-//                    Collections.singletonList(employeeUser.getJobRole()),
-//                    employeeUser.getActive()
-//            );
-//        } else {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//    }
 }
