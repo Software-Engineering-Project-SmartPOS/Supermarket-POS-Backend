@@ -61,4 +61,17 @@ public class Employee {
         this.branch = branch;
     }
 
+    public Employee(Title title, String firstName, String middleName, String lastName, String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active, String password) {
+        this.title = title;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.number = number;
+        this.jobRole = jobRole;
+        this.salaryType = salaryType;
+        this.active = active;
+        this.password = password;
+    }
 }

@@ -24,11 +24,11 @@ public class SecurityConfig {
     //authentication
     public UserDetailsService userDetailsService(){
 //        UserDetails admin = User.withUsername("amal")
-//                .password(encoder.encode("pw1"))
+//                .password(passwordEncoder().encode("pw1"))
 //                .roles("admin")
 //                .build();
 //        UserDetails user = User.withUsername("john")
-//                .password(encoder.encode("pw2"))
+//                .password(passwordEncoder().encode("pw2"))
 //                .roles("user")
 //                .build();
 //        return  new InMemoryUserDetailsManager(admin,user);
@@ -43,10 +43,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("/getToken","/RegisterOwner","/authenticate").permitAll())
+                        .requestMatchers("/getToken","/RegisterOwner","/authenticate","/addEmployee","/getEmployee").permitAll())
 
                 .authorizeHttpRequests((auth)-> auth
-                        .requestMatchers("graphql").authenticated())
+                        .requestMatchers("/graphql").authenticated())
                 .build();
     }
 

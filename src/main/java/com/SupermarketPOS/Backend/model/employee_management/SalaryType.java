@@ -26,8 +26,8 @@ public class SalaryType {
 
 
 
-    @OneToMany(mappedBy = "salaryType")
-    private List<Employee> employees;
+//    @OneToMany(mappedBy = "salaryType")
+//    private List<Employee> employees;
 
     public SalaryType(Float basicSalary, Float halfDaySalary, Float overTimeSalary, Float bonus) {
         this.basicSalary = basicSalary;

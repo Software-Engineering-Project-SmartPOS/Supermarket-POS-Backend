@@ -4,7 +4,6 @@ import com.SupermarketPOS.Backend.dto.common.BranchInput;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.repository.common.BranchRepository;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.stereotype.Service;
 
 @Service

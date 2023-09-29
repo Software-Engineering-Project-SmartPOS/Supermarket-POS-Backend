@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -20,43 +21,45 @@ public class UserInfoUserDetailsService implements UserDetailsService {
     private EmployeeRepository employeeRepository;
     private OwnerRepository ownerRepository;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        System.out.println("fffffffffffffffffff");
-//        Optional<Employee> employee1 = employeeRepository.findByEmail(username);
-//        System.out.println("jjjjjjjjjjjjj");
-//        return employee1.map(employee -> new UserInfoUserDetails(employee.getEmail(),
-//                        employee.getPassword(),
-//                        Collections.singletonList(employee.getJobRole()),
-//                        employee.getActive()))
-//                .orElseThrow(()-> new UsernameNotFoundException("user not found"));
-//
-//    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
-        Optional<Employee> employee = employeeRepository.findByEmail(username);
-        System.out.println(employee.get());
-        Optional<Owner> owner = ownerRepository.findByEmail(username);
-        if (owner.isPresent()) {
-            Owner ownerUser = owner.get();
-            return new UserInfoUserDetails(
-                    ownerUser.getEmail(),
-                    ownerUser.getPassword(),
-                    Collections.singletonList(JobRole.OWNER), // Assuming Owner has a role field
-                    true // You can set the active status as needed
-            );
-        } else if (employee.isPresent()) {
-            Employee employeeUser = employee.get();
-            return new UserInfoUserDetails(
-                    employeeUser.getEmail(),
-                    employeeUser.getPassword(),
-                    Collections.singletonList(employeeUser.getJobRole()),
-                    employeeUser.getActive()
-            );
-        } else {
-            throw new UsernameNotFoundException("User not found");
-        }
+        System.out.println("fffffffffffffffffff");
+        Optional<Employee> employee1 = employeeRepository.findByEmail(username);
+        System.out.println("jjjjjjjjjjjjj");
+        System.out.println(employee1);
+        return employee1.map(employee -> new UserInfoUserDetails(
+                        employee.getEmail(),
+                        employee.getPassword(),
+                        Collections.singletonList(employee.getJobRole()),
+                        employee.getActive()))
+                .orElseThrow(()-> new UsernameNotFoundException("user not found"));
+
     }
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        System.out.println(username);
+//        Optional<Employee> employee = employeeRepository.findByEmail(username);
+//        System.out.println(employee.get());
+//        Optional<Owner> owner = ownerRepository.findByEmail(username);
+//        if (owner.isPresent()) {
+//            Owner ownerUser = owner.get();
+//            return new UserInfoUserDetails(
+//                    ownerUser.getEmail(),
+//                    ownerUser.getPassword(),
+//                    Collections.singletonList(JobRole.OWNER), // Assuming Owner has a role field
+//                    true // You can set the active status as needed
+//            );
+//        } else if (employee.isPresent()) {
+//            Employee employeeUser = employee.get();
+//            return new UserInfoUserDetails(
+//                    employeeUser.getEmail(),
+//                    employeeUser.getPassword(),
+//                    Collections.singletonList(employeeUser.getJobRole()),
+//                    employeeUser.getActive()
+//            );
+//        } else {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//    }
 }

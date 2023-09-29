@@ -21,14 +21,15 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final SalaryTypeService salaryTypeService;
     private  final AddressService addressService;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
     private final BranchService branchService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
+//    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
+    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, BranchService branchService) {
         this.employeeRepository = employeeRepository;
         this.salaryTypeService = salaryTypeService;
         this.addressService = addressService ;
-        this.passwordEncoder = passwordEncoder;
+//        this.passwordEncoder = passwordEncoder;
         this.branchService = branchService;
     }
 
@@ -58,20 +59,6 @@ public class EmployeeService {
                 );
 
                  SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
-//            SalaryType availableSalaryType = salaryTypeService.AddNewSalaryType(
-//                    new SalaryTypeInput(
-//                            100.0f,  // Convert to Float
-//                            100.0f,  // Convert to Float
-//                            100.0f,  // Convert to Float
-//                            100.0f   // Convert to Float
-//                    )
-//            );
-
-
-            // SalaryTypeInput newSalaryTypeInput = employeeInput.salaryType(); // get the salaryIput from the employeeInput
-                // SalaryType availableSalaryType = salaryTypeService.getSalaryTypeBySalaryInput(newSalaryTypeInput); // get the salary type : if saved before give the saved salary type if not create a new salary type
-
-                //System.out.println(employeeInput.job_role());
 
                 Branch branch = branchService.findBranchById(employeeInput.branchId());
 
@@ -86,7 +73,8 @@ public class EmployeeService {
                         employeeInput.jobRole(),
                         availableSalaryType,
                         true,
-                        passwordEncoder.encode("aaaa"),
+                        employeeInput.password(),
+//                        passwordEncoder.encode(employeeInput.password()),
                         branch
                 );
                 System.out.println(employeeInput);
@@ -119,5 +107,9 @@ public class EmployeeService {
                 isNumberOkay,
                 isEmailOkay
         );
+    }
+
+    public Employee findById(Integer id) {
+        return  employeeRepository.findById(id).get();
     }
 }

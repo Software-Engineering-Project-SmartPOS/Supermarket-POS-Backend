@@ -32,7 +32,7 @@ public class Branch {
     private Address branchAddress;
 
 
-    @OneToMany(mappedBy = "branch")
-    private List<Employee> employeeList;
+//    @OneToMany(mappedBy = "branch")
+//    private List<Employee> employeeList;
 
 }

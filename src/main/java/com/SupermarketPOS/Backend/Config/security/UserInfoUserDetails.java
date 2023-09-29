@@ -1,6 +1,7 @@
 package com.SupermarketPOS.Backend.Config.security;
 
 import com.SupermarketPOS.Backend.model.common.JobRole;
+import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.parameters.P;
@@ -15,14 +16,20 @@ public class UserInfoUserDetails implements UserDetails {
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
-    private Boolean isAccountActive;
+    private Boolean isAccountActive ;
 
-    public UserInfoUserDetails(String username, String password , List<JobRole> roles ,Boolean active){
-        this.username = username;
-        this.password = password;
-        this.isAccountActive = active;
-        this.authorities = roles.stream()
-                .map((role)-> new SimpleGrantedAuthority(role.name()))
+//    public UserInfoUserDetails(Employee employee){
+//        username = employee.getEmail();
+//        password = employee.getPassword();
+//        authorities = employee.getJobRole()
+//    }
+
+    public UserInfoUserDetails(String Username, String Password , List<JobRole> roles ,Boolean active){
+        username = Username;
+        password = Password;
+        isAccountActive = active;
+        authorities = roles.stream()
+                .map((role)-> new SimpleGrantedAuthority(role.toString()))
                 .collect(Collectors.toList());
 
     }
