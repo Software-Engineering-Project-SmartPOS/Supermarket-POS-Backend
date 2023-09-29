@@ -24,9 +24,7 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        System.out.println("fffffffffffffffffff");
 //        Optional<Employee> employee1 = employeeRepository.findByEmail(username);
-//        System.out.println("jjjjjjjjjjjjj");
 //        System.out.println(employee1);
 //        return employee1.map(employee -> new UserInfoUserDetails(
 //                        employee.getEmail(),
@@ -39,19 +37,11 @@ public class UserInfoUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
+        //getting the owner and employee by the username
         Optional<Owner> owner = ownerRepository.findByEmail(username);
-        System.out.println("searched for the owner");
-        System.out.println(owner);
-
         Optional<Employee> employee = employeeRepository.findByEmail(username);
-        System.out.println(employee);
-//        System.out.println(owner.get());
-        System.out.println(owner.isPresent());
-        System.out.println(employee.isPresent());
 
-//        if(true){
-
+        //return useDetail objects according to the user (owner or employee)
         if (owner.isPresent()) {
             Owner ownerUser = owner.get();
             System.out.println("'im in the owner");

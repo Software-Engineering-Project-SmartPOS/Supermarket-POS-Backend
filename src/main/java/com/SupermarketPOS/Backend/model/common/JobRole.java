@@ -6,5 +6,5 @@ public enum JobRole {
     MANAGER,
     STORE_MANAGER,
     SALES_ASSISTANT,
-    ADMINISTRATOR
+    ADMIN
 }

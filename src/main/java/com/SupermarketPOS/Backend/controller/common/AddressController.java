@@ -29,11 +29,11 @@ public class AddressController {
         return addressService.allTheAddresses();
     }
     @QueryMapping
-    public Address addressById(@Argument Integer id){;
+    public String addressById(@Argument Integer id){;
         // output from the server is nul;
         Address output =  addressService.getByTheId(id);
         if (output == null){
         }
-        return output;
+        return "output";
     }
 }

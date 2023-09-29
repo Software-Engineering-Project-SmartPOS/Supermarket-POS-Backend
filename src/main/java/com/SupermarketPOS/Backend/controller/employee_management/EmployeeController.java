@@ -56,7 +56,7 @@ public class EmployeeController {
 
     //get all employees
     @QueryMapping
-    @PreAuthorize("has_Role(ADMIN")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Employee> allEmployees(){
         return employeeService.getAllEmployees();
     }

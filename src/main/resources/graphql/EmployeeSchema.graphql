@@ -1,7 +1,7 @@
 extend type Query {
   allEmployees: [Employee]
   allAddress: [Address]
-  addressById(id: ID!): Address
+  addressById(id: ID!): String
   allEmployeesByAddressId(addressId: ID!): [Employee]
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 

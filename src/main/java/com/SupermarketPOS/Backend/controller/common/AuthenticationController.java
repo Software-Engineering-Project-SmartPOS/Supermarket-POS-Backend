@@ -34,10 +34,12 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest){
-        System.out.println("came to the first place");
+
+        // authenticate the userdetails in the authRequest
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
-        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+
         if (authentication.isAuthenticated()){
+            //sending the jwt token if user is authenticated
             return  jwtService.generateToken(authRequest.getUsername());
         }
         else{
@@ -45,12 +47,16 @@ public class AuthenticationController {
         }
     }
 
+
+    //this is used to register/ add new owner to the database
+    //
     @PostMapping("/RegisterOwner")
     public String registerOwner(@RequestBody OwnerInput ownerInput ){
         Owner Owner = ownerService.addOwner(ownerInput) ;
         return "Owner added";
 
     }
+
 
     @PostMapping("/addEmployee")
     public Employee addANewEmployee(@RequestBody EmployeeInput employeeInput){
@@ -69,7 +75,5 @@ public class AuthenticationController {
     public Owner getOwner(@RequestParam String username) {
         return ownerService.findOwnerByEmail(username);
     }
-
-
 
 }

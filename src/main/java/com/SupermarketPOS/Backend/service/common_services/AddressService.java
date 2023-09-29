@@ -64,6 +64,7 @@ public class AddressService {
 //            return null;
             throw new IllegalArgumentException("No address for that id");
         }
+            System.out.println(theAddress);
         return theAddress;
         }
         catch (Exception e){
