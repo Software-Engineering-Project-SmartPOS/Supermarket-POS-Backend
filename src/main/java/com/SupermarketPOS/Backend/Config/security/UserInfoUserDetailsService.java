@@ -1,8 +1,6 @@
 package com.SupermarketPOS.Backend.Config.security;
 
-import com.SupermarketPOS.Backend.model.Owner;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import com.SupermarketPOS.Backend.repository.OwnerRepository;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -18,8 +16,6 @@ import java.util.Optional;
 public class UserInfoUserDetailsService implements UserDetailsService {
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private OwnerRepository ownerRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

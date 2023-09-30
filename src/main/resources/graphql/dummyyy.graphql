@@ -7,7 +7,10 @@ mutation {
         lastName: "Smith1",
         phoneNumber: "1111111",
         password: "owner1",
-        email: "Owner1@gmail.com"
+        email: "
+
+
+    "
         jobRole: OWNER
         branchId:0
     })
@@ -30,17 +33,7 @@ mutation {
 
 
 
-mutation {
-    registerOwner(ownerDetail: {
-        title: MR,
-        firstName: "Deo2",
-        middleName: "john2",
-        lastName: "Smith2",
-        number: "12345678902",
-        password: "owner2",
-        email: "Owner2@gmail.com"
-    })
-}
+
 
 
 mutation {
