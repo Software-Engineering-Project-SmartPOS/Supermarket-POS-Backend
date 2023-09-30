@@ -31,5 +31,4 @@ type Branch {
     name: String
     telephone: String
     address: Address
-    #    employeeList: Employee
 }

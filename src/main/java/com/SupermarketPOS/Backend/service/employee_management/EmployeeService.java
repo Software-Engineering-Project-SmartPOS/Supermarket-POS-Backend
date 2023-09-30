@@ -42,13 +42,19 @@ public class EmployeeService {
         return employeeRepository.findById(id).get().getBranch();
     }
 
+    public Employee getByEmail(String email){
+        return employeeRepository.findByEmail(email).get();
+    }
 
     @Transactional
     public Employee AddNewEmployee(EmployeeInput employeeInput){
         EmployeeValidationReport validationReport = Validate(employeeInput);
         System.out.println(validationReport);
         if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
-                Address newEmployeeAddress = addressService.SaveAddres(
+            Address newEmployeeAddress;
+            if (employeeInput.city() != null || employeeInput.street() !=null || employeeInput.houseNumber() != null || employeeInput.district()!= null ||employeeInput.postalCode()!=null){
+
+                newEmployeeAddress = addressService.SaveAddres(
                         new Address(
                                 employeeInput.houseNumber(),
                                 employeeInput.street(),
@@ -57,6 +63,9 @@ public class EmployeeService {
                                 employeeInput.postalCode()
                         )
                 );
+            }
+            else newEmployeeAddress = null;
+
 
                  SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
 

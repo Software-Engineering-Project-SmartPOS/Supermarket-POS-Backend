@@ -12,6 +12,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +67,7 @@ public class EmployeeController {
 
 
     //add a new employee
+    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
     public Employee AddEmployee(@Argument EmployeeInput employeeInput) {
         return employeeService.AddNewEmployee(employeeInput);

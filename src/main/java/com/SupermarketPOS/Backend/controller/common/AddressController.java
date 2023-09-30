@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 @RestController
 @Controller
 public class AddressController {
     private final AddressService addressService;
-
 
     @Autowired
     public AddressController(AddressService addressService){
@@ -31,51 +31,23 @@ public class AddressController {
     }
 
 
-    @QueryMapping
-
 //    mapping the graphql query : allAddresses to get all the addresses in the database
+    @QueryMapping
     public List<Address> allAddress(){
         return addressService.allTheAddresses();
 
     }
 
-    @PostMapping("/addressRest")
-    @Secured("ROLE_OWNER")
-    public AddressOutput addressByIdREST(){;
-        // output from the server is nul;
-        System.out.println("in the addressByIdREST function");
-        Address output =  addressService.getByTheId(1);
-        if (output == null){
-        }
-
-//        return new ResponseEntity<>(output, HttpStatus.OK);
-        return new AddressOutput(
-                output.getId(),
-                output.getHouseNumber(),
-                output.getStreet(),
-                output.getCity(),
-                output.getDistrict(),
-                output.getPostalCode()
-
-        );
-//        return output;
-    }
-
     @QueryMapping
-    @Secured("ROLE_ADMIN")
-    public AddressOutput addressById(@Argument Integer id){;
+//    @Secured("ROLE_ADMIN")
+
+    @Secured({"ROLE_ADMIN","ROLE_USER","ROLE_CASHIER","ROLE_MANAGER"})
+    public Address addressById(Principal principal,
+            @Argument Integer id ){;
         // output from the server is nul;
         Address output =  addressService.getByTheId(id);
         if (output == null){
         }
-        return new AddressOutput(
-                output.getId(),
-                output.getHouseNumber(),
-                output.getStreet(),
-                output.getCity(),
-                output.getDistrict(),
-                output.getPostalCode()
-
-        );
+        return output;
     }
 }

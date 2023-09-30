@@ -33,19 +33,7 @@ SecurityConfig {
     @Bean
 //    authentication
     public UserDetailsService userDetailsService(){
-//        UserDetails admin = User.withUsername("amal")
-//                .password(passwordEncoder().encode("pw1"))
-//                .roles("OWNER")
-//                .build();
-//        UserDetails user = User.withUsername("john")
-//                .password(passwordEncoder().encode("pw2"))
-//                .roles("user")
-//                .build();
-//        System.out.println("in memojjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjry");
-//        System.out.println(admin.getAuthorities());
-//        return  new InMemoryUserDetailsManager(admin,user);
-
-        return new UserInfoUserDetailsService();
+        return new UserInfoUserDetailsService(); // this will get the user details from the db and return userDetails objects
     }
 
 
@@ -54,13 +42,10 @@ SecurityConfig {
     //authorization
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf -> csrf.disable())
+                //permit all the endpoints
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("/getToken","/RegisterOwner","/addEmployee","/getEmployee","/getOwner1").permitAll()
                         .anyRequest().permitAll()
                 )
-
-//                .authorizeHttpRequests((auth)-> auth
-//                        .requestMatchers("/graphql").authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS ))
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore( jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -69,6 +54,7 @@ SecurityConfig {
     }
 
     @Bean
+    //password encoder
     public PasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
     }

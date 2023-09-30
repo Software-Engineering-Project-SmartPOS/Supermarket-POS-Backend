@@ -23,7 +23,11 @@ extend type Mutation {
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
   AddEmployee(employeeInput: EmployeeInput): Employee
+
+
 }
+
+
 
 input LoginDetails{
   userName: String
