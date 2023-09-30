@@ -8,6 +8,7 @@ import com.SupermarketPOS.Backend.model.Owner;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.service.OwnerService;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,11 +34,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
+    @Secured("ROLE_OWNER")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest){
 
         // authenticate the userdetails in the authRequest
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
 
+        System.out.println("At the authenticate and get token function");
         if (authentication.isAuthenticated()){
             //sending the jwt token if user is authenticated
             return  jwtService.generateToken(authRequest.getUsername());

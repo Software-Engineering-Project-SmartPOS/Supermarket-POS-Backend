@@ -45,7 +45,6 @@ public class CustomerController {
     @QueryMapping
     public Optional<CustomerOutput> customerById(@Argument Integer customerId){
         return customerService.GetCustomerById(customerId);
-
     }
 
 

@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class UserInfoUserDetails implements UserDetails {
     private String username;
     private String password;
@@ -28,9 +29,13 @@ public class UserInfoUserDetails implements UserDetails {
         username = Username;
         password = Password;
         isAccountActive = active;
+        System.out.println("inside the userDetails");
+        System.out.println(roles.get(0).toString());
         authorities = roles.stream()
                 .map((role)-> new SimpleGrantedAuthority(role.toString()))
                 .collect(Collectors.toList());
+
+//        authorities = List.of(new SimpleGrantedAuthority("ADMIN"));
 
     }
 
