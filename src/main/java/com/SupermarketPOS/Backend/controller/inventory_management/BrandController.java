@@ -6,6 +6,7 @@ import com.SupermarketPOS.Backend.model.inventory_management.Brand;
 import com.SupermarketPOS.Backend.service.inventory_management.BrandService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -16,11 +17,12 @@ public class BrandController {
         this.brandService = brandService;
     }
 
+
+    //creating the brand
+    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
     public BrandOutput CreateBrand(@Argument BrandInput brandInput){
         System.out.println("braan");
         return brandService.AddBrand(brandInput);
-
     }
-
 }

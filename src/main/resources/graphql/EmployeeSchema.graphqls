@@ -1,7 +1,7 @@
 extend type Query {
   allEmployees: [Employee]
   allAddress: [Address]
-  addressById(id: ID!): String
+  addressById(id: ID!): Address
   allEmployeesByAddressId(addressId: ID!): [Employee]
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 
@@ -108,9 +108,10 @@ enum Title {
   MISS
 }
 enum JobRole {
-  CASHIER
-  OWNER
-  MANAGER
-  STORE_MANAGER
-  SALES_ASSISTANT
+  CASHIER,
+    OWNER,
+      MANAGER,
+      STORE_MANAGER,
+      SALES_ASSISTANT,
+      ADMIN
 }

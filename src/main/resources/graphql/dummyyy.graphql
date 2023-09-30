@@ -1,3 +1,67 @@
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo1",
+        middleName: "john1",
+        lastName: "Smith1",
+        phoneNumber: "1111111",
+        password: "owner1",
+        email: "
+
+
+    "
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo2",
+        middleName: "john2",
+        lastName: "Smith2",
+        phoneNumber: "2222222",
+        password: "owner2",
+        email: "Owner2@gmail.com"
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+
+
+
+
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Sample Branch"
+        telephone: "+1234567890"
+        houseNumber: "123 Main Street"
+        street: "Downtown Avenue"
+        city: "Anytown"
+        district: "Downtown"
+        postalCode: "54321"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+
+
 mutation {
     AddSalaryType(inputSalaryTypeDetails: {
         basicSalary: 40000.0
@@ -10,15 +74,18 @@ mutation {
         halfDaySalary
         overTimeSalary
         bonus
+    }
 }
-}
+
+
+
 mutation {
     AddEmployee(employeeInput: {
         title: MR
         firstName: "John"
         middleName: "Doe"
         lastName: "Smith"
-        email: "john.smith@example.com"
+        email: "cashier1@gmail.com"
         addressId: 1 # Assuming you have an address with ID 1 in your database
         houseNumber: "Suite 2C"
         street: "456 Elm Street"
@@ -27,7 +94,11 @@ mutation {
         postalCode: "54321"
         phoneNumber: "+1234567890"
         jobRole: CASHIER
-        salaryTypeId: 1 # Assuming you have a SalaryType with ID 1 in your database
+        salaryTypeId: 1
+        branchId: 52
+        password: "cashier1"
+
+
     }) {
         id
         title
@@ -55,3 +126,54 @@ mutation {
         active
     }
 }
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Carl"
+        middleName: "Doe"
+        lastName: "Smith"
+        email: "Admin1@gmail.com"
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Anytown"
+        district: "Downtown"
+        postalCode: "54321"
+        phoneNumber: "11111111"
+        jobRole: ADMIN
+        salaryTypeId: 1
+        branchId: 1
+        password: "admin1"
+
+
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+
+
+

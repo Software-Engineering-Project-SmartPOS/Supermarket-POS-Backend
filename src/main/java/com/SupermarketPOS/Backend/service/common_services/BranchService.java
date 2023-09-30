@@ -6,6 +6,8 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.repository.common.BranchRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BranchService {
     private  final BranchRepository branchRepository;
@@ -37,7 +39,8 @@ public class BranchService {
     }
 
     public Branch findBranchById(int id){
-        return branchRepository.findById(id).get();
+        return branchRepository.getById(id);
+
     }
 
 }

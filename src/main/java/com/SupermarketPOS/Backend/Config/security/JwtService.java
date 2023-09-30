@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Component
 public class JwtService {
     private String SECRET = "RyBaEtTM/eBPnZS2wQDFBe+ErrbnE5Ur8MylzQN8WdMvylcQFCf2KO/LMZccJkGr";
-    private long expiration = 1000*60*60;
+    private long expiration = 1000*60*60*24;
 
 
     public String generateToken(String username){

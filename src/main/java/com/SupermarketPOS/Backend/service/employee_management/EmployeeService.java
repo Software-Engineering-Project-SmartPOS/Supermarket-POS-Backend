@@ -21,15 +21,15 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final SalaryTypeService salaryTypeService;
     private  final AddressService addressService;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final BranchService branchService;
 
-//    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
-    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, BranchService branchService) {
+    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
+//    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, BranchService branchService) {
         this.employeeRepository = employeeRepository;
         this.salaryTypeService = salaryTypeService;
         this.addressService = addressService ;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
         this.branchService = branchService;
     }
 
@@ -42,13 +42,19 @@ public class EmployeeService {
         return employeeRepository.findById(id).get().getBranch();
     }
 
+    public Employee getByEmail(String email){
+        return employeeRepository.findByEmail(email).get();
+    }
 
     @Transactional
     public Employee AddNewEmployee(EmployeeInput employeeInput){
         EmployeeValidationReport validationReport = Validate(employeeInput);
         System.out.println(validationReport);
         if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
-                Address newEmployeeAddress = addressService.SaveAddres(
+            Address newEmployeeAddress;
+            if (employeeInput.city() != null || employeeInput.street() !=null || employeeInput.houseNumber() != null || employeeInput.district()!= null ||employeeInput.postalCode()!=null){
+
+                newEmployeeAddress = addressService.SaveAddres(
                         new Address(
                                 employeeInput.houseNumber(),
                                 employeeInput.street(),
@@ -57,6 +63,9 @@ public class EmployeeService {
                                 employeeInput.postalCode()
                         )
                 );
+            }
+            else newEmployeeAddress = null;
+
 
                  SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
 
@@ -73,8 +82,8 @@ public class EmployeeService {
                         employeeInput.jobRole(),
                         availableSalaryType,
                         true,
-                        employeeInput.password(),
-//                        passwordEncoder.encode(employeeInput.password()),
+//                        employeeInput.password(),
+                        passwordEncoder.encode(employeeInput.password()),
                         branch
                 );
                 System.out.println(employeeInput);

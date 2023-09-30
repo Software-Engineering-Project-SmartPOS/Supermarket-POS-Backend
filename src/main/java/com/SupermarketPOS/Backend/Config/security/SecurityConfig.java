@@ -6,9 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,24 +23,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+@EnableMethodSecurity(securedEnabled = true)
+public class
+
+SecurityConfig {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
     @Bean
-    //authentication
+//    authentication
     public UserDetailsService userDetailsService(){
-//        UserDetails admin = User.withUsername("amal")
-//                .password(passwordEncoder().encode("pw1"))
-//                .roles("admin")
-//                .build();
-//        UserDetails user = User.withUsername("john")
-//                .password(passwordEncoder().encode("pw2"))
-//                .roles("user")
-//                .build();
-//        return  new InMemoryUserDetailsManager(admin,user);
-
-        return new UserInfoUserDetailsService();
+        return new UserInfoUserDetailsService(); // this will get the user details from the db and return userDetails objects
     }
 
 
@@ -46,16 +42,19 @@ public class SecurityConfig {
     //authorization
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf -> csrf.disable())
+                //permit all the endpoints
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("/getToken","/RegisterOwner","/authenticate","/addEmployee","/getEmployee","/getOwner1").permitAll())
-
-                .authorizeHttpRequests((auth)-> auth
-                        .requestMatchers("/graphql").authenticated())
+                        .anyRequest().permitAll()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS ))
+                .httpBasic(Customizer.withDefaults())
                 .addFilterBefore( jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .build();
     }
 
     @Bean
+    //password encoder
     public PasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
     }
