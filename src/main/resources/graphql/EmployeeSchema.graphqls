@@ -23,7 +23,10 @@ extend type Mutation {
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
   AddEmployee(employeeInput: EmployeeInput): Employee
+
+
 }
+
 
 input LoginDetails{
   userName: String
@@ -74,6 +77,8 @@ type Employee {
   jobRole: JobRole!
   salaryType: SalaryType
   active: Boolean!
+  createdAt : String
+  updatedAt: String
 }
 
 
@@ -109,9 +114,9 @@ enum Title {
 }
 enum JobRole {
   CASHIER,
-    OWNER,
-      MANAGER,
-      STORE_MANAGER,
-      SALES_ASSISTANT,
-      ADMIN
+  OWNER,
+  MANAGER,
+  STORE_MANAGER,
+  SALES_ASSISTANT,
+  ADMIN
 }

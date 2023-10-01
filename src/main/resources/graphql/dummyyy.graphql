@@ -176,4 +176,120 @@ mutation {
 
 
 
+mutation {
+    CreateCategory(categoryInput: {
+        name: "Stationaris"
+        description: "Learning materials"
+    }) {
+        id
+        name
+        description
+    }
+}
+
+query {
+    GetCategoryById(id: 1) {
+        id
+        name
+        description
+        createAt
+        updateAt
+        updatedDate
+        updatedEmployee {
+            id
+            firstName
+            # Other fields of Employee
+        }
+    }
+}
+
+
+mutation {
+    UpdateCategory(categoryInput: {
+        id: 1  # Replace with the actual category ID you want to update
+        name: "Updated Category Name"
+        description: "Updated category description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+query {
+    GetCategoryById(id: 1) {
+        id
+        name
+        description
+        createAt
+        updateAt
+        updatedDate
+        updatedEmployee {
+            id
+            firstName
+            # Other fields of Employee
+        }
+    }
+}
+#..................BRAND..................
+mutation {
+    CreateBrand(brandInput: {
+        name: "Sample Brand"
+        description: "This is a sample brand."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+mutation {
+    UpdateBrand(brandInput: {
+        id: 1
+        name: "Updated Brand Name"
+        description: "Updated brand description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+mutation {
+    UpdateBrand(brandInput: {
+        id: 1
+        name: "Updated Brand Name"
+        description: "Updated brand description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+
+
+
+query {
+    GetBrandById(id: 1) {
+        id
+        name
+        description
+        updateAt
+        createAt
+    }
+}
+
+query {
+    GetAllBrands{
+        id
+        name
+    }
+}
+
+
+
+
+
+
 

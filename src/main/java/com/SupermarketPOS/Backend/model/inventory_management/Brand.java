@@ -22,20 +22,22 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String name;
     private String description;
-
-//    private Integer updateUserId;
-
+    private Integer updateUserId;
+    private Timestamp createAt;
     private Timestamp updateAt;
 
     @OneToMany(mappedBy = "brand")
     private List<Item> itemList;
 
-    public Brand(String name, String description, Timestamp updateAt) {
+    public Brand(String name, String description, Timestamp createAt, Integer updateUserId) {
         this.name = name;
         this.description = description;
-        this.updateAt = updateAt;
+        this.updateAt = createAt;
+        this.createAt = createAt;
+        this.updateUserId= updateUserId;
     }
+
+
 }

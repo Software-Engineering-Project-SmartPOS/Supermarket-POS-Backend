@@ -1,9 +1,8 @@
 package com.SupermarketPOS.Backend.dto.inventory_management;
 
-public record BrandOutput(
+public record CategoryInput(
         Integer id,
         String name,
-        String description,
-        String updatedAt
+        String description
 ) {
 }

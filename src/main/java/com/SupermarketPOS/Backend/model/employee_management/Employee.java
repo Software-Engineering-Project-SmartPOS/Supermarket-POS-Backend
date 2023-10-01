@@ -4,6 +4,9 @@ import com.SupermarketPOS.Backend.model.common.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -46,6 +49,9 @@ public class Employee {
     private Boolean active;
     private String password;
 
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+
     public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active , String password ,Branch branch) {
         this.title = title;
         this.firstName = firstName;
@@ -61,7 +67,7 @@ public class Employee {
         this.branch = branch;
     }
 
-    public Employee(Title title, String firstName, String middleName, String lastName, String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active, String password) {
+    public Employee(Title title, String firstName, String middleName, String lastName,  String email, Address address, String number, JobRole jobRole, SalaryType salaryType, Boolean active , String password ,Branch branch, Timestamp createdAt) {
         this.title = title;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -73,5 +79,8 @@ public class Employee {
         this.salaryType = salaryType;
         this.active = active;
         this.password = password;
+        this.branch = branch;
+        this.createdAt = createdAt;
+        this.updatedAt = createdAt;
     }
 }

@@ -1,9 +1,45 @@
 extend type Mutation {
     CreateBrand(brandInput: BrandInput!): Brand
-    CreateCategory: Category!
+    UpdateBrand(brandInput : BrandInput): Brand
+
+
+    CreateCategory(categoryInput: CategoryInput): Category!
+    UpdateCategory(categoryInput: CategoryInput): Category!
+
+}
+extend type Query{
+
+    GetBrandById(id: ID!) : Brand
+    GetBrandByName(name: String): Brand
+    GetAllBrands : [Brand]
+
+    GetCategoryById(id: ID) : Category
+    GetCategoryByName(name: String): Category
+    GetAllCategories : [Category]!
 }
 
+
+
+input CategoryInput {
+id: ID
+name: String
+description: String
+}
+
+type Category {
+id: ID!
+name: String!
+description: String
+createAt: String
+updateAt: String
+updatedEmployee: Employee!
+updatedDate: String
+#itemList: [Item]
+}
+
+
 input BrandInput {
+    id: ID   # used when updating the brand
     name: String!
     description: String
 }
@@ -12,13 +48,8 @@ type Brand {
     id: ID!
     name: String!
     description: String
-    updatedAt : String
-
+    updateAt : String
+    createAt : String
 }
-type Category{
-    id: ID
-    description :String
-    updatedUser: Employee
 
-}
 

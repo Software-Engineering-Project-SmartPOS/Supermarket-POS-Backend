@@ -12,7 +12,7 @@ public class GraphqlConfig {
     @Bean
     RuntimeWiringConfigurer runtimeWiringConfigurer(){
         return wiringBuilder->
-                wiringBuilder.scalar(ExtendedScalars.Date);
+                wiringBuilder.scalar(ExtendedScalars.LocalTime);
     }
 
     //test
