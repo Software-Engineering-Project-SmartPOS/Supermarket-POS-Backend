@@ -6,7 +6,6 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -15,8 +14,6 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;

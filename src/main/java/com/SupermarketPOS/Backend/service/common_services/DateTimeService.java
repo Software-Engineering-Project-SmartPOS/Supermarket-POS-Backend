@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Service
 public class DateTimeService {
-    public String convertTimeStampIntoString(Timestamp timestamp){
+    public String convertTimeStampIntoString(Timestamp timestamp ){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timpeStampInString = sdf.format(timestamp);
         return timpeStampInString;
