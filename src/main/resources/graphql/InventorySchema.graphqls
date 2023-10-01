@@ -1,4 +1,7 @@
 extend type Mutation {
+    AddSupplier(supplierInput: SupplierInput) : Supplier
+    UpdateSupplier(supplierDetail: SupplierInput): Supplier
+
     CreateBrand(brandInput: BrandInput!): Brand
     UpdateBrand(brandInput : BrandInput): Brand
 
@@ -6,8 +9,13 @@ extend type Mutation {
     CreateCategory(categoryInput: CategoryInput): Category!
     UpdateCategory(categoryInput: CategoryInput): Category!
 
+
+
 }
 extend type Query{
+    GetSupplierById(id:ID!) : Supplier
+    GetSupplierByEmail(name: String) : Supplier
+    GetAllSuppliers : [Supplier]
 
     GetBrandById(id: ID!) : Brand
     GetBrandByName(name: String): Brand
@@ -18,6 +26,39 @@ extend type Query{
     GetAllCategories : [Category]!
 }
 
+input SupplierInput {
+    id: Int # Used when updating supplier details
+    name: String
+    landPhone: String
+    mobilePhone: String
+    email: String
+    addressId: Int # Used when updating supplier details
+    houseNumber: String
+    street: String
+    city: String
+    district: String
+    postalCode: String
+    active: Boolean
+    branchId: Int
+}
+
+
+type Supplier {
+    id: Int
+    name: String
+    landPhone: String
+    mobilePhone: String
+    email: String
+    address: Address
+    branchId: Int
+    createdBy: Employee
+    updatedEmployee: Employee
+    createdAt: String
+    updatedAt: String
+    active: Boolean
+
+
+}
 
 
 input CategoryInput {
