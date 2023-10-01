@@ -15,6 +15,7 @@ public class GraphqlConfig {
                 wiringBuilder.scalar(ExtendedScalars.Date);
     }
 
+    //test
     // CORS configuration
     @Bean
     public WebMvcConfigurer corsConfigurer() {
