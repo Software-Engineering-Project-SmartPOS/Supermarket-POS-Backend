@@ -17,10 +17,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-
     private String itemCode;
-
     private String name;
     private String barcodeNo;
     private String description;
@@ -38,14 +35,10 @@ public class Item {
 
     @Column(name = "createdAt", updatable = false, nullable = false)
     private Timestamp createdAt;
-
     @Column(name = "updatedAt")
     private Timestamp updatedAt;
-
     private Boolean active;
-
     private Integer reorderLevel;
-
     private Boolean returnable;
 
 }

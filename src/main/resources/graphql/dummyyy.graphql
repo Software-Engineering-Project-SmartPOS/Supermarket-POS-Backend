@@ -290,6 +290,97 @@ query {
 
 
 
+#.............Supplier..........
+mutation {
+    AddSupplier(supplierInput: {
+        name: "Supplier Company"
+        landPhone: "123-456-7890"
+        mobilePhone: "987-654-3210"
+        email: "supplier@example.com"
+        houseNumber: "123"
+        street: "Main Street"
+        city: "Cityville"
+        district: "Districtville"
+        postalCode: "12345"
+        active: true
+    }) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
 
+        }
+        active
+    }
+}
 
+mutation {
+    UpdateSupplier(supplierDetail: {
+        id: 1
+        name: "Updated Supplier Company"
+        landPhone: "555-555-5555"
+        mobilePhone: "777-777-7777"
+        email: "updated@example.com"
+        houseNumber: "456"
+        street: "Updated Street"
+        city: "Updated City"
+        district: "Updated District"
+        postalCode: "54321"
+        active: true
+    }) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+    }
+}
+
+query {
+    GetSupplierById(id: 2) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+
+    }
+}
+
+query {
+    GetAllSuppliers {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+
+    }
+}
 
