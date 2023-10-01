@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface BrandRepository extends JpaRepository<Brand,Integer> {
     @Query("SELECT COUNT(b)> 0 FROM Brand b WHERE b.name = ?1")
     boolean isAvailablebyName(String  brandName);
+
+    @Query("SELECT b FROM Brand b WHERE b.name = ?1")
+    Brand findByName(String name);
 }

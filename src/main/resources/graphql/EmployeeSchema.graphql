@@ -28,7 +28,6 @@ extend type Mutation {
 }
 
 
-
 input LoginDetails{
   userName: String
   password: String
@@ -78,6 +77,8 @@ type Employee {
   jobRole: JobRole!
   salaryType: SalaryType
   active: Boolean!
+  createdAt : String
+  updatedAt: String
 }
 
 

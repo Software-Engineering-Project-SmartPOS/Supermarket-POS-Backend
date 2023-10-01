@@ -18,20 +18,22 @@ import jakarta.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Integer id;
+    private String name;
     private String description;
-
-    private Timestamp addedDate;
-
+    private Timestamp createAt;
+    private Timestamp updateAt;
     @ManyToOne
     @JoinColumn(name = "updatedEmployeeId")
     private Employee updatedEmployee;
-
-    private Timestamp updatedDate;
-
     @OneToMany(mappedBy = "category")
     private List<Item> itemList;
 
+    public Category(String name, String description, Timestamp createAt, Employee updatedEmployee) {
+        this.name = name;
+        this.description = description;
+        this.createAt = createAt;
+        this.updatedEmployee = updatedEmployee;
+    }
 }
 
