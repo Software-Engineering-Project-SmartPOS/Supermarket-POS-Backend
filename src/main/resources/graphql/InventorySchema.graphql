@@ -1,4 +1,11 @@
 extend type Mutation {
+    CreateItem(itemInput: ItemInput!): Item
+    UpdateItem(itemDetail: ItemInput): Item
+
+    AddSupplier(supplierInput: SupplierInput) : Supplier
+    UpdateSupplier(supplierDetail: SupplierInput): Supplier
+
+
     CreateBrand(brandInput: BrandInput!): Brand
     UpdateBrand(brandInput : BrandInput): Brand
 
@@ -6,8 +13,24 @@ extend type Mutation {
     CreateCategory(categoryInput: CategoryInput): Category!
     UpdateCategory(categoryInput: CategoryInput): Category!
 
+
+
+    CreateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
+    UpdateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
+    DeleteItemSupply(id: ID!): Boolean
+
+
+
 }
 extend type Query{
+
+    GetItemById(id: ID): Item
+    GetItemByBarcode(barcode: String): Item
+    GetItemByItemCode(itemCode: String): Item
+
+    GetSupplierById(id:ID!) : Supplier
+    GetSupplierByEmail(name: String) : Supplier
+    GetAllSuppliers : [Supplier]
 
     GetBrandById(id: ID!) : Brand
     GetBrandByName(name: String): Brand
@@ -16,25 +39,125 @@ extend type Query{
     GetCategoryById(id: ID) : Category
     GetCategoryByName(name: String): Category
     GetAllCategories : [Category]!
+
+    GetActiveItemSupplyById(id: ID!): ItemSupply
+    GetActiveItemSuppliesBySupplierId(supplierId: ID!): [ItemSupply]
+    GetActiveItemSuppliesByItemId(itemId: ID!): [ItemSupply]
+    GetActiveItemSuppliesByBranchId(branchId: ID!): [ItemSupply]
 }
 
+type ItemSupply {
+    id: ID!
+    supplier: Supplier!
+    item: Item!
+    createdDate: String!
+    modifiedDate: String
+    createdBy: Employee!
+    updatedEmployee: Employee
+    branch: Branch!
+    unitCost: Float!
+    active: Boolean!
+}
+
+
+input ItemSupplyInput {
+    id: Int # used when updating
+    supplierId: Int
+    itemId: Int
+    #    branchId: Int! # branch id should be captured by the token //owner cant create this then
+    unitCost: Float
+    active: Boolean
+}
+
+input ItemInput {
+    id: Int # Used when updating
+    itemCode: String!
+    name: String!
+    barcodeNo: String!
+    description: String!
+    categoryId: Int!
+    brandId: Int!
+    unitOfMeasure: UnitOfMeasure!
+    active: Boolean!
+    reorderLevel: Int!
+    returnable: Boolean!
+}
+type Item {
+    id: Int!
+    itemCode: String!
+    name: String!
+    barcodeNo: String!
+    description: String!
+    category: Category!
+    brand: Brand!
+    unitOfMeasure: UnitOfMeasure!
+    createdAt: String!
+    updatedAt: String
+    active: Boolean!
+    reorderLevel: Int!
+    returnable: Boolean!
+}
+
+enum UnitOfMeasure {
+    KILOGRAM
+    GRAMS
+    LITERS
+    MILLILITERS
+    METERS
+    MILLIMETERS
+    COUNT
+}
+
+input SupplierInput {
+    id: Int # Used when updating supplier details
+    name: String
+    landPhone: String
+    mobilePhone: String
+    email: String
+    addressId: Int # Used when updating supplier details
+    houseNumber: String
+    street: String
+    city: String
+    district: String
+    postalCode: String
+    active: Boolean
+    branchId: Int
+}
+
+
+type Supplier {
+    id: Int
+    name: String
+    landPhone: String
+    mobilePhone: String
+    email: String
+    address: Address
+    branchId: Int
+    createdBy: Employee
+    updatedEmployee: Employee
+    createdAt: String
+    updatedAt: String
+    active: Boolean
+
+
+}
 
 
 input CategoryInput {
-id: ID
-name: String
-description: String
+    id: ID
+    name: String
+    description: String
 }
 
 type Category {
-id: ID!
-name: String!
-description: String
-createAt: String
-updateAt: String
-updatedEmployee: Employee!
-updatedDate: String
-#itemList: [Item]
+    id: ID!
+    name: String!
+    description: String
+    createAt: String
+    updateAt: String
+    updatedEmployee: Employee!
+    updatedDate: String
+    #itemList: [Item]
 }
 
 
