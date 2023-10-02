@@ -9,10 +9,20 @@ extend type Mutation {
     CreateCategory(categoryInput: CategoryInput): Category!
     UpdateCategory(categoryInput: CategoryInput): Category!
 
+    CreateItem(itemInput: ItemInput!): Item
+    UpdateItem(itemDetail: ItemInput): Item
+
+
+
 
 
 }
 extend type Query{
+
+    GetItemById(id: ID): Item
+    GetItemByBarcode(barcode: String): Item
+    GetItemByItemCode(itemCode: String): Item
+
     GetSupplierById(id:ID!) : Supplier
     GetSupplierByEmail(name: String) : Supplier
     GetAllSuppliers : [Supplier]
@@ -24,6 +34,44 @@ extend type Query{
     GetCategoryById(id: ID) : Category
     GetCategoryByName(name: String): Category
     GetAllCategories : [Category]!
+}
+input ItemInput {
+    id: Int # Used when updating
+    itemCode: String!
+    name: String!
+    barcodeNo: String!
+    description: String!
+    categoryId: Int!
+    brandId: Int!
+    unitOfMeasure: UnitOfMeasure!
+    active: Boolean!
+    reorderLevel: Int!
+    returnable: Boolean!
+}
+type Item {
+    id: Int!
+    itemCode: String!
+    name: String!
+    barcodeNo: String!
+    description: String!
+    category: Category!
+    brand: Brand!
+    unitOfMeasure: UnitOfMeasure!
+    createdAt: String!
+    updatedAt: String
+    active: Boolean!
+    reorderLevel: Int!
+    returnable: Boolean!
+}
+
+enum UnitOfMeasure {
+    KILOGRAM
+    GRAMS
+    LITERS
+    MILLILITERS
+    METERS
+    MILLIMETERS
+    COUNT
 }
 
 input SupplierInput {

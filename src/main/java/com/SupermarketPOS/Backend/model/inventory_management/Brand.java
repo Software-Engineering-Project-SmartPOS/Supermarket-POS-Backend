@@ -20,7 +20,7 @@ import lombok.Setter;
 public class Brand {
     // brand of the items
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
