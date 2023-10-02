@@ -35,6 +35,5 @@ public class Category {
         this.createAt = createAt;
         this.updatedEmployee = updatedEmployee;
     }
-
 }
 

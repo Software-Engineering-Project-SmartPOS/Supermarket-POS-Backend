@@ -1,0 +1,106 @@
+mutation {
+  CreateItemSupply1:CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 4,
+    unitCost: 9.99,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  CreateItemSupply2: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 3,
+    unitCost: 8.49,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  CreateItemSupply3: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 5,
+    unitCost: 11.79,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+}

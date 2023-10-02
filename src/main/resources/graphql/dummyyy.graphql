@@ -403,3 +403,198 @@ query {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# >>>>>.................ItemSupply.................
+{
+    GetActiveItemSupplyById(id: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            name
+        }
+        unitCost
+        active
+    }
+}
+
+
+{
+    GetActiveItemSuppliesBySupplierId(supplierId: 2) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            name
+        }
+        unitCost
+        active
+    }
+}
+
+
+
+
+query{
+    GetActiveItemSuppliesByBranchId(branchId: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+        }
+    }}
+
+
+
+mutation {
+    UpdateItemSupply(itemSupplyInput :{
+        id : 1
+        supplierId : 2
+        itemId: 10
+
+
+
+    }){
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            address{
+                street
+            }
+        }
+        }
+}
+
+
+
+
+mutation {
+    UpdateItemSupply (itemSupplyInput: {
+        id : 152
+        supplierId : 2
+        itemId: 2
+
+    }){
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            address{
+                street
+            }
+        }
+    }
+}
+
+
+
+
+
+
