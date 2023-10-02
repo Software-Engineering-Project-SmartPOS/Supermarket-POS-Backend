@@ -43,11 +43,11 @@ public class ItemService {
             throw new IllegalArgumentException("An item with the same barcode already exists.");
         }
 
-//        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElseThrow(()-> new IllegalArgumentException("Category not found with id"));
-//        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElseThrow(()-> new IllegalArgumentException("Brand not found with id"));
+        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElseThrow(()-> new IllegalArgumentException("Category not found with id"));
+        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElseThrow(()-> new IllegalArgumentException("Brand not found with id"));
 //
-        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElse(null);
-        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElse(null);
+//        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElse(null);
+//        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElse(null);
         // Create a new item
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
         Item newItem = new Item(

@@ -30,8 +30,6 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "brandId")
     private Brand brand;
-
-
     private UnitOfMeasure unitOfMeasure;
 
     @Column(name = "createdAt", updatable = false, nullable = false)
