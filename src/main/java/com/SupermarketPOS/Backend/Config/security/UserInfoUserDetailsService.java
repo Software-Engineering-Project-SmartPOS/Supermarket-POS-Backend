@@ -33,9 +33,9 @@ public class UserInfoUserDetailsService implements UserDetailsService {
                     .withUsername(employeeUser.getEmail())
                     .password(employeeUser.getPassword())
                     .roles(employeeUser.getJobRole().toString())
-                    .accountExpired(false)
-                    .accountLocked(false)
-                    .credentialsExpired(false)
+                    .accountExpired(!employeeUser.getActive())
+                    .accountLocked(!employeeUser.getActive())
+                    .credentialsExpired(!employeeUser.getActive())
                     .build();
 
         } else {

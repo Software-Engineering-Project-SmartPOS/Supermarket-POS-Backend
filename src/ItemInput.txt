@@ -1,0 +1,703 @@
+mutation {
+  MuncheeGoldMarie100g: CreateItem(itemInput: {
+    itemCode: "MGM100"
+    name: "Munchee Gold Marie 100g"
+    barcodeNo: "987654321"
+    description: "Delicious Marie biscuits from Munchee."
+    categoryId: 14  # Replace with the actual category ID for "Groceries"
+    brandId: 206   # Replace with the actual brand ID for "Munchee"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  MuncheeGoldMarie200g: CreateItem(itemInput: {
+    itemCode: "MGM200"
+    name: "Munchee Gold Marie 200g"
+    barcodeNo: "987654322"
+    description: "Delicious Marie biscuits from Munchee."
+    categoryId: 14
+    brandId: 206
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  MuncheeLemonPuff100g: CreateItem(itemInput: {
+    itemCode: "MLP100"
+    name: "Munchee Lemon Puff 100g"
+    barcodeNo: "987654323"
+    description: "Lemon-flavored puff biscuits from Munchee."
+    categoryId: 14
+    brandId: 206
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  MuncheeCreamCracker250g: CreateItem(itemInput: {
+    itemCode: "MCC250"
+    name: "Munchee Cream Cracker 250g"
+    barcodeNo: "987654324"
+    description: "Crunchy cream crackers from Munchee."
+    categoryId: 14
+    brandId: 206
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  MuncheeChocolateCreamBiscuits150g: CreateItem(itemInput: {
+    itemCode: "MCCB150"
+    name: "Munchee Chocolate Cream Biscuits 150g"
+    barcodeNo: "987654325"
+    description: "Chocolate cream-filled biscuits from Munchee."
+    categoryId: 14
+    brandId: 206
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  AnchorFreshMilk1L: CreateItem(itemInput: {
+    itemCode: "AFM1L"
+    name: "Anchor Fresh Milk 1L"
+    barcodeNo: "987654326"
+    description: "Fresh milk from Anchor."
+    categoryId: 2  # Replace with the actual category ID for "Dairy Products"
+    brandId: 203   # Replace with the actual brand ID for "Anchor"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  AnchorButter200g: CreateItem(itemInput: {
+    itemCode: "AB200"
+    name: "Anchor Butter 200g"
+    barcodeNo: "987654327"
+    description: "Creamy butter from Anchor."
+    categoryId: 2
+    brandId: 203
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  AnchorCheddarCheese250g: CreateItem(itemInput: {
+    itemCode: "ACC250"
+    name: "Anchor Cheddar Cheese 250g"
+    barcodeNo: "987654328"
+    description: "Cheddar cheese from Anchor."
+    categoryId: 2
+    brandId: 203
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  AnchorYogurt400g: CreateItem(itemInput: {
+    itemCode: "AY400"
+    name: "Anchor Yogurt 400g"
+    barcodeNo: "987654329"
+    description: "Creamy yogurt from Anchor."
+    categoryId: 2
+    brandId: 203
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  AnchorFullCreamMilkPowder400g: CreateItem(itemInput: {
+    itemCode: "AFMP400"
+    name: "Anchor Full Cream Milk Powder 400g"
+    barcodeNo: "987654330"
+    description: "Full cream milk powder from Anchor."
+    categoryId: 2
+    brandId: 203
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  NestleCerelac400g: CreateItem(itemInput: {
+    itemCode: "NC400"
+    name: "Nestlé Cerelac 400g"
+    barcodeNo: "987654331"
+    description: "Nutritious baby cereal from Nestlé."
+    categoryId: 4  # Replace with the actual category ID for "Cereals and Breakfast Foods"
+    brandId: 204   # Replace with the actual brand ID for "Nestlé"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  NestleMilo500g: CreateItem(itemInput: {
+    itemCode: "NM500"
+    name: "Nestlé Milo 500g"
+    barcodeNo: "987654332"
+    description: "Energy drink mix from Nestlé."
+    categoryId: 4
+    brandId: 204
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  NestleNescafeClassicCoffee100g: CreateItem(itemInput: {
+    itemCode: "NNCC100"
+    name: "Nestlé Nescafé Classic Coffee 100g"
+    barcodeNo: "987654333"
+    description: "Classic coffee blend from Nestlé."
+    categoryId: 6  # Replace with the actual category ID for "Beverages"
+    brandId: 204   # Replace with the actual brand ID for "Nestlé"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  NestleKitKat4FingerChocolateBar: CreateItem(itemInput: {
+    itemCode: "NK4F"
+    name: "Nestlé Kit Kat 4-Finger Chocolate Bar"
+    barcodeNo: "987654334"
+    description: "Crunchy chocolate bar from Nestlé."
+    categoryId: 8  # Replace with the actual category ID for "Snacks and Sweets"
+    brandId: 204   # Replace with the actual brand ID for "Nestlé"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  NestleMaggiInstantNoodles80g: CreateItem(itemInput: {
+    itemCode: "NMIN80"
+    name: "Nestlé Maggi Instant Noodles 80g"
+    barcodeNo: "987654335"
+    description: "Instant noodles from Nestlé."
+    categoryId: 8
+    brandId: 204
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  ElephantHouseVanillaIceCream1L: CreateItem(itemInput: {
+    itemCode: "EHVIC1L"
+    name: "Elephant House Vanilla Ice Cream 1L"
+    barcodeNo: "987654336"
+    description: "Creamy vanilla ice cream from Elephant House."
+    categoryId: 6  # Replace with the actual category ID for "Beverages"
+    brandId: 205   # Replace with the actual brand ID for "Elephant House"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  ElephantHouseGingerBeer500ml: CreateItem(itemInput: {
+    itemCode: "EHGB500"
+    name: "Elephant House Ginger Beer 500ml"
+    barcodeNo: "987654337"
+    description: "Refreshing ginger beer from Elephant House."
+    categoryId: 6
+    brandId: 205
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  ElephantHouseOrangeCrush1L: CreateItem(itemInput: {
+    itemCode: "EHOC1L"
+    name: "Elephant House Orange Crush 1L"
+    barcodeNo: "987654338"
+    description: "Orange-flavored crush from Elephant House."
+    categoryId: 6
+    brandId: 205
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  ElephantHouseFruitNectar200ml: CreateItem(itemInput: {
+    itemCode: "EHFN200"
+    name: "Elephant House Fruit Nectar 200ml"
+    barcodeNo: "987654339"
+    description: "Fruit nectar from Elephant House."
+    categoryId: 6
+    brandId: 205
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  ElephantHouseCreamSoda500ml: CreateItem(itemInput: {
+    itemCode: "EHCS500"
+    name: "Elephant House Cream Soda 500ml"
+    barcodeNo: "987654340"
+    description: "Cream soda from Elephant House."
+    categoryId: 6
+    brandId: 205
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CocaColaClassic500ml: CreateItem(itemInput: {
+    itemCode: "CCC500"
+    name: "Coca-Cola Classic 500ml"
+    barcodeNo: "987654341"
+    description: "Classic Coca-Cola in a 500ml bottle."
+    categoryId: 6
+    brandId: 213  # Replace with the actual brand ID for "Coca-Cola"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CocaColaDiet330ml: CreateItem(itemInput: {
+    itemCode: "CCD330"
+    name: "Coca-Cola Diet 330ml"
+    barcodeNo: "987654342"
+    description: "Diet Coca-Cola in a 330ml can."
+    categoryId: 6
+    brandId: 213
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CocaColaZeroSugar1_25L: CreateItem(itemInput: {
+    itemCode: "CCZS125L"
+    name: "Coca-Cola Zero Sugar 1.25L"
+    barcodeNo: "987654343"
+    description: "Zero-sugar Coca-Cola in a 1.25L bottle."
+    categoryId: 6
+    brandId: 213
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CocaColaFantaOrange500ml: CreateItem(itemInput: {
+    itemCode: "CCFO500"
+    name: "Coca-Cola Fanta Orange 500ml"
+    barcodeNo: "987654344"
+    description: "Refreshing Fanta Orange in a 500ml bottle."
+    categoryId: 6
+    brandId: 213
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CocaColaSprite330ml: CreateItem(itemInput: {
+    itemCode: "CCS330"
+    name: "Coca-Cola Sprite 330ml"
+    barcodeNo: "987654345"
+    description: "Sprite lemon-lime soda in a 330ml can."
+    categoryId: 6
+    brandId: 213
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  PepsiCola500ml: CreateItem(itemInput: {
+    itemCode: "PC500"
+    name: "Pepsi Cola 500ml"
+    barcodeNo: "987654346"
+    description: "Pepsi Cola in a 500ml bottle."
+    categoryId: 6
+    brandId: 214  # Replace with the actual brand ID for "Pepsi"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  PepsiMax330ml: CreateItem(itemInput: {
+    itemCode: "PM330"
+    name: "Pepsi Max 330ml"
+    barcodeNo: "987654347"
+    description: "Pepsi Max in a 330ml can."
+    categoryId: 6
+    brandId: 214
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  PepsiTwistLemon500ml: CreateItem(itemInput: {
+    itemCode: "PTL500"
+    name: "Pepsi Twist Lemon 500ml"
+    barcodeNo: "987654348"
+    description: "Lemon-flavored Pepsi Twist in a 500ml bottle."
+    categoryId: 6
+    brandId: 214
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  PepsiBlackCherryVanilla20oz: CreateItem(itemInput: {
+    itemCode: "PBCV20OZ"
+    name: "Pepsi Black Cherry Vanilla 20oz"
+    barcodeNo: "987654349"
+    description: "Black Cherry Vanilla Pepsi in a 20oz bottle."
+    categoryId: 6
+    brandId: 214
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  PepsiMountainDew1L: CreateItem(itemInput: {
+    itemCode: "PMD1L"
+    name: "Pepsi Mountain Dew 1L"
+    barcodeNo: "987654350"
+    description: "Mountain Dew soda in a 1L bottle."
+    categoryId: 6
+    brandId: 214
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CargillsMixedVegetables500g: CreateItem(itemInput: {
+    itemCode: "CMV500G"
+    name: "Cargills Mixed Vegetables 500g (Frozen)"
+    barcodeNo: "987654351"
+    description: "Frozen mixed vegetables from Cargills."
+    categoryId: 5  # Replace with the actual category ID for "Frozen Foods"
+    brandId: 211   # Replace with the actual brand ID for "Cargills"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CargillsChickenNuggets400g: CreateItem(itemInput: {
+    itemCode: "CCN400G"
+    name: "Cargills Chicken Nuggets 400g (Frozen)"
+    barcodeNo: "987654352"
+    description: "Frozen chicken nuggets from Cargills."
+    categoryId: 5
+    brandId: 211
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CargillsTunaChunksInBrine185g: CreateItem(itemInput: {
+    itemCode: "CTCIB185G"
+    name: "Cargills Tuna Chunks in Brine 185g (Canned)"
+    barcodeNo: "987654353"
+    description: "Canned tuna chunks in brine from Cargills."
+    categoryId: 7  # Replace with the actual category ID for "Canned Goods"
+    brandId: 211   # Replace with the actual brand ID for "Cargills"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CargillsBakedBeansInTomatoSauce400g: CreateItem(itemInput: {
+    itemCode: "CBBITS400G"
+    name: "Cargills Baked Beans in Tomato Sauce 400g (Canned)"
+    barcodeNo: "987654354"
+    description: "Canned baked beans in tomato sauce from Cargills."
+    categoryId: 7
+    brandId: 211
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  CargillsMangoJuice1L: CreateItem(itemInput: {
+    itemCode: "CMJ1L"
+    name: "Cargills Mango Juice 1L"
+    barcodeNo: "987654355"
+    description: "Refreshing mango juice from Cargills."
+    categoryId: 6
+    brandId: 211
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  SustagenNutritionalDrinkPowderVanillaFlavor400g: CreateItem(itemInput: {
+    itemCode: "SNPVF400G"
+    name: "Sustagen Nutritional Drink Powder - Vanilla Flavor 400g"
+    barcodeNo: "987654356"
+    description: "Nutritional drink powder with vanilla flavor from Sustagen."
+    categoryId: 14
+    brandId: 215  # Replace with the actual brand ID for "Sustagen"
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  SustagenKid3PlusNutritionalDrinkPowderChocolateFlavor900g: CreateItem(itemInput: {
+    itemCode: "SK3PNP900G"
+    name: "Sustagen Kid 3+ Nutritional Drink Powder - Chocolate Flavor 900g"
+    barcodeNo: "987654357"
+    description: "Nutritional drink powder with chocolate flavor for kids 3+ from Sustagen."
+    categoryId: 14
+    brandId: 215
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  SustagenMomNutritionalDrinkPowderStrawberryFlavor400g: CreateItem(itemInput: {
+    itemCode: "SMNPSF400G"
+    name: "Sustagen Mom Nutritional Drink Powder - Strawberry Flavor 400g"
+    barcodeNo: "987654358"
+    description: "Nutritional drink powder with strawberry flavor for moms from Sustagen."
+    categoryId: 14
+    brandId: 215
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+
+  SustagenActiveNutritionalDrinkPowderBananaFlavor400g: CreateItem(itemInput: {
+    itemCode: "SANPBF400G"
+    name: "Sustagen Active Nutritional Drink Powder - Banana Flavor 400g"
+    barcodeNo: "987654359"
+    description: "Nutritional drink powder with banana flavor for active lifestyles from Sustagen."
+    categoryId: 14
+    brandId: 215
+    unitOfMeasure: COUNT
+    active: true
+    reorderLevel: 10
+    returnable: true
+  }) {
+    id
+    itemCode
+    name
+    barcodeNo
+  }
+}

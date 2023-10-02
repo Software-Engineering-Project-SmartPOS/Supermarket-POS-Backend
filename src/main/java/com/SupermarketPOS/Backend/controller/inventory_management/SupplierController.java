@@ -24,7 +24,7 @@ public class SupplierController {
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
     @QueryMapping
     public Supplier GetSupplierById(@Argument Integer id) {
-        // Implement the logic to fetch a supplier by ID using supplierService
+        // logic to fetch a supplier by ID using supplierService
         return supplierService.GetSupplierById(id);
     }
 
@@ -38,25 +38,21 @@ public class SupplierController {
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
     @QueryMapping
     public List<Supplier> GetAllSuppliers() {
-        // Implement the logic to fetch all suppliers using supplierService
+        // logic to fetch all suppliers using supplierService
         return supplierService.GetAllSuppliers();
     }
 
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER"})
     @MutationMapping
     public Supplier AddSupplier(@Argument SupplierInput supplierInput, Principal principal) {
-        // Implement the logic to add a new supplier using supplierService
+        // logic to add a new supplier using supplierService
         return supplierService.CreateSupplier(supplierInput, principal);
     }
 
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER"})
     @MutationMapping
     public Supplier UpdateSupplier(@Argument SupplierInput supplierDetail, Principal principal) {
-        // Implement the logic to update a supplier using supplierService
+        // logic to update a supplier using supplierService
         return supplierService.UpdateSupplier(supplierDetail,principal);
     }
-
-//    @SchemaMapping(typeName = "Supplier", field = "")
-
-
 }
