@@ -26,7 +26,14 @@ public class GraphqlConfig {
                         .allowedOrigins("http://localhost:5173") // Add the origin that is allowed to access your GraphQL server
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow specific HTTP methods
                         .allowedHeaders("*"); // Allow specific headers
+
+                registry.addMapping("/authenticate")
+                        .allowedOrigins("http://localhost:5173")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
             }
+
+
         };
     }
 }
