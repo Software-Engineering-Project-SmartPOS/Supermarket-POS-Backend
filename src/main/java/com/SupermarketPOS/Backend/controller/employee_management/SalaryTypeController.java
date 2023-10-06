@@ -8,14 +8,16 @@ import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.service.employee_management.SalaryTypeService;
 
+import java.util.List;
+
 @Controller
 public class SalaryTypeController {
     private final SalaryTypeService salaryTypeService;
     public SalaryTypeController(SalaryTypeService salaryTypeService){
         this.salaryTypeService = salaryTypeService;
     }
-    
-    
+
+
     @MutationMapping
     public SalaryType AddSalaryType(@Argument SalaryTypeInput inputSalaryTypeDetails){
         return salaryTypeService.AddNewSalaryType(inputSalaryTypeDetails);
@@ -24,5 +26,10 @@ public class SalaryTypeController {
     @QueryMapping
     public SalaryType salaryTypeById(@Argument Integer id ){
         return salaryTypeService.FindById(id);
+    }
+
+    @QueryMapping
+    public List<SalaryType> allSalaryTypes(){
+        return salaryTypeService.getAllSalaryTypes();
     }
 }
