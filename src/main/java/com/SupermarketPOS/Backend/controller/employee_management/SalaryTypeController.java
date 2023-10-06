@@ -20,7 +20,6 @@ public class SalaryTypeController {
     }
 
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
-
     @MutationMapping
     public SalaryType AddSalaryType(@Argument SalaryTypeInput inputSalaryTypeDetails){
         return salaryTypeService.AddNewSalaryType(inputSalaryTypeDetails);
@@ -36,5 +35,4 @@ public class SalaryTypeController {
     public List<SalaryType> allSalaryTypes(){
         return salaryTypeService.getAllSalaryTypes();
     }
-
 }
