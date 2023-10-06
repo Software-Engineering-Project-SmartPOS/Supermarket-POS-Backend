@@ -16,7 +16,7 @@ import jakarta.persistence.*;
 @Entity
 public class ItemSupply {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne

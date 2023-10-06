@@ -5,25 +5,32 @@ extend type Mutation {
     AddSupplier(supplierInput: SupplierInput) : Supplier
     UpdateSupplier(supplierDetail: SupplierInput): Supplier
 
-
     CreateBrand(brandInput: BrandInput!): Brand
     UpdateBrand(brandInput : BrandInput): Brand
 
-
     CreateCategory(categoryInput: CategoryInput): Category!
     UpdateCategory(categoryInput: CategoryInput): Category!
-
-
 
     CreateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
     UpdateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
     DeleteItemSupply(id: ID!): Boolean
 
+    CreatePurchaseOrder(purchaseOrderInput: PurchaseOrderInput!): PurchaseOrder
+    UpdatePurchaseOrder(id: ID!, input: PurchaseOrderInput!): PurchaseOrder
+    DeletePurchaseOrder(id: ID!): Boolean
+
+    PurchaseOrderItemArrival(arrivalDetails: PurchaseOrderItemArrivalInput) : PurchaseOrderItem
+
 
 
 }
-extend type Query{
+input PurchaseOrderItemArrivalInput{
+    purchaseOrderItemId: ID!
+    receivedQuantity: Float
+}
 
+
+extend type Query{
     GetItemById(id: ID): Item
     GetItemByBarcode(barcode: String): Item
     GetItemByItemCode(itemCode: String): Item
@@ -44,6 +51,71 @@ extend type Query{
     GetActiveItemSuppliesBySupplierId(supplierId: ID!): [ItemSupply]
     GetActiveItemSuppliesByItemId(itemId: ID!): [ItemSupply]
     GetActiveItemSuppliesByBranchId(branchId: ID!): [ItemSupply]
+
+#    all these give only the data related to the callers branch
+    AllPurchaseOrders: [PurchaseOrder!]!
+    PurchaseOrderById(id: ID!): PurchaseOrder
+    AllPurchaseOrdersBySupplierId(supplierId: ID!) :[PurchaseOrder!]
+    AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrderItem]
+
+
+
+}
+
+
+type PurchaseOrder {
+    id: ID!
+    supplier: Supplier!
+    orderedDate: String!
+    expectedDate: String!
+    createdBy: Employee!
+    description: String!
+    branch: Branch!
+    purchaseCost: Float!
+    purchaseOrderItemList: [PurchaseOrderItem!]
+    orderStatus: PurchaseOrderStatus! # Now using the enum type
+}
+
+
+type PurchaseOrderItem {
+    id: ID!
+    purchaseOrder: PurchaseOrder!
+    item: Item!
+    itemSupply: ItemSupply!
+    quantity: Float!
+    purchaseItemUnitCost: Float!
+    totalCost: Float!
+    receivedQuantity: Float!
+    purchaseOrderItemStatus: PurchaseOrderStatus
+#    orderArrivals: [StockArrival!]
+}
+input PurchaseOrderInput {
+    id: ID
+    SupplierId: ID
+    description: String
+    expectedDate: String
+    purchaseCost: Float
+    purchaseOrderItemList: [PurchaseOrderItemInput]!
+}
+
+input PurchaseOrderItemInput {
+    id: ID
+    purchaseOrderId: ID
+    itemId: ID
+    itemSupplyId: ID
+    quantity: Float
+    purchaseItemUnitCost: Float
+    totalCost: Float
+    receivedQuantity: Float
+}
+
+
+enum PurchaseOrderStatus {
+    CREATE
+    CONFIRMED
+    HALF_RECEIVED
+    COMPLETED
+    CANCELLED
 }
 
 type ItemSupply {

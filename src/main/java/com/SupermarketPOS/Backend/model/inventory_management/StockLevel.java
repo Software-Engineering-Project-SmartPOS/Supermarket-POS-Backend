@@ -5,6 +5,7 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 public class StockLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "itemId")
@@ -29,7 +30,7 @@ public class StockLevel {
     @JoinColumn(name = "branchId")
     private Branch branch;
 
-    private Timestamp expiryDate;
+    private LocalDate expiryDate;
 
 
     @ManyToOne
@@ -43,8 +44,8 @@ public class StockLevel {
     private Location stallLocation;
     private Integer stallQuantity;
 
-    private Double cost;
-    private Double sellingPrice;
+//    private Double cost;
+    private Float sellingPrice;
 
 
 }

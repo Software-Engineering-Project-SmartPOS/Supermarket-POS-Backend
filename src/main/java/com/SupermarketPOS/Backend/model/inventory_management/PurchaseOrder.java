@@ -2,12 +2,9 @@ package com.SupermarketPOS.Backend.model.inventory_management;
 
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import lombok.Data;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -23,28 +20,49 @@ import lombok.Setter;
 public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "supplierId")
     private Supplier supplier;
+    private String description;
 
-    private Timestamp orderedDate;
-    private Timestamp expectedDate;
+    private LocalDate orderedDate;
+    private LocalDate expectedDate;
 
     @ManyToOne
     @JoinColumn(name = "employeeId")
-    private Employee employee;
+    private Employee createdBy; //change to createdBy
 
-    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "branch_id")
+    @JoinColumn(name = "branchId")
     private Branch branch;
 
-    private BigDecimal purchaseCost;
-    private PurchaseOrderStatus status;
+    private Float purchaseCost;
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<PurchaseOrderItem> purchaseOrderItemList;
+
+    private PurchaseOrderStatus orderStatus = PurchaseOrderStatus.CREATE ;
+
+
+//    public PurchaseOrder(Supplier supplier, Employee createdBy, String description, Branch branch, PurchaseOrderStatus orderStatus) {
+//        this.supplier = supplier;
+//        this.createdBy = createdBy;
+//        this.description = description;
+//        this.branch = branch;
+//        this.orderStatus = orderStatus;
+//    }
+
+    public PurchaseOrder(Supplier supplier, LocalDate orderedDate, LocalDate expectedDate, Employee createdBy, String description, Branch branch,Float purchaseCost) {
+        this.supplier = supplier;
+        this.orderedDate = orderedDate;
+        this.expectedDate = expectedDate;
+        this.createdBy = createdBy;
+        this.description = description;
+        this.branch = branch;
+        this.purchaseCost = purchaseCost;
+        this.purchaseCost =0F;
+    }
 }

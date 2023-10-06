@@ -52,18 +52,7 @@ public class SupplierService {
         return supplierRepository.save(newSupplier);
     }
 
-    public List<Supplier> GetAllSuppliers() {
-        return supplierRepository.findAll();
-    }
 
-    public Supplier GetSupplierById(Integer id) {
-        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
-        return optionalSupplier.orElse(null);
-    }
-    public Supplier GetSupplierByEmail(String name) {
-        Optional<Supplier> optionalSupplier = supplierRepository.findByEmail(name);
-        return optionalSupplier.orElse(null);
-    }
 
     public Supplier UpdateSupplier(SupplierInput supplierInput, Principal principal) {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(supplierInput.id());
@@ -113,8 +102,39 @@ public class SupplierService {
         }
         return null;
     }
-
+    //delete the supplier (only by the owner)
     public void deleteSupplier(Integer id) {
         supplierRepository.deleteById(id);
     }
+
+    // these can only accessed by the owner
+    public List<Supplier> GetAllSuppliers() {
+        return supplierRepository.findAll();
+    }
+
+    public Supplier GetSupplierById(Integer id) {
+        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
+        return optionalSupplier.orElse(null);
+    }
+    public Supplier GetSupplierByEmail(String name) {
+        Optional<Supplier> optionalSupplier = supplierRepository.findByEmail(name);
+        return optionalSupplier.orElse(null);
+    }
+
+
+
+
+//    // this funtions only return data related to the callers branch
+//    public Supplier GetSupplierById(Integer id, Principal principal) {
+//        Employee createdBy = employeeService.getByEmail(principal.getName());
+//        return supplierRepository.findByIdAnd
+//    }
+//
+//    public Supplier GetSupplierByEmail(String name, Principal principal) {
+//        Employee createdBy = employeeService.getByEmail(principal.getName());
+//    }
+//
+//    public List<Supplier> GetAllSuppliers(Principal principal) {
+//        Employee createdBy = employeeService.getByEmail(principal.getName());
+//    }
 }

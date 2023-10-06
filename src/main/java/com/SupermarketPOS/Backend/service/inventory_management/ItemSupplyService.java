@@ -148,8 +148,16 @@ public class ItemSupplyService {
         return itemSupplyRepository.findAllBySupplierIdAndActive( id, true).get(0); // a list is returned and taken the first element
     }
 
+    //by id
+    public ItemSupply getById(Integer id){
+        return itemSupplyRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("item supply is not found"));
+    }
+
     //by branchId active
     public List<ItemSupply> getActiveItemSuppliesByBranchId(Integer branchId ) {
         return itemSupplyRepository.findAllByBranchIdAndActive(branchId , true);
     }
+
+
+
 }

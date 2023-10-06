@@ -42,6 +42,34 @@ public class SupplierController {
         return supplierService.GetAllSuppliers();
     }
 
+
+//
+//    //following function are to be used by the particular employees in the branch / can get details only related to his branch only
+//    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+//    @QueryMapping
+//    public Supplier GetBranchSupplierById(@Argument Integer id,Principal principal) {
+//        // logic to fetch a supplier by ID using supplierService
+//        return supplierService.GetSupplierById(id,principal);
+//    }
+//
+//    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+//    @QueryMapping
+//    public Supplier GetBranchSupplierByEmail(@Argument String name,Principal principal) {
+//        // Implement the logic to fetch a supplier by name using supplierService
+//        return supplierService.GetSupplierByEmail(name,principal);
+//    }
+//
+//    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+//    @QueryMapping
+//    public List<Supplier> GetBranchAllSuppliers(Principal principal) {
+//        // logic to fetch all suppliers using supplierService
+//        return supplierService.GetAllSuppliers(principal);
+//    }
+
+
+
+
+
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER","ROLE_STORE_MANAGER"})
     @MutationMapping
     public Supplier AddSupplier(@Argument SupplierInput supplierInput, Principal principal) {

@@ -595,6 +595,33 @@ mutation {
 
 
 
+query{
+    GetActiveItemSuppliesByBranchId(
+        branchId: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+    }
+}
+
+
+
 
 
 
