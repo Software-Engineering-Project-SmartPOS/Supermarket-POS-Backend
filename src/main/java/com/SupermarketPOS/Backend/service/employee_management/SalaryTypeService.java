@@ -2,7 +2,8 @@ package com.SupermarketPOS.Backend.service.employee_management;
 import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.SalaryTypeRepository;
-import java.util.Optional;
+
+import java.util.List;
 
 
 import org.springframework.stereotype.Service;
@@ -14,7 +15,6 @@ public class SalaryTypeService {
     public SalaryTypeService(SalaryTypeRepository salaryTypeRepository){
         this.salaryTypeRepository=salaryTypeRepository;
     }
-
 
     public SalaryType getSalaryTypeBySalaryInput(SalaryTypeInput salaryTypeInput){
         //search for previously added salaryType
@@ -42,8 +42,6 @@ public class SalaryTypeService {
         }
     }
 
-
-
     public SalaryType AddNewSalaryType (SalaryTypeInput salaryTypeInput){
         SalaryType salaryType = new SalaryType(
             salaryTypeInput.basicSalary(),
@@ -52,11 +50,15 @@ public class SalaryTypeService {
             salaryTypeInput.bonus()
         );
         return salaryTypeRepository.save(salaryType);
-
     }
 
     public SalaryType FindById(Integer id){
         return salaryTypeRepository.getById(id);
+    }
+
+    //get list of all salarytypes
+    public List<SalaryType> getAllSalaryTypes(){
+        return salaryTypeRepository.findAll();
     }
 
 }
