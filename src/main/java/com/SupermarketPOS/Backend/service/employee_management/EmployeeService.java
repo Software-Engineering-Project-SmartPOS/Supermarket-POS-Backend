@@ -93,7 +93,7 @@ public class EmployeeService {
                 return employeeRepository.save(newEmployee);
         }
         throw new RuntimeException("User is already there");
-        
+
     }
 
     public EmployeeValidationReport Validate(EmployeeInput employeeInput){
@@ -123,5 +123,12 @@ public class EmployeeService {
 
     public Employee findById(Integer id) {
         return  employeeRepository.findById(id).get();
+    }
+
+    //delete employee using id
+    public Employee DeleteEmployee(Integer id){
+        Employee employee = employeeRepository.findById(id).get();
+        employee.setActive(false);
+        return employeeRepository.save(employee);
     }
 }

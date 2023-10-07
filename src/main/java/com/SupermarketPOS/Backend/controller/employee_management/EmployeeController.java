@@ -27,24 +27,6 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeOutputMapper employeeOutputMapper;
 
-//   @SchemaMapping(typeName = "Employee" , field = "Branch")
-//    public Branch getEmployeeBranch(Employee employee){
-//        return employeeService.getBranchByEmployeeId(employee.getId());
-//    }
-
-//    @SchemaMapping(typeName = "Employee", field = "branch")
-//    public Branch getEmployeeBranch1(Employee employee){
-//        return employee.getBranch();
-//    }
-
-
-
-
-
-
-
-
-
     @Autowired
     public EmployeeController(EmployeeService employeeService ,
                               EmployeeOutputMapper employeeOutputMapper ){
@@ -59,21 +41,27 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-
-
-
-
     //add a new employee
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
     public Employee AddEmployee(@Argument EmployeeInput employeeInput) {
         return employeeService.AddNewEmployee(employeeInput);
     }
+
+    //delete employee using id
+    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @MutationMapping
+    public Employee DeleteEmployee(@Argument Integer id){
+        return employeeService.DeleteEmployee(id);
+    }
+
     @QueryMapping
     // this validate the given input and send a validation report back
     public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employeeInput ){
         return employeeService.Validate(employeeInput);
     };
+
+
 
     @SchemaMapping(typeName = "Employee" , field = "branch")
     public Branch getEmployeeBranch(Employee employee){
@@ -82,7 +70,7 @@ public class EmployeeController {
 
 
 
-    //map the employee field to 
+    //map the employee field to
     @SchemaMapping(typeName = "SalaryType", field = "employees")
     public List<EmployeeOutput> getEmployeesWithSameSalary(SalaryType salaryType) {
         return allEmployees()

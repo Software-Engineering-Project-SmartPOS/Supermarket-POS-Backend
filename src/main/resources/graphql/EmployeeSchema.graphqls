@@ -23,7 +23,7 @@ extend type Mutation {
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
   AddEmployee(employeeInput: EmployeeInput): Employee
-
+  DeleteEmployee(id: ID!): Employee
 
 }
 
