@@ -22,15 +22,53 @@ extend type Mutation {
     PurchaseOrderItemArrival(arrivalDetails: PurchaseOrderItemArrivalInput) : PurchaseOrderItem
 
 
+    AddToStockLevel(stockLevelInput : StockLevelInput): StockLevel
+    TransferToStall(transferDetails: StockTransferInput): Boolean
+
 
 }
-input PurchaseOrderItemArrivalInput{
-    purchaseOrderItemId: ID!
-    receivedQuantity: Float
+input StockTransferInput{
+    stockLevelId : ID!
+    transferQuantity: Float
+
 }
 
+
+type StockLevel {
+    id: Int!
+    item: Item!
+    branch: Branch!
+    expiryDate: String!
+    inventoryQuantity: Int!
+    stallQuantity: Int!
+    sellingPrice: Float!
+}
+
+input StockLevelInput {
+    stockArrivalId: ID!
+    expiryDate: String
+    sellingPrice: Float!
+    quantity: Float!
+}
+input StockLevelDetailInput{
+    id: ID
+    status: StockLevelStatus
+}
+enum StockLevelStatus {
+    IN_INVENTORY
+    IN_BOTH
+    IN_STALL
+    SOLD_OUT
+}
 
 extend type Query{
+    AllStockLevels:[StockLevel]
+    AllStockLevelsByStatus(status: StockLevelStatus) : [StockLevel]
+    AllStockLevelsByItemId(itemDetail: StockLevelDetailInput): [StockLevel]
+    AllStockLevelsByCategory(categoryDetail: StockLevelDetailInput): [StockLevel]
+
+    GetStockLevelById(id: ID!): StockLevel
+
     GetItemById(id: ID): Item
     GetItemByBarcode(barcode: String): Item
     GetItemByItemCode(itemCode: String): Item
@@ -56,10 +94,30 @@ extend type Query{
     AllPurchaseOrders: [PurchaseOrder!]!
     PurchaseOrderById(id: ID!): PurchaseOrder
     AllPurchaseOrdersBySupplierId(supplierId: ID!) :[PurchaseOrder!]
-    AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrderItem]
+    AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrder]
+
+    GetAllStockArrivals(transferred: Boolean): [StockArrival!]
 
 
 
+
+}
+
+type StockArrival {
+    id: ID!
+    purchaseOrderItem: PurchaseOrderItem!
+    unitPrice: Float
+    quantity: Float
+    cost: Float
+    isTransferredToStore: Boolean
+    branchId: Int
+    arrivedAt: String # You can format the timestamp as a string if needed
+}
+
+
+input PurchaseOrderItemArrivalInput{
+    purchaseOrderItemId: ID!
+    receivedQuantity: Float
 }
 
 
@@ -179,6 +237,7 @@ enum UnitOfMeasure {
     MILLIMETERS
     COUNT
 }
+
 
 input SupplierInput {
     id: Int # Used when updating supplier details

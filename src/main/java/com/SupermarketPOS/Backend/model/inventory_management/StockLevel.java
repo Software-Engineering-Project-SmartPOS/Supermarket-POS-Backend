@@ -19,7 +19,7 @@ import lombok.Setter;
 @Entity
 public class StockLevel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -27,25 +27,42 @@ public class StockLevel {
     private Item item;
 
     @ManyToOne
+    @JoinColumn(name = "stockArrivalId")
+    private StockArrival stockArrival;
+
+//    public Integer getCategoryId() {
+//        return item != null ? item.getCategory().getId() : null;
+//    }
+
+    @ManyToOne
     @JoinColumn(name = "branchId")
     private Branch branch;
-
     private LocalDate expiryDate;
 
 
-    @ManyToOne
-    @JoinColumn(name = "inventoryLocationId")
-    private Location inventoryLocation;
-    private Integer inventoryQuantity;
+//    @ManyToOne
+//    @JoinColumn(name = "inventoryLocationId")
+//    private Location inventoryLocation;
+    private Float inventoryQuantity;
 
 
-    @ManyToOne
-    @JoinColumn(name = "stallLocationId")
-    private Location stallLocation;
-    private Integer stallQuantity;
+//    @ManyToOne
+//    @JoinColumn(name = "stallLocationId")
+//    private Location stallLocation;
+    private Float stallQuantity;
 
 //    private Double cost;
     private Float sellingPrice;
+    private StockLevelStatus status;
 
-
+    public StockLevel(Item item, Branch branch, LocalDate expiryDate, Float inventoryQuantity, Float sellingPrice, StockLevelStatus status, StockArrival stockArrival) {
+        this.item = item;
+        this.branch = branch;
+        this.expiryDate = expiryDate;
+        this.inventoryQuantity = inventoryQuantity;
+        this.sellingPrice = sellingPrice;
+        this.status = status;
+        this.stallQuantity =0F;
+        this.stockArrival = stockArrival;
+    }
 }

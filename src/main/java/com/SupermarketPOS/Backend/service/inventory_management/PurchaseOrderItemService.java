@@ -50,6 +50,10 @@ public class PurchaseOrderItemService {
             orderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.COMPLETED);
             // this completed check whether the order is completed(all times are received )
         }
+        else if(orderItem.getReceivedQuantity()>0){
+            orderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.CONFIRMED);
+        }
+
         purchaseOrderItemRepository.save(orderItem);
         purchaseOrderService.UpdatePurchaseOrderStatus(orderItem.getPurchaseOrder());
 

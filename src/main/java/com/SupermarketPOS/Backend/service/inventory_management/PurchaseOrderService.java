@@ -49,11 +49,11 @@ public class PurchaseOrderService {
         return purchaseOrderRepository.findByIdAndBranchId(id, caller.getBranch().getId())
                 .orElseThrow(() -> new RuntimeException("Purchase Order not found"));
     }
-    public PurchaseOrder GetPurchaseOrderBySupplierId(Integer supplierId, Principal principal) {
+    public List<PurchaseOrder> GetPurchaseOrderBySupplierId(Integer supplierId, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
         return purchaseOrderRepository.findAllBySupplierIdAndBranchId(supplierId,caller.getBranch().getId());
     }
-    public PurchaseOrder GetPurchaseOrdersByStatus(PurchaseOrderStatus status, Principal principal) {
+    public List<PurchaseOrder> GetPurchaseOrdersByStatus(PurchaseOrderStatus status, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
         return purchaseOrderRepository.findAllByOrderStatusAndBranchId(status , caller.getBranch().getId());
     }
@@ -138,7 +138,6 @@ public class PurchaseOrderService {
         System.out.println(purchaseOrderRepository.findById(id).get().getPurchaseOrderItemList());
         return purchaseOrderRepository.findById(id).get().getPurchaseOrderItemList();
     }
-
 
 
 }

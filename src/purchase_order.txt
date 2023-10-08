@@ -10,21 +10,21 @@ mutation {
         itemSupplyId: 1,
         quantity: 10,
         purchaseItemUnitCost: 10.0,
-        amount: 100.0
+        totalCost: 100.0
       }
       {
         itemId: 7,
         itemSupplyId: 7,
         quantity: 20.0,
         purchaseItemUnitCost: 12.0,
-        amount: 240.0
+        totalCost: 240.0
       }
       {
         itemId: 24,
         itemSupplyId: 24,
         quantity: 30.0,
         purchaseItemUnitCost: 15.0,
-        amount: 450.0
+        totalCost: 450.0
       }
     ]
   }) {
@@ -54,7 +54,7 @@ mutation {
       }
       quantity
       purchaseItemUnitCost
-      amount
+      totalCost
       receivedQuantity
     }
     orderStatus
@@ -71,21 +71,21 @@ mutation {
         itemSupplyId: 2,
         quantity: 15,
         purchaseItemUnitCost: 10.0,
-        amount: 150.0
+        totalCost: 150.0
       }
       {
         itemId: 6,
         itemSupplyId: 6,
         quantity: 4.0,
         purchaseItemUnitCost: 10.0,
-        amount: 40.0
+        totalCost: 40.0
       }
       {
         itemId: 30,
         itemSupplyId: 30,
         quantity: 8,
         purchaseItemUnitCost: 10.0,
-        amount: 80.0
+        totalCost: 80.0
       }
     ]
   }) {
@@ -115,7 +115,7 @@ mutation {
       }
       quantity
       purchaseItemUnitCost
-      amount
+      totalCost
       receivedQuantity
     }
     orderStatus
@@ -125,3 +125,156 @@ mutation {
 
 
 
+
+
+query{
+  AllPurchaseOrdersByStatus(
+    status :
+  ){
+    id
+    description
+    createdBy{
+      firstName
+    }
+    branch{
+      id
+    }
+    purchaseOrderItemList{
+      id
+      item{
+        id
+        name
+        brand{
+          id
+          name
+        }
+        category{
+          id
+          name        }
+      }
+      itemSupply{
+        id
+        supplier{
+          id
+          name
+
+        }branch{
+          id
+
+        }
+      }
+      quantity
+      receivedQuantity
+      purchaseItemUnitCost
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    mutation{
+    PurchaseOrderItemArrival(
+        arrivalDetails:{
+        purchaseOrderItemId :1,
+        receivedQuantity: 5
+        }){
+        id
+        purchaseOrder{
+        id
+        supplier{
+            id
+            name
+        }
+        branch{
+            id
+            name
+            telephone
+
+        }
+        }
+        item{
+        id
+        itemCode
+        name
+        brand{
+            id
+            name
+        }
+        barcodeNo
+        category{
+            id
+            name
+        }
+
+        }
+        itemSupply{
+        id
+        supplier{
+            id
+            name
+        }
+        unitCost
+        modifiedDate
+        }
+        quantity
+        receivedQuantity
+        purchaseOrderItemStatus
+        totalCost
+        purchaseOrderItemStatus
+    }
+}
+
+
+query{
+  GetAllStockArrivals(transferred: false){
+    id
+    purchaseOrderItem{
+      id
+      item{
+        id
+        name
+        category{
+          id
+          name
+        }
+        brand{
+          id
+          name
+        }
+        barcodeNo
+        unitOfMeasure
+      }
+      itemSupply{
+        id
+        supplier{
+          id
+          name
+          address{
+            id
+            houseNumber
+            street
+            city
+            district          }
+        }
+      }
+      quantity
+      receivedQuantity
+      purchaseItemUnitCost
+    }
+    branchId
+    arrivedAt
+    isTransferredToStore
+
+  }
+}

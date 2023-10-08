@@ -7,15 +7,11 @@ mutation {
         lastName: "Smith1",
         phoneNumber: "1111111",
         password: "owner1",
-        email: "
-
-
-    "
+        email: ""
         jobRole: OWNER
         branchId:0
     })
 }
-
 
 mutation {
     registerOwner(ownerDetail: {
@@ -30,10 +26,6 @@ mutation {
         branchId:0
     })
 }
-
-
-
-
 
 
 mutation {
@@ -60,7 +52,29 @@ mutation {
     }
 }
 
-
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Moratuwa Main"
+        telephone: "071717171"
+        houseNumber: "123 Main Street"
+        street: "Mople rd"
+        city: "Moratuwa"
+        district: "Colombo"
+        postalCode: "141451"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
 
 mutation {
     AddSalaryType(inputSalaryTypeDetails: {
@@ -97,6 +111,54 @@ mutation {
         salaryTypeId: 1
         branchId: 52
         password: "cashier1"
+
+
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Amila"
+        middleName: "Kasum"
+        lastName: "Smith"
+        email: "AdminBranch2@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Panapitiya"
+        street: "55/A"
+        city: "gampaha"
+        district: "Gampaha"
+        postalCode: "54321"
+        phoneNumber: "0332291578"
+        jobRole: ADMIN
+        salaryTypeId: 2
+        branchId: 2
+        password: "AdminBranch2"
 
 
     }) {

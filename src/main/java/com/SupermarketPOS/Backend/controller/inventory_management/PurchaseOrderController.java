@@ -40,7 +40,7 @@ public class PurchaseOrderController {
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
     @QueryMapping
-    public PurchaseOrder AllPurchaseOrdersByStatus(@Argument PurchaseOrderStatus status, Principal principal) {
+    public List<PurchaseOrder> AllPurchaseOrdersByStatus(@Argument PurchaseOrderStatus status, Principal principal) {
         // Logic to fetch a purchase order by ID using purchaseOrderService
         return purchaseOrderService.GetPurchaseOrdersByStatus(status, principal);
     }
@@ -49,12 +49,10 @@ public class PurchaseOrderController {
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER","ROLE_STORE_MANAGER"})
     @QueryMapping
-    public PurchaseOrder AllPurchaseOrdersBySupplierId(@Argument Integer supplierId, Principal principal) {
+    public List<PurchaseOrder> AllPurchaseOrdersBySupplierId(@Argument Integer supplierId, Principal principal) {
         // Logic to fetch a purchase order by ID using purchaseOrderService
         return purchaseOrderService.GetPurchaseOrderBySupplierId(supplierId, principal);
     }
-
-
 
 
 

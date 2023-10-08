@@ -14,9 +14,9 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, In
 
     Optional<PurchaseOrder> findByIdAndBranchId(Integer id, Integer id1);
 
-    PurchaseOrder findAllBySupplierIdAndBranchId(Integer supplierId, Integer id);
+    List<PurchaseOrder> findAllBySupplierIdAndBranchId(Integer supplierId, Integer id);
 
-    PurchaseOrder findAllByOrderStatusAndBranchId(PurchaseOrderStatus status, Integer id);
+    List<PurchaseOrder> findAllByOrderStatusAndBranchId(PurchaseOrderStatus status, Integer id);
 
 
 }

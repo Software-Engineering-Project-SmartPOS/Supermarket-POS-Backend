@@ -69,6 +69,7 @@ public class EmployeeController {
     public Employee AddEmployee(@Argument EmployeeInput employeeInput) {
         return employeeService.AddNewEmployee(employeeInput);
     }
+
     @QueryMapping
     // this validate the given input and send a validation report back
     public EmployeeValidationReport isValidateEmployee(@Argument EmployeeInput employeeInput ){

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,14 +36,22 @@ public class StockArrival {
     private Float quantity;
     private Float cost;
     private Boolean isTransferredToStore;
+    private Integer branchId;
 
     @Column(name = "ArrivedAt", updatable = false, nullable = false)
     private Timestamp arrivedAt;
+
+    @OneToMany(mappedBy = "stockArrival")
+    private List<StockLevel> stockLevels;
 
     public StockArrival(PurchaseOrderItem purchaseOrderItem, Float quantity, Boolean isTransferredToStore, Timestamp arrivedAt) {
         this.purchaseOrderItem = purchaseOrderItem;
         this.quantity = quantity;
         this.isTransferredToStore = isTransferredToStore;
         this.arrivedAt = arrivedAt;
+        this.branchId = purchaseOrderItem.getPurchaseOrder().getBranch().getId();
+        this.isTransferredToStore = false;
     }
+
+
 }
