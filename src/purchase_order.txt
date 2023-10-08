@@ -278,3 +278,38 @@ query{
 
   }
 }
+
+
+mutation{
+  AddToStockLevel(
+    stockLevelInput:{
+      stockArrivalId: 2
+      expiryDate : "2024-12-13"
+			sellingPrice: 15.0
+      quantity: 5
+    }
+  ){
+    id
+    item{
+      id
+      name
+      category{
+        id
+        name
+      }
+      brand{
+        id
+        name
+      }
+
+    }
+    expiryDate
+    branch{
+      id
+      name
+    }
+    inventoryQuantity
+    stallQuantity
+    sellingPrice
+  }
+}
