@@ -1,6 +1,5 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -14,30 +13,41 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "purchaseItem")
+@Table
 public class PurchaseOrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "purchaseId")
+    @JoinColumn(name = "purchaseOrderId")
     private PurchaseOrder purchaseOrder;
 
     @ManyToOne
     @JoinColumn(name = "itemId")
     private Item item;
 
-    private Integer quantity;
+    @ManyToOne
+    @JoinColumn(name = "itemSupplyId")
+    private ItemSupply itemSupply;
 
-    @Column(name = "purchaseItemCost", precision = 10, scale = 2)
-    private BigDecimal purchaseItemCost;
-
-    @Column(precision = 10, scale = 2)
-    private BigDecimal amount;
-
-    private Integer receivedQuantity; // when stock arrived based on the purchase order this recievedQuantity is updated
+    private Float quantity;
+    private Float purchaseItemUnitCost;
+    private Float totalCost;
+    private Float receivedQuantity ; // when stock arrived based on the purchase order this recievedQuantity is updated
 
     @OneToMany(mappedBy = "purchaseOrderItem") // Referring to the field name in the StockArrival class
     private List<StockArrival> orderArrivals;
+
+    private PurchaseOrderStatus purchaseOrderItemStatus;
+
+    public PurchaseOrderItem(PurchaseOrder purchaseOrder, Item item, ItemSupply itemSupply, Float quantity, Float purchaseItemUnitCost) {
+        this.purchaseOrder = purchaseOrder;
+        this.item = item;
+        this.itemSupply = itemSupply;
+        this.quantity = quantity;
+        this.purchaseItemUnitCost = purchaseItemUnitCost;
+        this.receivedQuantity = 0F;
+        this.totalCost = 0F;
+    }
 }

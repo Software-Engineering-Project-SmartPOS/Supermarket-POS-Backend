@@ -1,0 +1,533 @@
+mutation {
+  createItemSupply1: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,  # Updated supplier ID
+    itemId: 1,      # Updated item ID
+    unitCost: 9.99,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply2: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,  # Updated supplier ID
+    itemId: 2,      # Updated item ID
+    unitCost: 8.49,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply3: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,  # Updated supplier ID
+    itemId: 3,      # Updated item ID
+    unitCost: 11.79,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+
+  createItemSupply4: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,  # Updated supplier ID
+    itemId: 4,      # Updated item ID
+    unitCost: 12.99,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply5: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,  # Updated supplier ID
+    itemId: 5,      # Updated item ID
+    unitCost: 7.99,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply6: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,  # Updated supplier ID
+    itemId: 6,      # Updated item ID
+    unitCost: 10.49,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply7: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,  # Updated supplier ID
+    itemId: 7,      # Updated item ID
+    unitCost: 15.29,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply8: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,  # Updated supplier ID
+    itemId: 8,      # Updated item ID
+    unitCost: 14.79,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply9: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,  # Updated supplier ID
+    itemId: 9,      # Updated item ID
+    unitCost: 11.99,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+  createItemSupply10: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,  # Updated supplier ID
+    itemId: 10,     # Updated item ID
+    unitCost: 9.49,
+    active: true
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    item {
+      id
+      name
+    }
+    createdDate
+    modifiedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    updatedEmployee {
+      id
+      firstName
+      lastName
+    }
+    branch {
+      id
+      name
+    }
+    unitCost
+    active
+  }
+
+
+  createItemSupply11: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 11,
+    unitCost: 8.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply12: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 12,
+    unitCost: 10.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply13: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 13,
+    unitCost: 11.79,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply14: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,
+    itemId: 14,
+    unitCost: 12.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply15: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 15,
+    unitCost: 7.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply16: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 16,
+    unitCost: 15.29,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply17: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 17,
+    unitCost: 14.79,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply18: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,
+    itemId: 18,
+    unitCost: 11.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply19: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 19,
+    unitCost: 9.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply20: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 20,
+    unitCost: 8.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply21: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 21,
+    unitCost: 7.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply22: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 22,
+    unitCost: 10.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply23: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 23,
+    unitCost: 11.79,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply24: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,
+    itemId: 24,
+    unitCost: 12.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply25: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 25,
+    unitCost: 15.29,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply26: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 26,
+    unitCost: 14.79,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply27: CreateItemSupply(itemSupplyInput: {
+    supplierId: 1,
+    itemId: 27,
+    unitCost: 11.99,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply28: CreateItemSupply(itemSupplyInput: {
+    supplierId: 4,
+    itemId: 28,
+    unitCost: 9.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply29: CreateItemSupply(itemSupplyInput: {
+    supplierId: 3,
+    itemId: 29,
+    unitCost: 8.49,
+    active: true
+  }) {
+    id
+  }
+
+  createItemSupply30: CreateItemSupply(itemSupplyInput: {
+    supplierId: 2,
+    itemId: 30,
+    unitCost: 10.99,
+    active: true
+  }) {
+    id
+  }
+}

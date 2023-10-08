@@ -48,12 +48,14 @@ public class EmployeeController {
         return employeeService.AddNewEmployee(employeeInput);
     }
 
+
     //delete employee using id
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
     public Employee DeleteEmployee(@Argument Integer id){
         return employeeService.DeleteEmployee(id);
     }
+
 
     @QueryMapping
     // this validate the given input and send a validation report back

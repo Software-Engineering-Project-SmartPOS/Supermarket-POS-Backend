@@ -3,7 +3,12 @@ import com.SupermarketPOS.Backend.dto.employee_management.SalaryTypeInput;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.SalaryTypeRepository;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.security.Principal;
+import java.util.Optional;
+>>>>>>> sanjula
 
 
 import org.springframework.stereotype.Service;

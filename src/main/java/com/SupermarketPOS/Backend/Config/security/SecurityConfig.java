@@ -44,12 +44,10 @@ SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 //permit all the endpoints
                 .authorizeHttpRequests((auth)->auth
-                        .anyRequest().permitAll()
-                )
+                        .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS ))
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore( jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-
                 .build();
     }
 

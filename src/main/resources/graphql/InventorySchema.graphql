@@ -5,24 +5,69 @@ extend type Mutation {
     AddSupplier(supplierInput: SupplierInput) : Supplier
     UpdateSupplier(supplierDetail: SupplierInput): Supplier
 
-
     CreateBrand(brandInput: BrandInput!): Brand
     UpdateBrand(brandInput : BrandInput): Brand
 
-
     CreateCategory(categoryInput: CategoryInput): Category!
     UpdateCategory(categoryInput: CategoryInput): Category!
-
-
 
     CreateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
     UpdateItemSupply(itemSupplyInput: ItemSupplyInput!): ItemSupply
     DeleteItemSupply(id: ID!): Boolean
 
+    CreatePurchaseOrder(purchaseOrderInput: PurchaseOrderInput!): PurchaseOrder
+    UpdatePurchaseOrder(id: ID!, input: PurchaseOrderInput!): PurchaseOrder
+    DeletePurchaseOrder(id: ID!): Boolean
+
+    PurchaseOrderItemArrival(arrivalDetails: PurchaseOrderItemArrivalInput) : PurchaseOrderItem
+
+
+    AddToStockLevel(stockLevelInput : StockLevelInput): StockLevel
+    TransferToStall(transferDetails: StockTransferInput): Boolean
 
 
 }
+input StockTransferInput{
+    stockLevelId : ID!
+    transferQuantity: Float
+
+}
+
+
+type StockLevel {
+    id: Int!
+    item: Item!
+    branch: Branch!
+    expiryDate: String!
+    inventoryQuantity: Int!
+    stallQuantity: Int!
+    sellingPrice: Float!
+}
+
+input StockLevelInput {
+    stockArrivalId: ID!
+    expiryDate: String
+    sellingPrice: Float!
+    quantity: Float!
+}
+input StockLevelDetailInput{
+    id: ID
+    status: StockLevelStatus
+}
+enum StockLevelStatus {
+    IN_INVENTORY
+    IN_BOTH
+    IN_STALL
+    SOLD_OUT
+}
+
 extend type Query{
+    AllStockLevels:[StockLevel]
+    AllStockLevelsByStatus(status: StockLevelStatus) : [StockLevel]
+    AllStockLevelsByItemId(itemDetail: StockLevelDetailInput): [StockLevel]
+    AllStockLevelsByCategory(categoryDetail: StockLevelDetailInput): [StockLevel]
+
+    GetStockLevelById(id: ID!): StockLevel
 
     GetItemById(id: ID): Item
     GetItemByBarcode(barcode: String): Item
@@ -44,6 +89,91 @@ extend type Query{
     GetActiveItemSuppliesBySupplierId(supplierId: ID!): [ItemSupply]
     GetActiveItemSuppliesByItemId(itemId: ID!): [ItemSupply]
     GetActiveItemSuppliesByBranchId(branchId: ID!): [ItemSupply]
+
+#    all these give only the data related to the callers branch
+    AllPurchaseOrders: [PurchaseOrder!]!
+    PurchaseOrderById(id: ID!): PurchaseOrder
+    AllPurchaseOrdersBySupplierId(supplierId: ID!) :[PurchaseOrder!]
+    AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrder]
+
+    GetAllStockArrivals(transferred: Boolean): [StockArrival!]
+
+
+
+
+}
+
+type StockArrival {
+    id: ID!
+    purchaseOrderItem: PurchaseOrderItem!
+    unitPrice: Float
+    quantity: Float
+    cost: Float
+    isTransferredToStore: Boolean
+    branchId: Int
+    arrivedAt: String # You can format the timestamp as a string if needed
+}
+
+
+input PurchaseOrderItemArrivalInput{
+    purchaseOrderItemId: ID!
+    receivedQuantity: Float
+}
+
+
+type PurchaseOrder {
+    id: ID!
+    supplier: Supplier!
+    orderedDate: String!
+    expectedDate: String!
+    createdBy: Employee!
+    description: String!
+    branch: Branch!
+    purchaseCost: Float!
+    purchaseOrderItemList: [PurchaseOrderItem!]
+    orderStatus: PurchaseOrderStatus! # Now using the enum type
+}
+
+
+type PurchaseOrderItem {
+    id: ID!
+    purchaseOrder: PurchaseOrder!
+    item: Item!
+    itemSupply: ItemSupply!
+    quantity: Float!
+    purchaseItemUnitCost: Float!
+    totalCost: Float!
+    receivedQuantity: Float!
+    purchaseOrderItemStatus: PurchaseOrderStatus
+#    orderArrivals: [StockArrival!]
+}
+input PurchaseOrderInput {
+    id: ID
+    SupplierId: ID
+    description: String
+    expectedDate: String
+    purchaseCost: Float
+    purchaseOrderItemList: [PurchaseOrderItemInput]!
+}
+
+input PurchaseOrderItemInput {
+    id: ID
+    purchaseOrderId: ID
+    itemId: ID
+    itemSupplyId: ID
+    quantity: Float
+    purchaseItemUnitCost: Float
+    totalCost: Float
+    receivedQuantity: Float
+}
+
+
+enum PurchaseOrderStatus {
+    CREATE
+    CONFIRMED
+    HALF_RECEIVED
+    COMPLETED
+    CANCELLED
 }
 
 type ItemSupply {
@@ -107,6 +237,7 @@ enum UnitOfMeasure {
     MILLIMETERS
     COUNT
 }
+
 
 input SupplierInput {
     id: Int # Used when updating supplier details

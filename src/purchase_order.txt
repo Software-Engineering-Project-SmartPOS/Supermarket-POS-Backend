@@ -1,0 +1,280 @@
+mutation {
+  CreatePurchaseOrder1: CreatePurchaseOrder(purchaseOrderInput: {
+    SupplierId: 4
+    expectedDate: "2023-10-14",
+    description: "Sample Purchase Order 1",
+    purchaseCost: 790.00,
+    purchaseOrderItemList: [
+      {
+        itemId: 1,
+        itemSupplyId: 1,
+        quantity: 10,
+        purchaseItemUnitCost: 10.0,
+        totalCost: 100.0
+      }
+      {
+        itemId: 7,
+        itemSupplyId: 7,
+        quantity: 20.0,
+        purchaseItemUnitCost: 12.0,
+        totalCost: 240.0
+      }
+      {
+        itemId: 24,
+        itemSupplyId: 24,
+        quantity: 30.0,
+        purchaseItemUnitCost: 15.0,
+        totalCost: 450.0
+      }
+    ]
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    orderedDate
+    expectedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    description
+    branch {
+      id
+      name
+    }
+    purchaseCost
+    purchaseOrderItemList {
+      id
+      item {
+        id
+        name
+      }
+      quantity
+      purchaseItemUnitCost
+      totalCost
+      receivedQuantity
+    }
+    orderStatus
+  }
+
+  CreatePurchaseOrder2: CreatePurchaseOrder(purchaseOrderInput: {
+    SupplierId: 2,
+    expectedDate: "2023-10-15",
+    description: "Immediate order for a special order 2",
+    purchaseCost: 260.00,
+    purchaseOrderItemList: [
+      {
+        itemId: 2,
+        itemSupplyId: 2,
+        quantity: 15,
+        purchaseItemUnitCost: 10.0,
+        totalCost: 150.0
+      }
+      {
+        itemId: 6,
+        itemSupplyId: 6,
+        quantity: 4.0,
+        purchaseItemUnitCost: 10.0,
+        totalCost: 40.0
+      }
+      {
+        itemId: 30,
+        itemSupplyId: 30,
+        quantity: 8,
+        purchaseItemUnitCost: 10.0,
+        totalCost: 80.0
+      }
+    ]
+  }) {
+    id
+    supplier {
+      id
+      name
+    }
+    orderedDate
+    expectedDate
+    createdBy {
+      id
+      firstName
+      lastName
+    }
+    description
+    branch {
+      id
+      name
+    }
+    purchaseCost
+    purchaseOrderItemList {
+      id
+      item {
+        id
+        name
+      }
+      quantity
+      purchaseItemUnitCost
+      totalCost
+      receivedQuantity
+    }
+    orderStatus
+  }
+}
+
+
+
+
+
+
+query{
+  AllPurchaseOrdersByStatus(
+    status :
+  ){
+    id
+    description
+    createdBy{
+      firstName
+    }
+    branch{
+      id
+    }
+    purchaseOrderItemList{
+      id
+      item{
+        id
+        name
+        brand{
+          id
+          name
+        }
+        category{
+          id
+          name        }
+      }
+      itemSupply{
+        id
+        supplier{
+          id
+          name
+
+        }branch{
+          id
+
+        }
+      }
+      quantity
+      receivedQuantity
+      purchaseItemUnitCost
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    mutation{
+    PurchaseOrderItemArrival(
+        arrivalDetails:{
+        purchaseOrderItemId :1,
+        receivedQuantity: 5
+        }){
+        id
+        purchaseOrder{
+        id
+        supplier{
+            id
+            name
+        }
+        branch{
+            id
+            name
+            telephone
+
+        }
+        }
+        item{
+        id
+        itemCode
+        name
+        brand{
+            id
+            name
+        }
+        barcodeNo
+        category{
+            id
+            name
+        }
+
+        }
+        itemSupply{
+        id
+        supplier{
+            id
+            name
+        }
+        unitCost
+        modifiedDate
+        }
+        quantity
+        receivedQuantity
+        purchaseOrderItemStatus
+        totalCost
+        purchaseOrderItemStatus
+    }
+}
+
+
+query{
+  GetAllStockArrivals(transferred: false){
+    id
+    purchaseOrderItem{
+      id
+      item{
+        id
+        name
+        category{
+          id
+          name
+        }
+        brand{
+          id
+          name
+        }
+        barcodeNo
+        unitOfMeasure
+      }
+      itemSupply{
+        id
+        supplier{
+          id
+          name
+          address{
+            id
+            houseNumber
+            street
+            city
+            district          }
+        }
+      }
+      quantity
+      receivedQuantity
+      purchaseItemUnitCost
+    }
+    branchId
+    arrivedAt
+    isTransferredToStore
+
+  }
+}

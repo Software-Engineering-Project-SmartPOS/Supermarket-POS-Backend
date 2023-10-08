@@ -19,13 +19,13 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_STORE_MANAGER"})
     @MutationMapping
     public Category CreateCategory(@Argument CategoryInput categoryInput, Principal principal) {
         return categoryService.AddCategory(categoryInput, principal);
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_STORE_MANAGER"})
     @MutationMapping
     public Category UpdateCategory(@Argument CategoryInput categoryInput, Principal principal) {
         return categoryService.UpdateCategory(categoryInput, principal);

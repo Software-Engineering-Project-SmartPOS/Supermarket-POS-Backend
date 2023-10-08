@@ -35,7 +35,6 @@ public class AddressController {
     @QueryMapping
     public List<Address> allAddress(){
         return addressService.allTheAddresses();
-
     }
 
     @QueryMapping

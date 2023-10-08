@@ -16,11 +16,9 @@ import java.util.Optional;
 @Controller
 public class CustomerController {
     private final CustomerService customerService;
-
     public CustomerController( CustomerService customerService ){
         this.customerService = customerService;
     }
-
 
     @MutationMapping
     public Optional<CustomerOutput> addCustomer(@Argument CustomerInput customerInput ){
@@ -48,14 +46,8 @@ public class CustomerController {
     }
 
 
-
-
     @QueryMapping
     public List<CustomerOutput> allCustomer(){
         return  customerService.getAllCustomers();
-
     }
-
-
-
 }

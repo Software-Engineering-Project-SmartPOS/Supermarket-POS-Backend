@@ -22,7 +22,7 @@ public class ItemSupplyController {
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER", "ROLE_STORE_MANAGER"})
     @QueryMapping
-    public ItemSupply GetActiveItemSupplyById(@Argument Integer id) {
+    public ItemSupply GetActiveItemSupplyById(@Argument Integer id , Boolean Active) {
         // logic to fetch an item supply by ID using itemSupplyService
         return itemSupplyService.getActiveItemSupplyById(id);
     }
@@ -68,4 +68,6 @@ public class ItemSupplyController {
         // logic to delete an item supply by ID using itemSupplyService
         return itemSupplyService.deleteItemSupply(id);
     }
+
+
 }
