@@ -3,8 +3,6 @@ package com.SupermarketPOS.Backend.model.inventory_management;
 import com.SupermarketPOS.Backend.model.common.Branch;
 
 import jakarta.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -54,6 +52,7 @@ public class StockLevel {
 //    private Double cost;
     private Float sellingPrice;
     private StockLevelStatus status;
+    private Float discount;
 
     public StockLevel(Item item, Branch branch, LocalDate expiryDate, Float inventoryQuantity, Float sellingPrice, StockLevelStatus status, StockArrival stockArrival) {
         this.item = item;

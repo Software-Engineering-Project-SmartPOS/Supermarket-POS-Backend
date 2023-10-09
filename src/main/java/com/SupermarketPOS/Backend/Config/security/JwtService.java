@@ -1,5 +1,7 @@
 package com.SupermarketPOS.Backend.Config.security;
 
+import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,13 +20,22 @@ import java.util.function.Function;
 public class JwtService {
     private String SECRET = "RyBaEtTM/eBPnZS2wQDFBe+ErrbnE5Ur8MylzQN8WdMvylcQFCf2KO/LMZccJkGr";
     private long expiration = 1000*60*60*24;
+    private final EmployeeRepository employeeRepository;
+    private final UserInfoUserDetailsService userInfoUserDetailsService;
+
+    public JwtService(EmployeeRepository employeeRepository, UserInfoUserDetailsService userInfoUserDetailsService) {
+        this.employeeRepository = employeeRepository;
+        this.userInfoUserDetailsService = userInfoUserDetailsService;
+    }
 
 
     public String generateToken(String username){
+        UserDetails userDetails = userInfoUserDetailsService.loadUserByUsername(username);
+        Employee user = employeeRepository.findByEmail(username).get();
         Map<String, Object> claims = new HashMap<>();
+        claims.put("role", user.getJobRole().toString());
         return createToken(claims , username);
     }
-
 
     // creating a token
     public String createToken(Map<String, Object> claims, String username ){

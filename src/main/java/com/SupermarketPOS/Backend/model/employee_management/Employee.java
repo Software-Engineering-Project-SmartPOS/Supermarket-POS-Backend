@@ -3,9 +3,7 @@ package com.SupermarketPOS.Backend.model.employee_management;
 import com.SupermarketPOS.Backend.model.common.*;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -14,11 +12,6 @@ import java.time.LocalDateTime;
 @ToString
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "email")}) // Define the unique constraint
-    //@Table(uniqueConstraints = {
-    //        @UniqueConstraint(columnNames = "email"),
-    //        @UniqueConstraint(columnNames = {"firstName", "middleName", "lastName"})
-    //})
-
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +32,6 @@ public class Employee {
     @JoinColumn(name = "addressId")
     private Address address;
 
-
     private String number;
     private JobRole jobRole;
 
@@ -48,7 +40,6 @@ public class Employee {
     private SalaryType salaryType;
     private Boolean active;
     private String password;
-
     private Timestamp createdAt;
     private Timestamp updatedAt;
 

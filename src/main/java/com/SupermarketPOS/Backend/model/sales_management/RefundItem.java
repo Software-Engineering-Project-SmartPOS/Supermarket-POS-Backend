@@ -15,7 +15,7 @@ import jakarta.persistence.*;
 public class RefundItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "refundId")
