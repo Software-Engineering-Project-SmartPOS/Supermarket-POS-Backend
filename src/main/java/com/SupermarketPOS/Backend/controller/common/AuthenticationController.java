@@ -38,6 +38,7 @@ public class AuthenticationController {
         // authenticate the userDetails in the authRequest
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
 
+
         System.out.println("At the authenticate and get token function");
         if (authentication.isAuthenticated()){
             //sending the jwt token if user is authenticated

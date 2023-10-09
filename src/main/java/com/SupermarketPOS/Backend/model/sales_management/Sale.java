@@ -1,7 +1,9 @@
 package com.SupermarketPOS.Backend.model.sales_management;
 
+import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
 
+import com.SupermarketPOS.Backend.model.inventory_management.Brand;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -28,21 +30,40 @@ public class Sale {
     private String barcodeNo;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customerId")
     private Customer customer;
+
+
+    @ManyToOne
+    @JoinColumn(name = "branchId")
+    private Branch branch;
 
     private Timestamp time;
 
-    @Column(name = "total", precision = 10, scale = 2)
-    private BigDecimal total;
+//    @Column(name = "total", precision = 10, scale = 2)
+    private Float total;
 
 
-    private Double discount;
-    private Integer loyaltyPoints;
+//    private Double discount;
+//    private Integer loyaltyPoints;
     private PaymentType paymentType;
 
     @OneToMany(mappedBy = "sales")
     private List<SalesItem> salesItemList;
 
 
+    public Sale(String barcodeNo, Customer customer, Branch branch, Timestamp time, PaymentType paymentType) {
+        this.barcodeNo = barcodeNo;
+        this.customer = customer;
+        this.branch = branch;
+        this.time = time;
+        this.paymentType = paymentType;
+    }
+
+    public Sale(Customer customer, Branch branch, Timestamp time, PaymentType paymentType) {
+        this.customer = customer;
+        this.branch = branch;
+        this.time = time;
+        this.paymentType = paymentType;
+    }
 }

@@ -1,0 +1,53 @@
+extend type Query {
+    getSale(id: ID!): Sale
+    getAllSales: [Sale]
+    getSalesItem(id: ID!): SalesItem
+    getAllSalesItems: [SalesItem]
+}
+
+extend type Mutation {
+    createSale(input: SaleInput): Sale
+    createSalesItem(input: SalesItemInput): SalesItem
+}
+
+type Sale {
+    id: ID!
+    barcodeNo: String
+    customer: Customer
+    time: String
+    total: Float
+    discount: Float
+    loyaltyPoints: Int
+    paymentType: String
+    salesItemList: [SalesItem]
+}
+
+type SalesItem {
+    id: ID # used when updating the data
+    sale: Sale
+    stockLevel: StockLevel
+    quantity: Float
+    unitPrice: Float
+    subtotal: Float
+    discountGiven : Float
+    total : Float
+
+}
+
+
+input SaleInput {
+    id: ID # used when updating the data
+    barcodeNo: String # used when updating / returning
+    customerId: ID
+    salesItem : [SalesItemInput]
+    total: Float
+#    discount: Float
+#    loyaltyPoints: Int
+    paymentType: String
+}
+
+input SalesItemInput {
+    saleId: ID # used when updating
+    stockLevelId: ID
+    quantity: Float
+}

@@ -113,4 +113,10 @@ public class CustomerService {
                 .collect(Collectors.toList());
 
     }
+
+
+    ///
+    public Customer getCustomerByCustomerId(Integer id){
+        return customerRepository.findById(id).orElse(null);
+    }
 }
