@@ -33,8 +33,11 @@ public class BrandService {
     public Brand AddBrand(BrandInput brandInput , Principal principal){
         Employee updatingUser =  employeeService.getByEmail(principal.getName());
 
+        // check the availability of the brand name
         boolean isBrandAlreadyAvailable = isBandAvailable(brandInput.name()); // check by name is this brand is already added
-        if( isBrandAlreadyAvailable ){ return null;}
+        if( isBrandAlreadyAvailable ){
+            throw new UsernameNotFoundException("Brand is already available");
+        }
         else {
             Timestamp createdAt = new Timestamp(System.currentTimeMillis());
             Brand newBrand =new Brand(
@@ -44,14 +47,6 @@ public class BrandService {
                     updatingUser.getId()
             );
             return brandRepository.save(newBrand);
-
-//            BrandOutput brandOutput = new BrandOutput(
-//                    newBrandSaved.getId(),
-//                    newBrandSaved.getName(),
-//                    newBrandSaved.getDescription(),
-//                    dateTimeService.convertTimeStampIntoString(newBrandSaved.getUpdateAt())
-//            );
-//            return brandOutput;
         }
     }
 
