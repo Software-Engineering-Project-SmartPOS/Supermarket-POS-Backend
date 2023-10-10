@@ -42,6 +42,7 @@ public class StockLevel {
 //    @JoinColumn(name = "inventoryLocationId")
 //    private Location inventoryLocation;
     private Float inventoryQuantity;
+    private Float soldQuantity;
 
 
 //    @ManyToOne
@@ -62,6 +63,8 @@ public class StockLevel {
         this.sellingPrice = sellingPrice;
         this.status = status;
         this.stallQuantity =0F;
+        this.soldQuantity = 0F;
+        this.discount=0F;
         this.stockArrival = stockArrival;
     }
 }

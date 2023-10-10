@@ -1,16 +1,52 @@
 extend type Query {
-    getSale(id: ID!): Sale
-    getAllSales: [Sale]
-    getSalesItem(id: ID!): SalesItem
-    getAllSalesItems: [SalesItem]
+    GetSale(id: ID!): Sales
+    GetAllSales: [Sales]
+    GetSalesItem(id: ID!): SalesItem
+    GetAllSalesItems: [SalesItem]
+
+    GetRefundById(id: ID!): Refund
+    GetAllRefunds: [Refund!]
+    GetRefundItem(id: ID!): RefundItem
+
+
 }
 
 extend type Mutation {
-    createSale(input: SaleInput): Sale
-    createSalesItem(input: SalesItemInput): SalesItem
+    CreateSales(salesInput: SaleInput): Sales
+#    UpdateSales(input: SaleInput): Sales
+
+    CreateRefund(refundDetails: RefundInput) : Refund
+
 }
 
-type Sale {
+type Refund {
+    id: Int!
+    sales: Sales!
+    total: Float!
+    refundItems: [RefundItem]!
+}
+
+input RefundInput {
+    salesId: ID!
+    total: Float!
+    refundItemList: RefundItemInput
+}
+
+type RefundItem {
+    id: Int!
+    refund: Refund!
+    item: Item!
+    quantity: Int!
+    unitPrice: Float!
+}
+
+input RefundItemInput {
+    salesItemId: ID!
+    quantity: Float!
+}
+
+
+type Sales {
     id: ID!
     barcodeNo: String
     customer: Customer
@@ -24,7 +60,7 @@ type Sale {
 
 type SalesItem {
     id: ID # used when updating the data
-    sale: Sale
+    sales: Sales
     stockLevel: StockLevel
     quantity: Float
     unitPrice: Float
@@ -39,15 +75,22 @@ input SaleInput {
     id: ID # used when updating the data
     barcodeNo: String # used when updating / returning
     customerId: ID
-    salesItem : [SalesItemInput]
+    salesItemsInput : [SalesItemInput]
     total: Float
 #    discount: Float
 #    loyaltyPoints: Int
-    paymentType: String
+    paymentType: PaymentType
 }
 
 input SalesItemInput {
     saleId: ID # used when updating
     stockLevelId: ID
     quantity: Float
+}
+enum PaymentType{
+    CASH
+    ONLINE
+    DEBIT_CARD,
+    CREDIT_CARD
+    GIFT_CARD
 }

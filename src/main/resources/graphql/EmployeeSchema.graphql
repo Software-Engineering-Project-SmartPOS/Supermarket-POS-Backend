@@ -22,10 +22,16 @@ extend type Mutation {
 
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
-  AddEmployee(employeeInput: EmployeeInput): Employee
+  AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
 
 
 }
+union EmployeeOutput = Employee | FailedPayload
+
+type FailedPayload{
+  errorMessage: String!
+}
+
 
 
 input LoginDetails{

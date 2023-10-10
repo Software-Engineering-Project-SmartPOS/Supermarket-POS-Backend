@@ -41,6 +41,7 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+
     //add a new employee
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
@@ -74,12 +75,9 @@ public class EmployeeController {
 
     //map the employee field to
     @SchemaMapping(typeName = "SalaryType", field = "employees")
-    public List<EmployeeOutput> getEmployeesWithSameSalary(SalaryType salaryType) {
-        return allEmployees()
-                    .stream()
-                    .filter(e -> e.getSalaryType().equals(salaryType))
-                    .map(employeeOutputMapper)
-                    .collect(Collectors.toList());
+    public List<Employee> getEmployeesWithSameSalary(SalaryType salaryType) {
+        return allEmployees();
+
     }
 }
 

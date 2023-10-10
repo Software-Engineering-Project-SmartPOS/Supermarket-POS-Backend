@@ -34,6 +34,7 @@ public class JwtService {
         Employee user = employeeRepository.findByEmail(username).get();
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.getJobRole().toString());
+        claims.put("branch", user.getBranch().getId());
         return createToken(claims , username);
     }
 
