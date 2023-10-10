@@ -1,0 +1,214 @@
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo1",
+        middleName: "john1",
+        lastName: "Smith1",
+        phoneNumber: "1111111",
+        password: "owner1",
+        email: "Owner1@gmail.com"
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Colombo Branch"
+        telephone: "0111122323"
+        houseNumber: "123 Main Street"
+        street: "Galle Rd"
+        city: "Colombo"
+        district: "Colombo"
+        postalCode: "00001"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Moratuwa Branch"
+        telephone: "0112222222"
+        houseNumber: "14/14"
+        street: "Mople rd"
+        city: "Moratuwa"
+        district: "Colombo"
+        postalCode: "141451"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+
+mutation {
+    AddSalaryType(inputSalaryTypeDetails: {
+        basicSalary: 40000.0
+        halfDaySalary: 20000.0
+        overTimeSalary: 5000.0
+        bonus: 10000.0
+    }) {
+        id
+        basicSalary
+        halfDaySalary
+        overTimeSalary
+        bonus
+    }
+}
+
+
+mutation {
+    AddSalaryType(inputSalaryTypeDetails: {
+        basicSalary: 80000.0
+        halfDaySalary: 40000.0
+        overTimeSalary: 10000.0
+        bonus: 5000.0
+    }) {
+        id
+        basicSalary
+        halfDaySalary
+        overTimeSalary
+        bonus
+    }
+}
+
+
+
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Tharak"
+        middleName: "Kumara"
+        lastName: "kumara"
+        email: "Admin1@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Kurunegala"
+        district: "kurunegala"
+        postalCode: "54321"
+        phoneNumber: "+0101111111"
+        jobRole: ADMIN
+        salaryTypeId: 1
+        branchId: 1
+        password: "admin1"
+
+
+    }) {
+        ...on Employee {
+
+            id
+            title
+            firstName
+            middleName
+            lastName
+            email
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
+            number
+            jobRole
+            salaryType {
+                id
+                basicSalary
+                halfDaySalary
+                overTimeSalary
+                bonus
+            }
+            active
+        }
+        ...on FailedPayLoad{
+            errorMessage
+        }
+
+    }
+}
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Kobinath"
+        middleName: "Panchalingam"
+        lastName: "Pancha"
+        email: "Admin2@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Jaffna"
+        district: "Jaffna"
+        postalCode: "787878"
+        phoneNumber: "+0202222222"
+        jobRole: ADMIN
+        salaryTypeId: 2
+        branchId: 2
+        password: "admin2"
+
+
+    }) {
+        ...on Employee {
+
+            id
+            title
+            firstName
+            middleName
+            lastName
+            email
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
+            number
+            jobRole
+            salaryType {
+                id
+                basicSalary
+                halfDaySalary
+                overTimeSalary
+                bonus
+            }
+            active
+        }
+        ...on FailedPayLoad{
+            errorMessage
+        }
+
+    }
+}
+
+
+
+
