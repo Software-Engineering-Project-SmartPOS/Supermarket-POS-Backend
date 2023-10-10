@@ -13,13 +13,15 @@ import jakarta.persistence.*;
 public class Refund {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "sales_id")
     private Sale sales;
 
-    private Double total;
+    private float total;
 
-    // Getters and setters
+    public Refund(Sale sales) {
+        this.sales = sales;
+    }
 }

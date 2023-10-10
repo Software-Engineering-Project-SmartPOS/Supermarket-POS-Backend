@@ -15,7 +15,7 @@ import jakarta.persistence.*;
 public class SalesItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer     id;
 
     @ManyToOne(
             fetch = FetchType.LAZY,
@@ -33,6 +33,8 @@ public class SalesItem {
     private Float subtotal;
     private Float discountGiven;
     private Float total;
+
+
 
     // Getters and setters
 

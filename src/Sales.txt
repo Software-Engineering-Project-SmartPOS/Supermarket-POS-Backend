@@ -1,0 +1,69 @@
+query {
+  GetAllSales {
+    id
+    barcodeNo
+    customer {
+      id
+      name
+    }
+    time
+    total
+    discount
+    loyaltyPoints
+    paymentType
+  }
+}
+
+
+mutation {
+  CreateSales(salesInput: {
+    barcodeNo: "12345",
+    customerId: 1,
+    salesItemsInput: [
+      {
+        stockLevelId: 1,
+        quantity: 1
+      }
+    ],
+    total: 100.0,
+    paymentType: CASH
+  }) {
+    id
+    barcodeNo
+    customer {
+      id
+      name
+    }
+    time
+    total
+    discount
+    loyaltyPoints
+    paymentType
+    salesItemList {
+      id
+      stockLevel {
+        id
+        item {
+          id
+          itemCode
+          name
+        }
+        branch {
+          id
+        }
+        expiryDate
+        inventoryQuantity
+        sellingPrice
+        stallQuantity
+      }
+      quantity
+      unitPrice
+      subtotal
+      discountGiven
+      total
+    }
+  }
+}
+
+
+

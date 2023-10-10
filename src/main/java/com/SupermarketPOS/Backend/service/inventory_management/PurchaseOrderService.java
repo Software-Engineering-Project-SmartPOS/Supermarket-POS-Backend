@@ -3,10 +3,7 @@ package com.SupermarketPOS.Backend.service.inventory_management;
 import com.SupermarketPOS.Backend.dto.inventory_management.PurchaseOrderInput;
 import com.SupermarketPOS.Backend.dto.inventory_management.PurchaseOrderItemInput;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
-import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrder;
-import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrderItem;
-import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrderStatus;
-import com.SupermarketPOS.Backend.model.inventory_management.Supplier;
+import com.SupermarketPOS.Backend.model.inventory_management.*;
 import com.SupermarketPOS.Backend.repository.inventory_management.PurchaseOrderItemRepository;
 import com.SupermarketPOS.Backend.repository.inventory_management.PurchaseOrderRepository;
 import com.SupermarketPOS.Backend.service.common_services.DateTimeService;
@@ -78,12 +75,15 @@ public class PurchaseOrderService {
                 )
         );
 
-        System.out.println(newPurchaseOrder);
-        System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
         List<PurchaseOrderItem> orderItemList = new ArrayList<>(); // to store the PurchaseOrderItems
 
         //get the purchaseOrderItemInput, create the orderItemList
         for (PurchaseOrderItemInput orderItem :purchaseOrderInput.purchaseOrderItemList()){
+            ItemSupply itemSupply =itemSupplyService.getById(orderItem.itemSupplyId());
+
+            if (itemSupply.getBranch() != createdBy.getBranch()){
+                throw new RuntimeException("Given item supply is for your branch");
+            }
             System.out.println("inside the purchase order item creation");
             PurchaseOrderItem newOrderItem = new PurchaseOrderItem(
                     newPurchaseOrder,
@@ -91,10 +91,9 @@ public class PurchaseOrderService {
                     itemSupplyService.getById(orderItem.itemSupplyId()),
                     orderItem.quantity(),
                     orderItem.purchaseItemUnitCost()
-
             );
+
             newOrderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.CREATE);
-            System.out.println(newPurchaseOrder);
             // save and return the new purchaseOrderItem
             orderItemList.add(purchaseOrderItemRepository.save(newOrderItem));
         }

@@ -11,5 +11,5 @@ public record SalesInput (
         List<SalesItemInput> salesItemsInput,
         Float total,
         PaymentType paymentType
-    ) {}
+) {}
 

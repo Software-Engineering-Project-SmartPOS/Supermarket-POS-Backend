@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class SalesService {
@@ -36,6 +37,7 @@ public class SalesService {
 
     @Transactional
     public Sale CreateSales(SalesInput salesInput, Principal principal){
+        System.out.println("in the Create sales in sales service");
         Employee caller = employeeService.getByEmail(principal.getName());
         Customer customer = customerService.getCustomerByCustomerId(salesInput.customerId());
         Sale newSales = salesRepository.save(
@@ -56,13 +58,37 @@ public class SalesService {
                             stockLevel,
                             salesItemInput.quantity(),
                             stockLevel.getSellingPrice(),
-                            stockLevel.getDiscount()
+                            (stockLevel.getDiscount() != null) ? stockLevel.getDiscount() : 0
+
                     )
              );
-//             stockLevel.setStallQuantity(stockLevel.getStallQuantity() +  );
+
+             if(stockLevel.getStallQuantity() < salesItemInput.quantity()){
+                 throw new RuntimeException("not enough stocks in the stall");
+             }
+             stockLevel.setStallQuantity(stockLevel.getStallQuantity()  - salesItemInput.quantity());
+             stockLevel.setSoldQuantity(stockLevel.getSoldQuantity() + salesItemInput.quantity());
+
         }
+
         return newSales;
     };
+
+    public Sale GetSalesById(Integer id, Principal principal) {
+        Employee caller = employeeService.getByEmail(principal.getName());
+        return salesRepository.findByIdAndBranchId(id, caller.getBranch().getId());
+    }
+
+    public Sale GetSalesById(Integer id) {
+        return salesRepository.findById(id).orElseThrow(()-> new RuntimeException("Sales with given id is not found"));
+    }
+
+    public List<Sale> GetAllSales(Principal principal){
+        Employee caller = employeeService.getByEmail(principal.getName());
+        return salesRepository.findAllByBranchId(caller.getBranch().getId());
+    }
+
+
 
 
 }

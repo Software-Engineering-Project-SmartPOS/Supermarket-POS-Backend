@@ -4,7 +4,7 @@ extend type Query {
   addressById(id: ID!): Address
   allEmployeesByAddressId(addressId: ID!): [Employee]
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
-  allSalaryTypes: [SalaryType]
+
   salaryTypeById(id : ID): SalaryType
 
 }
@@ -22,10 +22,16 @@ extend type Mutation {
 
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
-  AddEmployee(employeeInput: EmployeeInput): Employee
-  DeleteEmployee(id: ID!): Employee
+  AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
+
 
 }
+union EmployeeOutput = Employee | FailedPayLoad
+
+type FailedPayLoad{
+  errorMessage: String!
+}
+
 
 
 input LoginDetails{

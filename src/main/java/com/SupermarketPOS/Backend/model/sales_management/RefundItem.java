@@ -22,12 +22,19 @@ public class RefundItem {
     private Refund refund;
 
     @ManyToOne
-    @JoinColumn(name = "itemId")
-    private Item item;
+    @JoinColumn(name = "salesItemId")
+    private SalesItem salesItem;
 
-    private Integer quantity;
-    private Double unitPrice;
+    private Float quantity;
+    private Float unitPrice;
 
     // Getters and setters
+
+    public RefundItem(Refund refund, SalesItem salesItem, Float quantity, Float unitPrice) {
+        this.refund = refund;
+        this.salesItem = salesItem;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
 }
 

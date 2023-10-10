@@ -32,8 +32,11 @@ public class StockLevelController {
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
     @MutationMapping
-    public StockLevel TransferToStall(@Argument StockTransferInput transferDetails, Principal principal) {
-        return stockLevelService.transferToStall(transferDetails,principal);
+    public Boolean TransferToStall(@Argument StockTransferInput transferDetails, Principal principal) {
+        if (stockLevelService.transferToStall(transferDetails,principal) == null){
+            return false;
+        }
+        return  true;
     }
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
