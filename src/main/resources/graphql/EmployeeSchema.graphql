@@ -24,11 +24,10 @@ extend type Mutation {
 
   AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
 
-
 }
-union EmployeeOutput = Employee | FailedPayload
+union EmployeeOutput = Employee | FailedPayLoad
 
-type FailedPayload{
+type FailedPayLoad{
   errorMessage: String!
 }
 

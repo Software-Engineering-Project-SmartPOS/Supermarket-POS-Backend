@@ -1,6 +1,7 @@
 package com.SupermarketPOS.Backend.controller.employee_management;
 
 
+import com.SupermarketPOS.Backend.dto.common.FailedPayLoad;
 import com.SupermarketPOS.Backend.dto.employee_management.*;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
@@ -45,8 +46,13 @@ public class EmployeeController {
     //add a new employee
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
     @MutationMapping
-    public Employee AddEmployee(@Argument EmployeeInput employeeInput) {
-        return employeeService.AddNewEmployee(employeeInput);
+    public Object AddEmployee(@Argument EmployeeInput employeeInput) {
+        try {
+            return employeeService.AddNewEmployee(employeeInput);
+        }
+        catch (Exception e){
+            return new FailedPayLoad(e.getMessage());
+        }
     }
 
 
