@@ -1,3 +1,7 @@
+extend type Query {
+    getAllBranch: [Branch]
+
+}
 extend type Mutation {
     #    here the input for the mutations must be defined in the graphql schema
     #    all the inputs must be in json
@@ -11,8 +15,9 @@ extend type Mutation {
 
     addBranch( branchInputDetails: BranchInput): Branch
 
-
 }
+
+
 
 input BranchInput {
     id :ID

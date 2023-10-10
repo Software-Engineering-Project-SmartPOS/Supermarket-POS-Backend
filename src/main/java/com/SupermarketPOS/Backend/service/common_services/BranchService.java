@@ -6,6 +6,7 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.repository.common.BranchRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,4 +44,7 @@ public class BranchService {
 
     }
 
+    public List<Branch> GetAllBranches() {
+        return branchRepository.findAll();
+    }
 }
