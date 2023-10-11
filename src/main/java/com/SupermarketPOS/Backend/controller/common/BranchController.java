@@ -41,5 +41,19 @@ public class BranchController {
         return  branchService.GetAllBranches();
     }
 
+    @Secured({"ROLE_OWNER" ,"ROLE_MANAGER"})
+    @MutationMapping
+    public Branch updateBranch(@Argument BranchInput branchDetails){
+        return  branchService.UpdateTheBranch(branchDetails);
+    }
+
+    @Secured({"ROLE_OWNER", "ROLE_MANAGER"})
+    @MutationMapping
+    public String deleteBranch(@Argument Integer id){
+        return  branchService.DeleteBranchById(id);
+    }
+
+
+
 
 }

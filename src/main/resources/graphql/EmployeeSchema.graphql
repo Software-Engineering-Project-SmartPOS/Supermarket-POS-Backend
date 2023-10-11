@@ -21,8 +21,11 @@ extend type Mutation {
 
 
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
-
   AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
+
+
+  UpdateSalryType(salaryTypeDetails: SalaryTypeInput) : SalaryType
+  DeleteSalaryType( id: ID! ) : String
 
 }
 union EmployeeOutput = Employee | FailedPayLoad
@@ -106,6 +109,7 @@ type SalaryType {
 }
 
 input SalaryTypeInput {
+  id: ID # used when updating
   basicSalary: Float
   halfDaySalary: Float
   overTimeSalary: Float

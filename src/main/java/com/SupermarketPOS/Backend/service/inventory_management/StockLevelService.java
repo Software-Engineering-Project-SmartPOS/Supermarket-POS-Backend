@@ -72,6 +72,7 @@ public class StockLevelService {
 
     }
 
+    @Transactional
     public StockLevel transferToStall(StockTransferInput transferDetails, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
         StockLevel stockLevel = stockLevelRepository.findById(transferDetails.stockLevelId()).orElseThrow(()->new EntityNotFoundException("Stock Level is not found"));
@@ -81,8 +82,14 @@ public class StockLevelService {
         if (caller.getBranch()!= stockLevel.getBranch()){
             throw new RuntimeException("trying to transfer another branch stock level");
         }
+
+        if(stockLevel.getInventoryQuantity()< transferDetails.transferQuantity()){
+            throw new RuntimeException("No enough quantity in the inventory");
+        }
+
         stockLevel.setInventoryQuantity(stockLevel.getInventoryQuantity()-transferDetails.transferQuantity());
         stockLevel.setStallQuantity(stockLevel.getStallQuantity()+ transferDetails.transferQuantity());
+
         return  stockLevelRepository.save(stockLevel);
     }
 

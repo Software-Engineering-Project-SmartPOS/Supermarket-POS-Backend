@@ -72,7 +72,7 @@ public class AddressService {
         }
     }
 
-    public Address SaveAddres(Address address){
+    public Address SaveAddress(Address address){
         return addressRepository.save(address);
     }
 

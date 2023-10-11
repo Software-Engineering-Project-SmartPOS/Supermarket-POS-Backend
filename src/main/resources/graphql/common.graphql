@@ -14,6 +14,8 @@ extend type Mutation {
     #add new Salary Type
 
     addBranch( branchInputDetails: BranchInput): Branch
+    updateBranch(branchDetails: BranchInput!): Branch
+    deleteBranch(id: ID!): String
 
 }
 
