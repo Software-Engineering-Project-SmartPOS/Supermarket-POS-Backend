@@ -11,12 +11,14 @@ import com.SupermarketPOS.Backend.service.common_services.AddressService;
 
 import com.SupermarketPOS.Backend.service.common_services.BranchService;
 import jakarta.transaction.Transactional;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Service
 public class EmployeeService {
@@ -84,7 +86,6 @@ public class EmployeeService {
                         employeeInput.jobRole(),
                         availableSalaryType,
                         true,
-//                        employeeInput.password(),
                         passwordEncoder.encode(employeeInput.password()),
                         branch,
                         new Timestamp(System.currentTimeMillis())
