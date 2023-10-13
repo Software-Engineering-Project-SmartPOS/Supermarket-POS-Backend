@@ -256,7 +256,7 @@ NestleMilo500g: CreateItem(itemInput: {
 NestleNescafeClassicCoffee100g: CreateItem(itemInput: {
     itemCode: "NNCC100"
     name: "Nestlé Nescafé Classic Coffee 100g"
-    barcodeNo: "987654333"
+    barcodeNo: "98765433333"
     description: "Classic coffee blend from Nestlé."
     categoryId: 6
     brandId: 4

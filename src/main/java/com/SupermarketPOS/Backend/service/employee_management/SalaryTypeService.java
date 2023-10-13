@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class SalaryTypeService {
     private final SalaryTypeRepository salaryTypeRepository;
@@ -60,4 +62,32 @@ public class SalaryTypeService {
         return salaryTypeRepository.findAll();
     }
 
+    public SalaryType UpdateTheSalaryType(SalaryTypeInput salaryTypeDetails) {
+        SalaryType salaryType = salaryTypeRepository.findById(salaryTypeDetails.id()).orElseThrow(()-> new EntityNotFoundException("Salary Type not found"));
+
+        if(salaryTypeDetails.basicSalary() != null){
+            salaryType.setBasicSalary(salaryTypeDetails.basicSalary());
+        }
+        if (salaryTypeDetails.halfDaySalary() != null){
+            salaryType.setHalfDaySalary(salaryTypeDetails.halfDaySalary());
+        }
+
+        if (salaryTypeDetails.overTimeSalary() != null){
+            salaryType.setOverTimeSalary(salaryTypeDetails.overTimeSalary());
+        }
+        if(salaryTypeDetails.bonus() != null){
+            salaryType.setBonus(salaryTypeDetails.bonus());
+        }
+        return salaryTypeRepository.save(salaryType);
+    }
+
+    public String DeleteSalaryType(Integer id) {
+        try {
+            salaryTypeRepository.deleteById(id);
+            return "Salary Type deleted";
+        }
+        catch (Exception e){
+            return "Could not delete salaryType";
+        }
+    }
 }

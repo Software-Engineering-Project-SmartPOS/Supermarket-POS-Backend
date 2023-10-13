@@ -78,5 +78,6 @@ public class BrandService {
         brand.setUpdateAt(new Timestamp(System.currentTimeMillis()));
         brand.setUpdateUserId(updatedBy.getId());
         return brandRepository.save(brand);
+
     }
 }

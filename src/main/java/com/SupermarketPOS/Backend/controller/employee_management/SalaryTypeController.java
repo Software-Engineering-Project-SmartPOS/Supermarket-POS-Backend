@@ -25,14 +25,28 @@ public class SalaryTypeController {
         return salaryTypeService.AddNewSalaryType(inputSalaryTypeDetails);
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
+    @MutationMapping
+    public SalaryType UpdateSalryType(@Argument SalaryTypeInput salaryTypeDetails){
+        return salaryTypeService.UpdateTheSalaryType(salaryTypeDetails);
+    }
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
+    @MutationMapping
+    public String DeleteSalaryType(@Argument Integer id){
+        return salaryTypeService.DeleteSalaryType(id);
+    }
+
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
     @QueryMapping
     public SalaryType salaryTypeById(@Argument Integer id , Principal principal){
         return salaryTypeService.FindById(id);
     }
 
+
     @QueryMapping
     public List<SalaryType> allSalaryTypes(){
         return salaryTypeService.getAllSalaryTypes();
     }
+
+
 }

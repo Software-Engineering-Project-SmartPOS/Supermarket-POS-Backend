@@ -1,9 +1,12 @@
-extend type Mutation {
-    addBranch( branchInputDetails: BranchInput): Branch
+extend type Query {
+    getAllBranch: [Branch]
+
 }
 
-extend type Query {
-    getAllBranches: [Branch]
+extend type Mutation {
+    addBranch( branchInputDetails: BranchInput): Branch
+    updateBranch(branchDetails: BranchInput!): Branch
+    deleteBranch(id: ID!): String
 }
 
 input BranchInput {
@@ -23,5 +26,4 @@ type Branch {
     name: String
     telephone: String
     address: Address
-    #    employeeList: Employee
 }

@@ -56,7 +56,7 @@ public class EmployeeService {
             Address newEmployeeAddress;
             if (employeeInput.city() != null || employeeInput.street() !=null || employeeInput.houseNumber() != null || employeeInput.district()!= null ||employeeInput.postalCode()!=null){
 
-                newEmployeeAddress = addressService.SaveAddres(
+                newEmployeeAddress = addressService.SaveAddress(
                         new Address(
                                 employeeInput.houseNumber(),
                                 employeeInput.street(),

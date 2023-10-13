@@ -12,9 +12,7 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 //    Employee findByFirstNameAndMiddleNameAndLastName(String firstName, String middleName, String lastName);
 
-
-
-        @Query("SELECT e FROM Employee e WHERE e.firstName = ?1 and e.middleName = ?2 and e.lastName = ?3")
+    @Query("SELECT e FROM Employee e WHERE e.firstName = ?1 and e.middleName = ?2 and e.lastName = ?3")
     Employee findByNames(
             String firstName,
             String middleName,
@@ -31,14 +29,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             String lastName
     );
 
-
     @Query("SELECT COUNT(e)>0 FROM Employee e WHERE e.number = ?1 ")
     Boolean isNumberTaken(String number);
 
     @Query("SELECT COUNT(e)>0 FROM Employee e WHERE e.email = ?1 ")
     Boolean isEmailTaken(String email);
-
-
-
 
 }

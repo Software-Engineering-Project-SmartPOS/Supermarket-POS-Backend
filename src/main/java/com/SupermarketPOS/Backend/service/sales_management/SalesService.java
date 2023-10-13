@@ -59,7 +59,6 @@ public class SalesService {
                             salesItemInput.quantity(),
                             stockLevel.getSellingPrice(),
                             (stockLevel.getDiscount() != null) ? stockLevel.getDiscount() : 0
-
                     )
              );
 
@@ -68,7 +67,6 @@ public class SalesService {
              }
              stockLevel.setStallQuantity(stockLevel.getStallQuantity()  - salesItemInput.quantity());
              stockLevel.setSoldQuantity(stockLevel.getSoldQuantity() + salesItemInput.quantity());
-
         }
 
         return newSales;

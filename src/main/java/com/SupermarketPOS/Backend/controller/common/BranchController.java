@@ -27,18 +27,29 @@ public class BranchController {
     }
 
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
+//    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
     //mapping the address field of the Branch
     @SchemaMapping(typeName = "Branch", field = "address")
     public Address getAddressByBranch(Branch branch){
         return branchService.findBranchById(branch.getId()).getBranchAddress();
     }
 
-    //get all branch details
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
+    //mapping the address field of the Branch
     @QueryMapping
-    public List<Branch> getAllBranches(){
-        return branchService.getAllBranches();
+    public List<Branch> getAllBranch(){
+        return  branchService.GetAllBranches();
     }
 
+    @Secured({"ROLE_OWNER" ,"ROLE_MANAGER"})
+    @MutationMapping
+    public Branch updateBranch(@Argument BranchInput branchDetails){
+        return  branchService.UpdateTheBranch(branchDetails);
+    }
+
+    @Secured({"ROLE_OWNER", "ROLE_MANAGER"})
+    @MutationMapping
+    public String deleteBranch(@Argument Integer id){
+        return  branchService.DeleteBranchById(id);
+    }
 }
