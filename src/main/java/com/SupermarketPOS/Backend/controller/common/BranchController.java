@@ -52,8 +52,4 @@ public class BranchController {
     public String deleteBranch(@Argument Integer id){
         return  branchService.DeleteBranchById(id);
     }
-
-
-
-
 }
