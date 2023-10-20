@@ -84,6 +84,7 @@ extend type Query{
     GetCategoryById(id: ID) : Category
     GetCategoryByName(name: String): Category
     GetAllCategories : [Category]!
+    GetAllItems : [Item]!
 
     GetActiveItemSupplyById(id: ID!): ItemSupply
     GetActiveItemSuppliesBySupplierId(supplierId: ID!): [ItemSupply]

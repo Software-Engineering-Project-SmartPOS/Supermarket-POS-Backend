@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class ItemService {
@@ -132,5 +133,8 @@ public class ItemService {
         return itemRepository.findByItemCode(itemCode);
     }
 
-    // You can add more service methods as needed
+    //get all items
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
 }

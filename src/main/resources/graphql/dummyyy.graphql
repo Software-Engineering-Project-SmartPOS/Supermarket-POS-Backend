@@ -29,28 +29,28 @@ mutation {
 
 
 mutation {
-    addBranch(branchInputDetails: {
-        name: "Sample Branch"
-        telephone: "+1234567890"
-        houseNumber: "123 Main Street"
-        street: "Downtown Avenue"
-        city: "Anytown"
-        district: "Downtown"
-        postalCode: "54321"
-    }) {
-        id
-        name
-        telephone
-        address {
+        addBranch(branchInputDetails: {
+            name: "Sample Branch"
+            telephone: "+1234567890"
+            houseNumber: "123 Main Street"
+            street: "Downtown Avenue"
+            city: "Anytown"
+            district: "Downtown"
+            postalCode: "54321"
+        }) {
             id
-            houseNumber
-            street
-            city
-            district
-            postalCode
+            name
+            telephone
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
         }
     }
-}
 
 mutation {
     addBranch(branchInputDetails: {

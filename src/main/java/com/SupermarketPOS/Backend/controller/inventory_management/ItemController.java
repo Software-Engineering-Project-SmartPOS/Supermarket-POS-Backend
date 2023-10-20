@@ -10,6 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ItemController {
@@ -53,5 +54,10 @@ public class ItemController {
         return itemService.getItemByItemCode(itemCode);
     }
 
-    // You can add more query mappings as needed
+    // Get all items
+    @QueryMapping
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
+    public List<Item> GetAllItems(){
+        return itemService.getAllItems();
+    }
 }
