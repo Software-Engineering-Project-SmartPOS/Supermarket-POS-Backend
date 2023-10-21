@@ -1,6 +1,6 @@
 extend type Mutation {
     CreateItem(itemInput: ItemInput!): Item
-    UpdateItem(itemDetail: ItemInput): Item
+    UpdateItem(itemInput: ItemInput): Item
 
     AddSupplier(supplierInput: SupplierInput) : Supplier
     UpdateSupplier(supplierDetail: SupplierInput): Supplier
