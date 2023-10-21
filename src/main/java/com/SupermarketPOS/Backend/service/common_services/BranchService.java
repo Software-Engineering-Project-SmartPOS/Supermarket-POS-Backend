@@ -5,7 +5,6 @@ import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.repository.common.BranchRepository;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
