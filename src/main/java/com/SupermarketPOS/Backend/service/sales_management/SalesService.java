@@ -2,9 +2,11 @@ package com.SupermarketPOS.Backend.service.sales_management;
 
 import com.SupermarketPOS.Backend.dto.sales_management.SalesInput;
 import com.SupermarketPOS.Backend.dto.sales_management.SalesItemInput;
+import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.inventory_management.StockLevel;
+import com.SupermarketPOS.Backend.model.inventory_management.StockLevelStatus;
 import com.SupermarketPOS.Backend.model.sales_management.Sale;
 import com.SupermarketPOS.Backend.model.sales_management.SalesItem;
 import com.SupermarketPOS.Backend.repository.sales_management.SalesItemRepository;
@@ -13,6 +15,7 @@ import com.SupermarketPOS.Backend.service.customer_management.CustomerService;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 import com.SupermarketPOS.Backend.service.inventory_management.StockLevelService;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -42,6 +45,7 @@ public class SalesService {
         Customer customer = customerService.getCustomerByCustomerId(salesInput.customerId());
         Sale newSales = salesRepository.save(
                 new Sale(
+                        salesInput.barcodeNo(),
                         customer,
                         caller.getBranch(),
                         new Timestamp(System.currentTimeMillis()),
@@ -67,7 +71,12 @@ public class SalesService {
              }
              stockLevel.setStallQuantity(stockLevel.getStallQuantity()  - salesItemInput.quantity());
              stockLevel.setSoldQuantity(stockLevel.getSoldQuantity() + salesItemInput.quantity());
+
+             if (stockLevel.getSoldQuantity() ==  stockLevel.getTotalQuantity()){
+                 stockLevel.setStatus(StockLevelStatus.SOLD_OUT);
+             }
         }
+
 
         return newSales;
     };
@@ -87,6 +96,11 @@ public class SalesService {
     }
 
 
-
-
+    public List<Sale> GetAllSalesForOwner(Principal principal) {
+        Employee caller = employeeService.getByEmail(principal.getName());
+        if (caller.getJobRole() != JobRole.OWNER){
+            throw new UsernameNotFoundException("only owner can access ");
+        }
+        return salesRepository.findAll();
+    }
 }

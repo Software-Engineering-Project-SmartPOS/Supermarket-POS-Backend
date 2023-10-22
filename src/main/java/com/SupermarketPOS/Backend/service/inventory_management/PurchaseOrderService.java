@@ -84,13 +84,12 @@ public class PurchaseOrderService {
             if (itemSupply.getBranch() != createdBy.getBranch()){
                 throw new RuntimeException("Given item supply is for your branch");
             }
-            System.out.println("inside the purchase order item creation");
             PurchaseOrderItem newOrderItem = new PurchaseOrderItem(
                     newPurchaseOrder,
                     itemService.getItemById(orderItem.itemId()),
                     itemSupplyService.getById(orderItem.itemSupplyId()),
                     orderItem.quantity(),
-                    orderItem.purchaseItemUnitCost()
+                    itemSupply.getUnitCost()
             );
 
             newOrderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.CREATE);
@@ -134,9 +133,6 @@ public class PurchaseOrderService {
     }
 
     public List<PurchaseOrderItem> GetPurchaseOrderItemByPurchaseOrderId(Integer id){
-        System.out.println(purchaseOrderRepository.findById(id).get().getPurchaseOrderItemList());
-        return purchaseOrderRepository.findById(id).get().getPurchaseOrderItemList();
+        return purchaseOrderItemRepository.findAllByPurchaseOrderId(id);
     }
-
-
 }

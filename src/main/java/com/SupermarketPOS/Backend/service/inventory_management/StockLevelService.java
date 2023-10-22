@@ -90,6 +90,15 @@ public class StockLevelService {
         stockLevel.setInventoryQuantity(stockLevel.getInventoryQuantity()-transferDetails.transferQuantity());
         stockLevel.setStallQuantity(stockLevel.getStallQuantity()+ transferDetails.transferQuantity());
 
+        if (stockLevel.getInventoryQuantity()> 0F && stockLevel.getInventoryQuantity() != stockLevel.getTotalQuantity()){
+            stockLevel.setStatus(StockLevelStatus.IN_BOTH);
+        }
+        if (stockLevel.getInventoryQuantity()==0){
+            stockLevel.setStatus(StockLevelStatus.IN_STALL);
+        }
+
+
+
         return  stockLevelRepository.save(stockLevel);
     }
 
@@ -99,15 +108,22 @@ public class StockLevelService {
 
     }
 
-    public List<StockLevel> getAllStockLevelsByStatus(StockLevelDetailInput detailInput, Principal principal) {
+    public List<StockLevel> getAllStockLevelsByStatus(StockLevelStatus stockLevelStatus, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
-        return stockLevelRepository.findAllByBranchIdAndStatus(caller.getBranch().getId(), detailInput.status());
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        System.out.println(stockLevelStatus);
+        return stockLevelRepository.findAllByBranchIdAndStatus(caller.getBranch().getId(), stockLevelStatus);
 
 
     }
 
     public List<StockLevel> getAllStockLevelsByItemId(StockLevelDetailInput detailInput, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
+        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+        System.out.println(detailInput.id());
+        System.out.println(detailInput.status());
+        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+
         return stockLevelRepository.findAllByBranchIdAndItemIdAndStatus(
                 caller.getBranch().getId(),
                 detailInput.id(),

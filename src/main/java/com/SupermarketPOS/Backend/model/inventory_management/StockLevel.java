@@ -41,6 +41,9 @@ public class StockLevel {
 //    @ManyToOne
 //    @JoinColumn(name = "inventoryLocationId")
 //    private Location inventoryLocation;
+
+    private Float totalQuantity;
+
     private Float inventoryQuantity;
     private Float soldQuantity;
 
@@ -59,6 +62,7 @@ public class StockLevel {
         this.item = item;
         this.branch = branch;
         this.expiryDate = expiryDate;
+        this.totalQuantity = inventoryQuantity;
         this.inventoryQuantity = inventoryQuantity;
         this.sellingPrice = sellingPrice;
         this.status = status;

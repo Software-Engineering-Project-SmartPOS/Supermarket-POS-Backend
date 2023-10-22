@@ -22,7 +22,7 @@ public class SalesController {
         this.salesService = salesService;
     }
 
-    @Secured({"ROLE_MANAGER","ROLE_ADMIN","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+    @Secured({"ROLE_MANAGER","ROLE_ADMIN","ROLE_CASHIER"})
     @MutationMapping
     public Sale CreateSales(@Argument SalesInput salesInput, Principal principal) {
         return salesService.CreateSales( salesInput,principal);
@@ -38,6 +38,12 @@ public class SalesController {
     @QueryMapping
     public List<Sale> GetAllSales(Principal principal) {
         return salesService.GetAllSales(principal);
+    }
+
+    @Secured({"ROLE_OWNER"})
+    @QueryMapping
+    public List<Sale> GetAllSalesForOwner(Principal principal) {
+        return salesService.GetAllSalesForOwner(principal);
     }
 
 

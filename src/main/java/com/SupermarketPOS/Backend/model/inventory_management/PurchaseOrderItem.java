@@ -1,7 +1,6 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -20,7 +20,7 @@ public class BranchController {
         this.branchService = branchService;
     }
 
-    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @Secured({"ROLE_OWNER"})
     @MutationMapping
     public Branch addBranch(@Argument BranchInput branchInputDetails){
         return branchService.addNewBranch(branchInputDetails);
@@ -41,13 +41,13 @@ public class BranchController {
         return  branchService.GetAllBranches();
     }
 
-    @Secured({"ROLE_OWNER" ,"ROLE_MANAGER"})
+    @Secured({"ROLE_OWNER" ,"ROLE_MANAGER","ROLE_ADMIN"})
     @MutationMapping
     public Branch updateBranch(@Argument BranchInput branchDetails){
         return  branchService.UpdateTheBranch(branchDetails);
     }
 
-    @Secured({"ROLE_OWNER", "ROLE_MANAGER"})
+    @Secured({"ROLE_OWNER", "ROLE_MANAGER","ROLE_ADMIN"})
     @MutationMapping
     public String deleteBranch(@Argument Integer id){
         return  branchService.DeleteBranchById(id);

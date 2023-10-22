@@ -5,7 +5,7 @@
 //import com.SupermarketPOS.Backend.dto.inventory_management.StockTransferInput;
 //import com.SupermarketPOS.Backend.model.inventory_management.StockLevel;
 //import com.SupermarketPOS.Backend.service.inventory_management.StockLevelService;
-//import org.springframework.beans.factory.annotation.Autowired;
+//
 //import org.springframework.graphql.data.method.annotation.MutationMapping;
 //import org.springframework.graphql.data.method.annotation.QueryMapping;
 //import org.springframework.stereotype.Controller;

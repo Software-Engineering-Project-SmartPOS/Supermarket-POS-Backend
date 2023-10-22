@@ -3,6 +3,7 @@ extend type Query {
     GetAllSales: [Sales]
     GetSalesItem(id: ID!): SalesItem
     GetAllSalesItems: [SalesItem]
+    GetAllSalesForOwner:[SalesItem]
 
     GetRefundById(id: ID!): Refund
     GetAllRefunds: [Refund!]

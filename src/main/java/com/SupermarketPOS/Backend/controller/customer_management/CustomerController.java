@@ -39,6 +39,7 @@ public class CustomerController {
     public CustomerValidationReport validateNewCustomerDetail(@Argument CustomerInput newCustomerDetail){
         return customerService.Validate(newCustomerDetail);
     }
+
     //  customerById(customerId :Integer):Customer
     @QueryMapping
     public Optional<CustomerOutput> customerById(@Argument Integer customerId){

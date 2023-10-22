@@ -63,12 +63,6 @@ public class PurchaseOrderController {
         return purchaseOrderService.CreatePurchaseOrder(purchaseOrderInput,principal);
     }
 
-//    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
-//    @MutationMapping
-//    public PurchaseOrder UpdatePurchaseOrder(@Argument PurchaseOrderInput input) {
-//        // Logic to update a purchase order by ID using purchaseOrderService
-//        return purchaseOrderService.UpdatePurchaseOrder(input);
-//    }
 
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
     @MutationMapping

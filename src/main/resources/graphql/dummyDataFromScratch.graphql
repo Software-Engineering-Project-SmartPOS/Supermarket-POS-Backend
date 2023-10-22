@@ -878,13 +878,57 @@ mutation{
 }
 
 
+mutation {
+    TransferToStall(transferDetails: {
+        stockLevelId: 1,
+        transferQuantity: 2
+    })
+}
 
 
 
 
 
+query{
+    AllStockLevelsByStatus(status: IN_INVENTORY){
+        id
+        item{
+            name
+            brand{
+                name
+            }
+            category{
+                name
+            }
+        }
+        stallQuantity
+        inventoryQuantity
+        expiryDate
+        sellingPrice
+    }
+}
 
-
+query{
+    AllStockLevelsByItemId(itemDetail: {
+        id: 3
+        status: IN_BOTH
+    }){
+        id
+        item{
+            name
+            brand{
+                name
+            }
+            category{
+                name
+            }
+        }
+        stallQuantity
+        inventoryQuantity
+        expiryDate
+        sellingPrice
+    }
+}
 
 
 
