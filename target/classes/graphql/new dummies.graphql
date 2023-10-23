@@ -1,0 +1,4 @@
+mutation{
+    deleteBranch(id : 52)
+}
+

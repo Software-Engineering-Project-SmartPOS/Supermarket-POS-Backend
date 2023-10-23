@@ -1,0 +1,937 @@
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo1",
+        middleName: "john1",
+        lastName: "Smith1",
+        phoneNumber: "1111111",
+        password: "owner1",
+        email: "Owner1@gmail.com"
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Colombo Branch"
+        telephone: "0111122323"
+        houseNumber: "123 Main Street"
+        street: "Galle Rd"
+        city: "Colombo"
+        district: "Colombo"
+        postalCode: "00001"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Moratuwa Branch"
+        telephone: "0112222222"
+        houseNumber: "14/14"
+        street: "Mople rd"
+        city: "Moratuwa"
+        district: "Colombo"
+        postalCode: "141451"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+
+mutation {
+    AddSalaryType(inputSalaryTypeDetails: {
+        basicSalary: 40000.0
+        halfDaySalary: 20000.0
+        overTimeSalary: 5000.0
+        bonus: 10000.0
+    }) {
+        id
+        basicSalary
+        halfDaySalary
+        overTimeSalary
+        bonus
+    }
+}
+
+
+mutation {
+    AddSalaryType(inputSalaryTypeDetails: {
+        basicSalary: 80000.0
+        halfDaySalary: 40000.0
+        overTimeSalary: 10000.0
+        bonus: 5000.0
+    }) {
+        id
+        basicSalary
+        halfDaySalary
+        overTimeSalary
+        bonus
+    }
+}
+
+
+
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Tharak"
+        middleName: "Kumara"
+        lastName: "kumara"
+        email: "Admin1@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Kurunegala"
+        district: "kurunegala"
+        postalCode: "54321"
+        phoneNumber: "+0101111111"
+        jobRole: ADMIN
+        salaryTypeId: 1
+        branchId: 1
+        password: "admin1"
+
+
+    }) {
+        ...on Employee {
+
+            id
+            title
+            firstName
+            middleName
+            lastName
+            email
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
+            number
+            jobRole
+            salaryType {
+                id
+                basicSalary
+                halfDaySalary
+                overTimeSalary
+                bonus
+            }
+            active
+        }
+        ...on FailedPayLoad{
+            errorMessage
+        }
+
+    }
+}
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Kobinath"
+        middleName: "Panchalingam"
+        lastName: "Pancha"
+        email: "Admin2@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Jaffna"
+        district: "Jaffna"
+        postalCode: "787878"
+        phoneNumber: "+0202222222"
+        jobRole: ADMIN
+        salaryTypeId: 2
+        branchId: 2
+        password: "admin2"
+
+
+    }) {
+        ...on Employee {
+
+            id
+            title
+            firstName
+            middleName
+            lastName
+            email
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
+            number
+            jobRole
+            salaryType {
+                id
+                basicSalary
+                halfDaySalary
+                overTimeSalary
+                bonus
+            }
+            active
+        }
+        ...on FailedPayLoad{
+            errorMessage
+        }
+
+    }
+}
+
+
+
+
+# to create new categories
+mutation {
+    category1: CreateCategory(categoryInput: {
+        name: "Fresh Produce"
+        description: "Fresh fruits and vegetables"
+    }) {
+        id
+        name
+        description
+    }
+
+    category2: CreateCategory(categoryInput: {
+        name: "Dairy Products"
+        description: "Milk, cheese, yogurt, and butter"
+    }) {
+        id
+        name
+        description
+    }
+
+    category3: CreateCategory(categoryInput: {
+        name: "Bakery"
+        description: "Freshly baked bread, pastries, and cakes"
+    }) {
+        id
+        name
+        description
+    }
+
+    category4: CreateCategory(categoryInput: {
+        name: "Cereals and Breakfast Foods"
+        description: "Cereals, oatmeal, and breakfast bars"
+    }) {
+        id
+        name
+        description
+    }
+
+    category5: CreateCategory(categoryInput: {
+        name: "Frozen Foods"
+        description: "Frozen fruits, vegetables, and prepared meals"
+    }) {
+        id
+        name
+        description
+    }
+
+    category6: CreateCategory(categoryInput: {
+        name: "Beverages"
+        description: "Sodas, juices, teas, and bottled water"
+    }) {
+        id
+        name
+        description
+    }
+
+    category7: CreateCategory(categoryInput: {
+        name: "Canned Goods"
+        description: "Canned vegetables, fruits, and soups"
+    }) {
+        id
+        name
+        description
+    }
+
+    category8: CreateCategory(categoryInput: {
+        name: "Snacks and Sweets"
+        description: "Chips, cookies, candies, and chocolates"
+    }) {
+        id
+        name
+        description
+    }
+
+    category9: CreateCategory(categoryInput: {
+        name: "Household Essentials"
+        description: "Main category for household items"
+    }) {
+        id
+        name
+        description
+    }
+
+    category10: CreateCategory(categoryInput: {
+        name: "Cleaning Supplies"
+        description: "Cleaning agents, detergents, and tools"
+    }) {
+        id
+        name
+        description
+    }
+
+    category11: CreateCategory(categoryInput: {
+        name: "Paper Products"
+        description: "Toilet paper, paper towels, tissues, etc."
+    }) {
+        id
+        name
+        description
+    }
+
+    category12: CreateCategory(categoryInput: {
+        name: "Personal Care"
+        description: "Personal hygiene and care products"
+    }) {
+        id
+        name
+        description
+    }
+
+    category13: CreateCategory(categoryInput: {
+        name: "Stationery"
+        description: "Office and school supplies"
+    }) {
+        id
+        name
+        description
+    }
+
+    category14: CreateCategory(categoryInput: {
+        name: "Groceries"
+        description: "Food and kitchen essentials"
+    }) {
+        id
+        name
+        description
+    }
+
+    category15: CreateCategory(categoryInput: {
+        name: "Electronics"
+        description: "Electronic gadgets and accessories"
+    }) {
+        id
+        name
+        description
+    }
+
+    category16: CreateCategory(categoryInput: {
+        name: "Clothing"
+        description: "Apparel and clothing items"
+    }) {
+        id
+        name
+        description
+    }
+
+    category17: CreateCategory(categoryInput: {
+        name: "Toys and Games"
+        description: "Games, toys, and recreational items"
+    }) {
+        id
+        name
+        description
+    }
+
+    category18: CreateCategory(categoryInput: {
+        name: "Home Decor"
+        description: "Decorative items for the home"
+    }) {
+        id
+        name
+        description
+    }
+
+    category19: CreateCategory(categoryInput: {
+        name: "Books"
+        description: "Books and reading materials"
+    }) {
+        id
+        name
+        description
+    }
+
+    category20: CreateCategory(categoryInput: {
+        name: "Health and Fitness"
+        description: "Health and fitness products"
+    }) {
+        id
+        name
+        description
+    }
+
+    category21: CreateCategory(categoryInput: {
+        name: "Automotive"
+        description: "Automotive parts and accessories"
+    }) {
+        id
+        name
+        description
+    }
+
+    category22: CreateCategory(categoryInput: {
+        name: "Pets"
+        description: "Pet supplies and products"
+    }) {
+        id
+        name
+        description
+    }
+
+}
+
+
+
+
+
+
+#to create new branched
+mutation {
+    # Create brands for "Fresh Produce" category
+    brand1: CreateBrand(brandInput: {
+        name: "Keells Supermarket"
+        description: "Supermarket brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand2: CreateBrand(brandInput: {
+        name: "Araliya"
+        description: "Local produce brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Dairy Products" category
+    brand3: CreateBrand(brandInput: {
+        name: "Anchor"
+        description: "Dairy products brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand4: CreateBrand(brandInput: {
+        name: "Nestlé"
+        description: "Food and beverage brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand5: CreateBrand(brandInput: {
+        name: "Elephant House"
+        description: "Local dairy and beverage brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Bakery" category
+    brand6: CreateBrand(brandInput: {
+        name: "Munchee"
+        description: "Bakery brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand7: CreateBrand(brandInput: {
+        name: "Perera & Sons"
+        description: "Local bakery brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand8: CreateBrand(brandInput: {
+        name: "BreadTalk"
+        description: "Bakery brand known for quality bread."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Cereals and Breakfast Foods" category
+    brand9: CreateBrand(brandInput: {
+        name: "Kellogg's"
+        description: "Global cereal brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand10: CreateBrand(brandInput: {
+        name: "Nestlé"
+        description: "Food and beverage brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand11: CreateBrand(brandInput: {
+        name: "Prima"
+        description: "Local food brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Frozen Foods" category
+    brand12: CreateBrand(brandInput: {
+        name: "Cargills"
+        description: "Local food brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand13: CreateBrand(brandInput: {
+        name: "Supreme"
+        description: "Local frozen foods brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Beverages" category
+    brand14: CreateBrand(brandInput: {
+        name: "Coca-Cola"
+        description: "Global beverage brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand15: CreateBrand(brandInput: {
+        name: "Pepsi"
+        description: "Global beverage brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand16: CreateBrand(brandInput: {
+        name: "Elephant House"
+        description: "Local beverage brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Canned Goods" category
+    brand17: CreateBrand(brandInput: {
+        name: "Cargills"
+        description: "Local canned goods brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand18: CreateBrand(brandInput: {
+        name: "Sustagen"
+        description: "Nutritional supplement brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand19: CreateBrand(brandInput: {
+        name: "Nestlé"
+        description: "Food and beverage brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Snacks and Sweets" category
+    brand20: CreateBrand(brandInput: {
+        name: "Maliban"
+        description: "Local snacks and sweets brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand21: CreateBrand(brandInput: {
+        name: "Munchee"
+        description: "Local snacks and sweets brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand22: CreateBrand(brandInput: {
+        name: "Elephant House"
+        description: "Local snacks and sweets brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Household Essentials" category
+    brand23: CreateBrand(brandInput: {
+        name: "Dettol"
+        description: "Household essentials brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand24: CreateBrand(brandInput: {
+        name: "Sunlight"
+        description: "Household essentials brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand25: CreateBrand(brandInput: {
+        name: "Arpico"
+        description: "Local household essentials brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Cleaning Supplies" category
+    brand26: CreateBrand(brandInput: {
+        name: "Sunlight"
+        description: "Cleaning supplies brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand27: CreateBrand(brandInput: {
+        name: "Surf Excel"
+        description: "Laundry detergent brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand28: CreateBrand(brandInput: {
+        name: "Domex"
+        description: "Household cleaning brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    # Create brands for "Paper Products" category
+    brand29: CreateBrand(brandInput: {
+        name: "Velona"
+        description: "Local paper products brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand30: CreateBrand(brandInput: {
+        name: "Royal Tissues"
+        description: "Tissue paper brand."
+    }) {
+        id
+        name
+        description
+    }
+
+    brand31: CreateBrand(brandInput: {
+        name: "Aramuna"
+        description: "Local paper products brand in Sri Lanka."
+    }) {
+        id
+        name
+        description
+    }
+
+}
+
+
+
+
+
+mutation {
+    CreatePurchaseOrder1: CreatePurchaseOrder(purchaseOrderInput: {
+        SupplierId: 1
+        expectedDate: "2023-10-14",
+        description: "Sample Purchase Order 1",
+        purchaseCost: 790.00,
+        purchaseOrderItemList: [
+            {
+                itemId: 4,
+                itemSupplyId: 1,
+                quantity: 10,
+                purchaseItemUnitCost: 10.0,
+                totalCost: 100.0
+            }
+            {
+                itemId: 5,
+                itemSupplyId: 3,
+                quantity: 20.0,
+                purchaseItemUnitCost: 12.0,
+                totalCost: 240.0
+            }
+
+        ]
+    }) {
+        id
+        supplier {
+            id
+            name
+        }
+        orderedDate
+        expectedDate
+        createdBy {
+            id
+            firstName
+            lastName
+        }
+        description
+        branch {
+            id
+            name
+        }
+        purchaseCost
+        purchaseOrderItemList {
+            id
+            item {
+                id
+                name
+            }
+            quantity
+            purchaseItemUnitCost
+            totalCost
+            receivedQuantity
+        }
+        orderStatus
+    }
+
+    CreatePurchaseOrder2: CreatePurchaseOrder(purchaseOrderInput: {
+        SupplierId: 2,
+        expectedDate: "2023-10-15",
+        description: "Immediate order for a special order 2",
+        purchaseCost: 260.00,
+        purchaseOrderItemList: [
+            {
+                itemId: 3,
+                itemSupplyId: 2,
+                quantity: 15,
+                purchaseItemUnitCost: 10.0,
+                totalCost: 150.0
+            }
+
+
+        ]
+    }) {
+        id
+        supplier {
+            id
+            name
+        }
+        orderedDate
+        expectedDate
+        createdBy {
+            id
+            firstName
+            lastName
+        }
+        description
+        branch {
+            id
+            name
+        }
+        purchaseCost
+        purchaseOrderItemList {
+            id
+            item {
+                id
+                name
+            }
+            quantity
+            purchaseItemUnitCost
+            totalCost
+            receivedQuantity
+        }
+        orderStatus
+    }
+}
+
+
+
+mutation{
+    PurchaseOrderItemArrival(
+        arrivalDetails:{
+            purchaseOrderItemId :2,
+            receivedQuantity: 5
+        }){
+        id
+        purchaseOrder{
+            id
+            supplier{
+                id
+                name
+            }
+            branch{
+                id
+                name
+                telephone
+
+            }
+        }
+        item{
+            id
+            itemCode
+            name
+            brand{
+                id
+                name
+            }
+            barcodeNo
+            category{
+                id
+                name
+            }
+
+        }
+        itemSupply{
+            id
+            supplier{
+                id
+                name
+            }
+            unitCost
+            modifiedDate
+        }
+        quantity
+        receivedQuantity
+        purchaseOrderItemStatus
+        totalCost
+        purchaseOrderItemStatus
+    }
+}
+
+
+mutation {
+    TransferToStall(transferDetails: {
+        stockLevelId: 1,
+        transferQuantity: 2
+    })
+}
+
+
+
+
+
+query{
+    AllStockLevelsByStatus(status: IN_INVENTORY){
+        id
+        item{
+            name
+            brand{
+                name
+            }
+            category{
+                name
+            }
+        }
+        stallQuantity
+        inventoryQuantity
+        expiryDate
+        sellingPrice
+    }
+}
+
+query{
+    AllStockLevelsByItemId(itemDetail: {
+        id: 3
+        status: IN_BOTH
+    }){
+        id
+        item{
+            name
+            brand{
+                name
+            }
+            category{
+                name
+            }
+        }
+        stallQuantity
+        inventoryQuantity
+        expiryDate
+        sellingPrice
+    }
+}
+
+
+
+
+
+

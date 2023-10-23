@@ -1,0 +1,689 @@
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo1",
+        middleName: "john1",
+        lastName: "Smith1",
+        phoneNumber: "1111111",
+        password: "owner1",
+        email: ""
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+mutation {
+    registerOwner(ownerDetail: {
+        title: MR,
+        firstName: "Deo2",
+        middleName: "john2",
+        lastName: "Smith2",
+        phoneNumber: "2222222",
+        password: "owner2",
+        email: "Owner2@gmail.com"
+        jobRole: OWNER
+        branchId:0
+    })
+}
+
+
+mutation {
+        addBranch(branchInputDetails: {
+            name: "Sample Branch"
+            telephone: "+1234567890"
+            houseNumber: "123 Main Street"
+            street: "Downtown Avenue"
+            city: "Anytown"
+            district: "Downtown"
+            postalCode: "54321"
+        }) {
+            id
+            name
+            telephone
+            address {
+                id
+                houseNumber
+                street
+                city
+                district
+                postalCode
+            }
+        }
+    }
+
+mutation {
+    addBranch(branchInputDetails: {
+        name: "Moratuwa Main"
+        telephone: "071717171"
+        houseNumber: "123 Main Street"
+        street: "Mople rd"
+        city: "Moratuwa"
+        district: "Colombo"
+        postalCode: "141451"
+    }) {
+        id
+        name
+        telephone
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+    }
+}
+
+mutation {
+    AddSalaryType(inputSalaryTypeDetails: {
+        basicSalary: 40000.0
+        halfDaySalary: 20000.0
+        overTimeSalary: 5000.0
+        bonus: 10000.0
+    }) {
+        id
+        basicSalary
+        halfDaySalary
+        overTimeSalary
+        bonus
+    }
+}
+
+
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "John"
+        middleName: "Doe"
+        lastName: "Smith"
+        email: "cashier1@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Anytown"
+        district: "Downtown"
+        postalCode: "54321"
+        phoneNumber: "+1234567890"
+        jobRole: CASHIER
+        salaryTypeId: 1
+        branchId: 52
+        password: "cashier1"
+
+
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Amila"
+        middleName: "Kasum"
+        lastName: "Smith"
+        email: "AdminBranch2@gmail.com"
+        addressId: 1 # Assuming you have an address with ID 1 in your database
+        houseNumber: "Panapitiya"
+        street: "55/A"
+        city: "gampaha"
+        district: "Gampaha"
+        postalCode: "54321"
+        phoneNumber: "0332291578"
+        jobRole: ADMIN
+        salaryTypeId: 2
+        branchId: 2
+        password: "AdminBranch2"
+
+
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+mutation {
+    AddEmployee(employeeInput: {
+        title: MR
+        firstName: "Carl"
+        middleName: "Doe"
+        lastName: "Smith"
+        email: "Admin1@gmail.com"
+        houseNumber: "Suite 2C"
+        street: "456 Elm Street"
+        city: "Anytown"
+        district: "Downtown"
+        postalCode: "54321"
+        phoneNumber: "11111111"
+        jobRole: ADMIN
+        salaryTypeId: 1
+        branchId: 1
+        password: "admin1"
+
+
+    }) {
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
+
+
+
+mutation {
+    CreateCategory(categoryInput: {
+        name: "Stationaris"
+        description: "Learning materials"
+    }) {
+        id
+        name
+        description
+    }
+}
+
+query {
+    GetCategoryById(id: 1) {
+        id
+        name
+        description
+        createAt
+        updateAt
+        updatedDate
+        updatedEmployee {
+            id
+            firstName
+            # Other fields of Employee
+        }
+    }
+}
+
+
+mutation {
+    UpdateCategory(categoryInput: {
+        id: 1  # Replace with the actual category ID you want to update
+        name: "Updated Category Name"
+        description: "Updated category description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+query {
+    GetCategoryById(id: 1) {
+        id
+        name
+        description
+        createAt
+        updateAt
+        updatedDate
+        updatedEmployee {
+            id
+            firstName
+            # Other fields of Employee
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#..................BRAND..................
+mutation {
+    CreateBrand(brandInput: {
+        name: "Sample Brand"
+        description: "This is a sample brand."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+mutation {
+    UpdateBrand(brandInput: {
+        id: 1
+        name: "Updated Brand Name"
+        description: "Updated brand description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+mutation {
+    UpdateBrand(brandInput: {
+        id: 1
+        name: "Updated Brand Name"
+        description: "Updated brand description."
+    }) {
+        id
+        name
+        description
+    }
+}
+
+
+
+
+query {
+    GetBrandById(id: 1) {
+        id
+        name
+        description
+        updateAt
+        createAt
+    }
+}
+
+query {
+    GetAllBrands{
+        id
+        name
+    }
+}
+
+
+
+
+#.............Supplier..........
+mutation {
+    AddSupplier(supplierInput: {
+        name: "Supplier Company"
+        landPhone: "123-456-7890"
+        mobilePhone: "987-654-3210"
+        email: "supplier@example.com"
+        houseNumber: "123"
+        street: "Main Street"
+        city: "Cityville"
+        district: "Districtville"
+        postalCode: "12345"
+        active: true
+    }) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+    }
+}
+
+mutation {
+    UpdateSupplier(supplierDetail: {
+        id: 1
+        name: "Updated Supplier Company"
+        landPhone: "555-555-5555"
+        mobilePhone: "777-777-7777"
+        email: "updated@example.com"
+        houseNumber: "456"
+        street: "Updated Street"
+        city: "Updated City"
+        district: "Updated District"
+        postalCode: "54321"
+        active: true
+    }) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+    }
+}
+
+query {
+    GetSupplierById(id: 2) {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+
+        }
+        active
+
+    }
+}
+
+query {
+    GetAllSuppliers {
+        id
+        name
+        landPhone
+        mobilePhone
+        email
+        address{
+            id
+            street
+            postalCode
+        }
+        active
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# >>>>>.................ItemSupply.................
+{
+    GetActiveItemSupplyById(id: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            name
+        }
+        unitCost
+        active
+    }
+}
+
+
+{
+    GetActiveItemSuppliesBySupplierId(supplierId: 2) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            name
+        }
+        unitCost
+        active
+    }
+}
+
+
+
+
+query{
+    GetActiveItemSuppliesByBranchId(branchId: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+        }
+    }}
+
+
+
+mutation {
+    UpdateItemSupply(itemSupplyInput :{
+        id : 1
+        supplierId : 2
+        itemId: 10
+
+
+
+    }){
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            address{
+                street
+            }
+        }
+        }
+}
+
+
+
+
+mutation {
+    UpdateItemSupply (itemSupplyInput: {
+        id : 152
+        supplierId : 2
+        itemId: 2
+
+    }){
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+        branch {
+            id
+            address{
+                street
+            }
+        }
+    }
+}
+
+
+
+query{
+    GetActiveItemSuppliesByBranchId(
+        branchId: 1) {
+        id
+        supplier {
+            id
+            name
+        }
+        item {
+            id
+            name
+        }
+        createdDate
+        modifiedDate
+        createdBy {
+            id
+            firstName
+        }
+        updatedEmployee {
+            id
+            firstName
+        }
+    }
+}
+
+
+
+
+
+

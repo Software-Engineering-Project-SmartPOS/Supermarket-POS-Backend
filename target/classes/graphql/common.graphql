@@ -1,0 +1,41 @@
+extend type Query {
+    getAllBranch: [Branch]
+
+}
+extend type Mutation {
+    #    here the input for the mutations must be defined in the graphql schema
+    #    all the inputs must be in json
+    #    in the request body, input data should be in json
+    #    those inputs names must be same as in the input type
+    #    but no order is needed
+    #    when mapping the mutation,
+    #       that function
+    # addAddress(addressInput: AddressInput): Address
+    #add new Salary Type
+
+    addBranch( branchInputDetails: BranchInput): Branch
+    updateBranch(branchDetails: BranchInput!): Branch
+    deleteBranch(id: ID!): String
+
+}
+
+
+
+input BranchInput {
+    id :ID
+    name: String
+    telephone: String
+    addressId: Int # Updated field name and type
+    houseNumber: String
+    street: String
+    city: String
+    district: String
+    postalCode: String
+}
+
+type Branch {
+    id :ID
+    name: String
+    telephone: String
+    address: Address
+}

@@ -1,0 +1,61 @@
+extend type Query {
+    GetSale(id: ID!): Sales
+    GetAllSales: [Sales]
+    GetSalesItem(id: ID!): SalesItem
+    GetAllSalesItems: [SalesItem]
+}
+
+extend type Mutation {
+    CreateSales(salesInput: SaleInput): Sales
+#    UpdateSales(input: SaleInput): Sales
+
+}
+
+type Sales {
+    id: ID!
+    barcodeNo: String
+    customer: Customer
+    time: String
+    total: Float
+    discount: Float
+    loyaltyPoints: Int
+    paymentType: String
+    salesItemList: [SalesItem]
+}
+
+type SalesItem {
+    id: ID # used when updating the data
+    sales: Sales
+    stockLevel: StockLevel
+    quantity: Float
+    unitPrice: Float
+    subtotal: Float
+    discountGiven : Float
+    total : Float
+
+}
+
+
+input SaleInput {
+    id: ID # used when updating the data
+    barcodeNo: String # used when updating / returning
+    customerId: ID
+    salesItemsInput : [SalesItemInput]
+    total: Float
+#    discount: Float
+#    loyaltyPoints: Int
+    paymentType: PaymentType
+}
+
+input SalesItemInput {
+    saleId: ID # used when updating
+    stockLevelId: ID
+    quantity: Float
+}
+enum PaymentType{
+    CASH
+    ONLINE
+    DEBIT_CARD,
+    CREDIT_CARD
+    GIFT_CARD
+}

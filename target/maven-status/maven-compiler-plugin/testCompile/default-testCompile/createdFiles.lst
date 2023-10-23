@@ -1,0 +1,4 @@
+com\SupermarketPOS\Backend\controller\employee_management\EmployeeControllerTest.class
+com\SupermarketPOS\Backend\repository\employee_management\EmployeeRepositoryTest.class
+com\SupermarketPOS\Backend\service\employee_management\EmployeeServiceTest.class
+com\SupermarketPOS\Backend\BackendApplicationTests.class
