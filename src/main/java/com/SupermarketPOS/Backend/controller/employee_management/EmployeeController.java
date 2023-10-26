@@ -55,6 +55,11 @@ public class EmployeeController {
         }
     }
 
+    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @MutationMapping
+    public Object UpdateEmployee(@Argument EmployeeInput employeeInput) {
+        return  employeeService.UpdateTheEmployee(employeeInput);
+    }
 
     //delete employee using id
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})

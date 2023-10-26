@@ -25,6 +25,7 @@ extend type Mutation {
 
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
   AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
+  UpdateEmployee(employeeInput :EmployeeInput): Employee
 
 
   UpdateSalryType(salaryTypeDetails: SalaryTypeInput) : SalaryType
@@ -71,6 +72,7 @@ input AddressInput {
 }
 
 input EmployeeInput {
+  id: ID
   title: Title
   firstName: String
   middleName: String

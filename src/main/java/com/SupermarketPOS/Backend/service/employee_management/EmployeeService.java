@@ -96,6 +96,59 @@ public class EmployeeService {
 
     }
 
+    public Employee UpdateTheEmployee(EmployeeInput employeeInputDetails){
+        Employee employeeToBeUpdated = employeeRepository.findById(employeeInputDetails.id()).orElseThrow(()->new RuntimeException("no such employee"));
+
+        if (employeeInputDetails.title() != null){
+            employeeToBeUpdated.setTitle(employeeInputDetails.title());
+        }
+        if (employeeInputDetails.firstName() != null){
+            employeeToBeUpdated.setFirstName(employeeInputDetails.firstName());
+        }
+
+        if (employeeInputDetails.middleName() != null){
+            employeeToBeUpdated.setMiddleName(employeeInputDetails.middleName());
+        }
+        if (employeeInputDetails.lastName() != null){
+            employeeToBeUpdated.setLastName(employeeInputDetails.lastName());
+        }
+        Address employeeAddress = employeeToBeUpdated.getAddress();
+        if (employeeInputDetails.houseNumber() != null){
+            employeeAddress.setHouseNumber(employeeInputDetails.houseNumber());
+        }
+        if (employeeInputDetails.street() != null){
+            employeeAddress.setStreet(employeeInputDetails.street());
+        }
+        if (employeeInputDetails.city() != null){
+            employeeAddress.setCity(employeeInputDetails.city());
+        }
+        if (employeeInputDetails.district() != null){
+            employeeAddress.setDistrict(employeeInputDetails.district());
+        }
+        if (employeeInputDetails.postalCode()!= null){
+            employeeAddress.setPostalCode(employeeInputDetails.postalCode());
+        }
+        if (employeeInputDetails.password() !=null){
+            employeeToBeUpdated.setPassword(passwordEncoder.encode(employeeInputDetails.password()));
+        }
+        if (employeeInputDetails.salaryTypeId()!= null){
+            SalaryType newSalaryType = salaryTypeService.FindById(employeeInputDetails.salaryTypeId());
+            employeeToBeUpdated.setSalaryType(newSalaryType);
+        }
+        if (employeeInputDetails.jobRole()!= null){
+            employeeToBeUpdated.setJobRole(employeeInputDetails.jobRole());
+        }
+        if(employeeInputDetails.phoneNumber()!= null){
+            employeeToBeUpdated.setNumber(employeeInputDetails.phoneNumber());
+        }
+        addressService.SaveAddress(employeeAddress);
+        return employeeRepository.save(employeeToBeUpdated);
+
+    }
+
+
+
+
     public EmployeeValidationReport Validate(EmployeeInput employeeInput){
         //  validation criteria
         // no employee have the same 3 names (first, middle, last)
