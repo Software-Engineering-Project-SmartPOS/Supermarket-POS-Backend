@@ -43,6 +43,8 @@ public class SalaryTypeController {
     }
 
 
+
+
     @QueryMapping
     public List<SalaryType> allSalaryTypes(){
         return salaryTypeService.getAllSalaryTypes();

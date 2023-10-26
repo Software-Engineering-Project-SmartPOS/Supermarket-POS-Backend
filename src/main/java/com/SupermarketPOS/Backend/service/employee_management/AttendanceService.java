@@ -10,10 +10,14 @@ import jakarta.transaction.Transactional;
 import org.hibernate.id.IdentifierGeneratorAggregator;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AttendanceService {
@@ -57,5 +61,26 @@ public class AttendanceService {
         }
         return  true;
     }
+
+    public Double GetTotalWorkingHoursForEmployeeInDateRange(Integer employeeId, String fromDate, String toDate) {
+        List<Attendance> allAttendance = attendenceRepository.findAllByEmployeeId(employeeId);
+        Double workingHours = 0d;
+        LocalDate theFromDate = dateTimeService.convertStringIntoLocalDate(fromDate);
+        LocalDate theToDate = dateTimeService.convertStringIntoLocalDate(toDate);
+        for (Attendance attendance : allAttendance){
+            if( attendance.getDate().isBefore(theToDate.plusDays(1)) && attendance.getDate().isAfter(theFromDate.minusDays(1))){
+                Duration duration = Duration.between(attendance.getTimeIn(),attendance.getTimeOut());
+                workingHours = workingHours + duration.toHours();
+            }
+        }
+        return workingHours;
+
+
+
+
+//        Optional<Double> totalWorkingHours = attendenceRepository.getTotalWorkingHoursForEmployeeInDateRange(employeeId, fromDate, toDate);
+//        return totalWorkingHours.orElse(0.0); // Default to 0 if no records found.
+    }
+
 
 }

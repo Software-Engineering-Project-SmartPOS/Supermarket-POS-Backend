@@ -6,7 +6,9 @@ extend type Query {
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
 
   salaryTypeById(id : ID): SalaryType
+  allSalaryTypes: [SalaryType]
 
+  GetWorkingHours( workingHoursRequest : WorkingHoursRequest) : String
 }
 extend type Mutation {
   #    here the input for the mutations must be defined in the graphql schema
@@ -28,7 +30,7 @@ extend type Mutation {
   UpdateSalryType(salaryTypeDetails: SalaryTypeInput) : SalaryType
   DeleteSalaryType( id: ID! ) : String
 
-  MarKEmployeeAttendance(employeeAttendanceDetails :EmployeeAttendenceDetails): Boolean
+  MarKEmployeeAttendance(employeeAttendanceDetails :EmployeeAttendanceDetails): Boolean
 
 }
 union EmployeeOutput = Employee | FailedPayLoad
@@ -37,9 +39,14 @@ type FailedPayLoad{
   errorMessage: String!
 }
 
+input WorkingHoursRequest{
+  employeeId: ID
+  from : String #here is the from date
+  to: String # here is the to date
+}
 
 
-input  EmployeeAttendenceDetails{
+input  EmployeeAttendanceDetails{
   employeeId: ID
   timeIn : String
   timeOut: String
@@ -139,5 +146,3 @@ enum JobRole {
   SALES_ASSISTANT,
   ADMIN
 }
-
-
