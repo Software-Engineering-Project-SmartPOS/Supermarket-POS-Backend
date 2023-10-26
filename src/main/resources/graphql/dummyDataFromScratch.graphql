@@ -209,7 +209,52 @@ mutation {
     }
 }
 
+mutation{
+    UpdateEmployee(employeeInput
+    :{
+        id:15
+        title: MRS
+        firstName : "firstKamala"
+        middleName: "middleKamala"
+        lastName: "lastKamala"
+        jobRole:CASHIER
+        salaryTypeId :102
+        phoneNumber :"9876543210"
+        houseNumber:"211A"
+        street : "newKamlaStreet"
+        city: "kamalCity"
+        district :"kamalaDis"
+        postalCode :"787878788787887878778877888"
+        password : "123kamala"
 
+    }
+    ){
+        id
+        title
+        firstName
+        middleName
+        lastName
+        email
+        address {
+            id
+            houseNumber
+            street
+            city
+            district
+            postalCode
+        }
+        number
+        jobRole
+        salaryType {
+            id
+            basicSalary
+            halfDaySalary
+            overTimeSalary
+            bonus
+        }
+        active
+    }
+}
 
 
 # to create new categories
@@ -933,5 +978,24 @@ query{
 
 
 
+query{
+    GetWorkingHours(workingHoursRequest:
+    {
+        employeeId:2
+        from: "2023-10-26"
+        to: "2023-10-28"
+    })
+}
 
+
+mutation{
+    MarKEmployeeAttendance(employeeAttendanceDetails:{
+        employeeId : 2
+        timeIn: "2023-10-26 08:30:45"
+        timeOut: "2023-10-26 15:30:45"
+        timeInDate : "2023-10-26"
+        timeOutDate : "2023-10-31"
+
+    })
+}
 

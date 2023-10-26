@@ -23,11 +23,13 @@ public class LoyaltyProgram {
     private String description;
     private Integer pointsThreshold;
     private Float discountPercentage;
+    private Boolean status;
 
     public LoyaltyProgram(String loyaltyProgramName, String description, Integer pointsThreshold, Float discountPercentage) {
         this.loyaltyProgramName = loyaltyProgramName;
         this.description = description;
         this.pointsThreshold = pointsThreshold;
         this.discountPercentage = discountPercentage;
+        this.status = true;
     }
 }

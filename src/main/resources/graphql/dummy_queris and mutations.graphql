@@ -270,3 +270,18 @@ pointsThreshold
 discountPercentage
 }
 }
+
+
+mutation{
+InActivateLoyaltyProgram(loyaltyProgramId:1)
+}
+
+
+
+mutation{
+InActivateCustomer(
+customerId :53
+)
+}
+
+

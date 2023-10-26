@@ -15,11 +15,13 @@ extend type Query {
 extend type Mutation {
   addCustomer(customerInput: CustomerInput): Customer
   updateCustomer(customerUpdateInput : CustomerInput) : Customer
+  InActivateCustomer(customerId : ID!): String
   
 
   #creat a new loyalty program
   createLoyaltyProgram(newProgramInput: LoyaltyProgramInput!): LoyaltyProgram!
   updateLoyaltyProgram(updateDetail: LoyaltyProgramInput!) :LoyaltyProgram!
+  InActivateLoyaltyProgram(loyaltyProgramId : ID!) : String
 }
 
 type CustomerValidationReport {

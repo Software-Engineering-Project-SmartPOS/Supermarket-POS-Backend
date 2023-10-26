@@ -1,22 +1,27 @@
 extend type Query {
-  validateNewCustomerDetail(
-    newCustomerDetail: CustomerInput
-  ): CustomerValidationReport
-  customerById(customerId: ID): Customer
+  validateNewCustomerDetail(newCustomerDetail: CustomerInput): CustomerValidationReport
+  customerById(customerId :ID):Customer
   allCustomer: [Customer]
+
+
 
   #loyalty Program
   getAllLoyaltyPrograms: [LoyaltyProgram]!
   getLoyaltyProgramById(loyaltyProgramId: ID!): LoyaltyProgram
+
+
 }
 
 extend type Mutation {
   addCustomer(customerInput: CustomerInput): Customer
-  updateCustomer(customerUpdateInput: CustomerInput): Customer
+  updateCustomer(customerUpdateInput : CustomerInput) : Customer
+  InActivateCustomer(customerId : ID!): String
+
 
   #creat a new loyalty program
   createLoyaltyProgram(newProgramInput: LoyaltyProgramInput!): LoyaltyProgram!
-  updateLoyaltyProgram(updateDetail: LoyaltyProgramInput!): LoyaltyProgram!
+  updateLoyaltyProgram(updateDetail: LoyaltyProgramInput!) :LoyaltyProgram!
+  InActivateLoyaltyProgram(loyaltyProgramId : ID!) : String
 }
 
 type CustomerValidationReport {
@@ -25,37 +30,28 @@ type CustomerValidationReport {
 }
 
 input CustomerInput {
-  id: ID # this is used when updating an customer
+  id : ID  # this is used when updating an customer
   name: String
   telephone: String
   email: String
-  addressId: Int #used when updating an address Not mandatary
-  houseNumber: String
-  street: String
-  city: String
-  district: String
-  postalCode: String
-  customerType: CustomerType
+  customerAddress: CustomerAddressInput #customer address input
+  customerType : CustomerType
   # customer type is not needed when adding a new customer
-  password: String
+  password : String
 }
+
 
 type Customer {
   id: ID
   name: String
   telephone: String
   email: String
-  addressId: Int
-  houseNumber: String
-  street: String
-  city: String
-  district: String
-  postalCode: String
-  customerType: CustomerType
-  loyaltyId: String
+  customerAddress: CustomerAddress
+    customerType: CustomerType
+  loyaltyId : String
   createdDate: String
   firstVisited: String
-  lastVisited: String
+  lastVisited :String
 }
 
 enum CustomerType {
@@ -64,21 +60,23 @@ enum CustomerType {
   GRADE_C
 }
 
-input CustomerAddressInput {
-  id: ID # used when updating the address
-  address: String
-  city: String
-  district: String
+
+input CustomerAddressInput{
+  id : ID # used when updating the address
+  address : String
+  city : String
+  district : String
   postalCode: String
 }
 
-type CustomerAddress {
-  id: String
-  address: String
-  city: String
-  district: String
+type CustomerAddress{
+  id : String
+  address : String
+  city : String
+  district : String
   postalCode: String
 }
+
 
 type LoyaltyProgram {
   id: ID!
@@ -88,7 +86,7 @@ type LoyaltyProgram {
   discountPercentage: Float!
 }
 input LoyaltyProgramInput {
-  id: ID #used when updating so it not ! here
+  id :ID  #used when updating
   loyaltyProgramName: String!
   description: String
   pointsThreshold: Int!
