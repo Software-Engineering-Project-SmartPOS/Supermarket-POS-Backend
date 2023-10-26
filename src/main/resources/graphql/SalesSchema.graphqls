@@ -3,17 +3,52 @@ extend type Query {
     GetAllSales: [Sales]
     GetSalesItem(id: ID!): SalesItem
     GetAllSalesItems: [SalesItem]
+    GetAllSalesForOwner:[SalesItem]
+
+    GetRefundById(id: ID!): Refund
+    GetAllRefunds: [Refund!]
+    GetRefundItem(id: ID!): RefundItem
+
+
 }
 
 extend type Mutation {
     CreateSales(salesInput: SaleInput): Sales
 #    UpdateSales(input: SaleInput): Sales
 
+    CreateRefund(refundDetails: RefundInput) : Refund
+
 }
+
+type Refund {
+    id: Int!
+    sales: Sales!
+    total: Float!
+    refundItems: [RefundItem]!
+}
+
+input RefundInput {
+    salesId: ID!
+    total: Float!
+    refundItemList: RefundItemInput
+}
+
+type RefundItem {
+    id: Int!
+    refund: Refund!
+    item: Item!
+    quantity: Int!
+    unitPrice: Float!
+}
+
+input RefundItemInput {
+    salesItemId: ID!
+    quantity: Float!
+}
+
 
 type Sales {
     id: ID!
-    barcodeNo: String
     customer: Customer
     time: String
     total: Float

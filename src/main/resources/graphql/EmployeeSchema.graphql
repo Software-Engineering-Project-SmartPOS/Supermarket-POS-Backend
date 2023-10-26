@@ -20,12 +20,15 @@ extend type Mutation {
   #add new Salary Type
 
 
+
   AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
   AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
 
 
   UpdateSalryType(salaryTypeDetails: SalaryTypeInput) : SalaryType
   DeleteSalaryType( id: ID! ) : String
+
+  MarKEmployeeAttendance(employeeAttendanceDetails :EmployeeAttendanceDetails): Boolean
 
 }
 union EmployeeOutput = Employee | FailedPayLoad
@@ -36,6 +39,13 @@ type FailedPayLoad{
 
 
 
+input  EmployeeAttendanceDetails{
+  employeeId: ID
+  timeIn : String
+  timeOut: String
+  timeInDate: String
+  timeOutDate: String
+}
 input LoginDetails{
   userName: String
   password: String

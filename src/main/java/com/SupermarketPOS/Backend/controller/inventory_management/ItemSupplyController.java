@@ -52,6 +52,7 @@ public class ItemSupplyController {
     @MutationMapping
     public ItemSupply CreateItemSupply(@Argument ItemSupplyInput itemSupplyInput, Principal principal) {
         // logic to create a new item supply using itemSupplyService
+        System.out.println("im in the controller");
         return itemSupplyService.CreateItemSupply(itemSupplyInput, principal);
     }
 

@@ -45,15 +45,18 @@ public class SalesService {
         Customer customer = customerService.getCustomerByCustomerId(salesInput.customerId());
         Sale newSales = salesRepository.save(
                 new Sale(
-                        salesInput.barcodeNo(),
                         customer,
                         caller.getBranch(),
                         new Timestamp(System.currentTimeMillis()),
                         salesInput.paymentType()
                 )
         );
+        Float total =0F;
         for(SalesItemInput salesItemInput : salesInput.salesItemsInput()){
             StockLevel stockLevel = stockLevelService.getStockLevelById(salesItemInput.stockLevelId(),principal);
+
+            total = salesItemInput.quantity() * stockLevel.getSellingPrice();
+
 
             // save the new sales item
              salesItemRepository.save(
@@ -76,9 +79,8 @@ public class SalesService {
                  stockLevel.setStatus(StockLevelStatus.SOLD_OUT);
              }
         }
-
-
-        return newSales;
+        newSales.setTotal(total);
+        return salesRepository.save(newSales);
     };
 
     public Sale GetSalesById(Integer id, Principal principal) {

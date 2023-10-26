@@ -35,4 +35,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query("SELECT COUNT(e)>0 FROM Employee e WHERE e.email = ?1 ")
     Boolean isEmailTaken(String email);
 
+    @Query("SELECT e FROM Employee e WHERE e.id = ?1 AND e.branch.id = ?2")
+    Employee findByIdAndBranchId(Integer employeeId, Integer branchId);
+
 }
