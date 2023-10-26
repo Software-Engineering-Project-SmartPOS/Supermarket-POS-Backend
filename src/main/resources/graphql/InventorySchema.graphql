@@ -68,6 +68,7 @@ extend type Query{
     AllStockLevelsByCategory(categoryDetail: StockLevelDetailInput): [StockLevel]
 
     GetStockLevelById(id: ID!): StockLevel
+    GetAllStockLevels: [StockLevel]
 
     GetItemById(id: ID): Item
     GetItemByBarcode(barcode: String): Item
