@@ -184,4 +184,18 @@ public class EmployeeService {
         employee.setActive(false);
         return employeeRepository.save(employee);
     }
+
+    public String InActivateEmployee(EmployeeInput employeeInput) {
+        try {
+            Employee employee = employeeRepository.findById(employeeInput.id()).orElseThrow(()->new RuntimeException("no such employee"));
+            employee.setActive(false);
+            employeeRepository.save(employee);
+            return "In activate the user";
+
+        }
+        catch (Exception e){
+            throw new RuntimeException("couldnt in activete");
+        }
+
+    }
 }

@@ -65,7 +65,7 @@ public class SalesService {
                             stockLevel,
                             salesItemInput.quantity(),
                             stockLevel.getSellingPrice(),
-                            (stockLevel.getDiscount() != null) ? stockLevel.getDiscount() : 0
+                            (stockLevel.getDiscount() != null ) ? stockLevel.getDiscount() : 0
                     )
              );
 

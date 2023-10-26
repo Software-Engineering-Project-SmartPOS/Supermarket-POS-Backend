@@ -60,6 +60,13 @@ public class EmployeeController {
     public Object UpdateEmployee(@Argument EmployeeInput employeeInput) {
         return  employeeService.UpdateTheEmployee(employeeInput);
     }
+    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @MutationMapping
+    public String InActivateEmployee(@Argument EmployeeInput employeeInput) {
+        return  employeeService.InActivateEmployee(employeeInput);
+    }
+
+
 
     //delete employee using id
     @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
@@ -90,6 +97,7 @@ public class EmployeeController {
         return allEmployees();
 
     }
+
 }
 
 
