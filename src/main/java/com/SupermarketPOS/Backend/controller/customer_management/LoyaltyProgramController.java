@@ -39,5 +39,9 @@ public class LoyaltyProgramController {
     public LoyaltyProgram updateLoyaltyProgram(@Argument LoyaltyProgramInput updateDetail){
         return loyaltyProgramService.UpdateLoyaltyProgram(updateDetail);
     }
+    @MutationMapping
+    public String InActivateLoyaltyProgram(@Argument Integer loyaltyProgramId){
+        return loyaltyProgramService.InActivate(loyaltyProgramId);
+    }
 
 }

@@ -119,4 +119,19 @@ public class CustomerService {
     public Customer getCustomerByCustomerId(Integer id){
         return customerRepository.findById(id).orElse(null);
     }
+
+    public String InActivate(Integer customerId) {
+        try {
+            Customer customer = customerRepository.findById(customerId).orElseThrow(()->new RuntimeException("customer not found"));
+            customer.setActive(false);
+            customerRepository.save(customer);
+            return "Customer In Activated";
+        }
+        catch (Exception e){
+            throw new RuntimeException("couldn't delete customer");
+        }
+    }
+
+
+
 }

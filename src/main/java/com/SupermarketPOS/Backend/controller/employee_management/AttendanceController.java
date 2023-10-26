@@ -24,9 +24,6 @@ public class AttendanceController {
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
     public Boolean MarKEmployeeAttendance(@Argument EmployeeAttendenceDetails employeeAttendanceDetails, Principal principal){
         System.out.println("inside the markEmployeeAttendance");
-
-
-
         return attendanceService.MarkAttendance(employeeAttendanceDetails,principal);
     }
 
@@ -39,4 +36,7 @@ public class AttendanceController {
                 workingHoursRequest.to()
         );
     }
+
+//    all attendance
+//    java -jar path
 }

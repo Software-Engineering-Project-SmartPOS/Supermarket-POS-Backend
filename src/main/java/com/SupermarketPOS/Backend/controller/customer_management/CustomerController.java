@@ -32,6 +32,12 @@ public class CustomerController {
         return customerService.UpdateCustomer(customerUpdateInput);
     }
 
+    @MutationMapping
+    public String InActivateCustomer(@Argument Integer customerId){
+        return customerService.InActivate(customerId);
+    }
+
+
 
 
     //validate the customer details

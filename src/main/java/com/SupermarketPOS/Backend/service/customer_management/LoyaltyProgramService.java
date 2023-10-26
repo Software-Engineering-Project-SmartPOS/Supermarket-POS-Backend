@@ -53,4 +53,10 @@ public class LoyaltyProgramService {
     public Optional<LoyaltyProgram> findLoyaltyProgramById(Integer id){
         return loyaltyProgramRepository.findById(id);
     }
+
+    public String InActivate(Integer loyaltyProgramId) {
+        LoyaltyProgram loyaltyProgram = loyaltyProgramRepository.findById(loyaltyProgramId).orElseThrow(()->new RuntimeException("loyalty program is not found"));
+        loyaltyProgram.setStatus(false);
+        return "loyalty Program was In Activated";
+    }
 }
