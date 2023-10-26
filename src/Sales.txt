@@ -65,5 +65,16 @@ mutation {
   }
 }
 
+query{
+  GetAllSales{
+    id
+    salesItemList{
+      id
+      quantity
+      unitPrice
 
+    }
+    total
+  }
+}
 

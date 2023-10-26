@@ -22,7 +22,7 @@ public class Employee {
     private String lastName;
 
     @ManyToOne
-    @JoinColumn(name = "branch_id")
+    @JoinColumn(name = "branchId")
     private Branch branch;
 
     @Column(unique = true)

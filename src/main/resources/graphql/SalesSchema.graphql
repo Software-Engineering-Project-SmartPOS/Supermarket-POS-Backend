@@ -49,7 +49,6 @@ input RefundItemInput {
 
 type Sales {
     id: ID!
-    barcodeNo: String
     customer: Customer
     time: String
     total: Float

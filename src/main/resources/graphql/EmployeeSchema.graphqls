@@ -4,7 +4,7 @@ extend type Query {
   addressById(id: ID!): Address
   allEmployeesByAddressId(addressId: ID!): [Employee]
   isValidateEmployee(employeeInput: EmployeeInput): EmployeeValidationReport #this is to validate the employee when creating a new employee
-  allSalaryTypes: [SalaryType]
+
   salaryTypeById(id : ID): SalaryType
 
 }
@@ -20,10 +20,15 @@ extend type Mutation {
   #add new Salary Type
 
 
-  AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
 
+  AddSalaryType(inputSalaryTypeDetails: SalaryTypeInput): SalaryType
   AddEmployee(employeeInput: EmployeeInput): EmployeeOutput
 
+
+  UpdateSalryType(salaryTypeDetails: SalaryTypeInput) : SalaryType
+  DeleteSalaryType( id: ID! ) : String
+
+  MarKEmployeeAttendance(employeeAttendanceDetails :EmployeeAttendenceDetails): Boolean
 
 }
 union EmployeeOutput = Employee | FailedPayLoad
@@ -34,6 +39,13 @@ type FailedPayLoad{
 
 
 
+input  EmployeeAttendenceDetails{
+  employeeId: ID
+  timeIn : String
+  timeOut: String
+  timeInDate: String
+  timeOutDate: String
+}
 input LoginDetails{
   userName: String
   password: String
@@ -107,6 +119,7 @@ type SalaryType {
 }
 
 input SalaryTypeInput {
+  id: ID # used when updating
   basicSalary: Float
   halfDaySalary: Float
   overTimeSalary: Float
@@ -126,3 +139,5 @@ enum JobRole {
   SALES_ASSISTANT,
   ADMIN
 }
+
+
