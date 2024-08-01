@@ -15,17 +15,18 @@ import java.util.List;
 @Controller
 public class CategoryController {
     private final CategoryService categoryService;
+
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_STORE_MANAGER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER", "ROLE_STORE_MANAGER"})
     @MutationMapping
     public Category CreateCategory(@Argument CategoryInput categoryInput, Principal principal) {
         return categoryService.AddCategory(categoryInput, principal);
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_STORE_MANAGER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER", "ROLE_STORE_MANAGER"})
     @MutationMapping
     public Category UpdateCategory(@Argument CategoryInput categoryInput, Principal principal) {
         return categoryService.UpdateCategory(categoryInput, principal);
@@ -40,8 +41,9 @@ public class CategoryController {
     public List<Category> GetAllCategories() {
         return categoryService.getAllCategories();
     }
+
     @QueryMapping
-    public Category GetCategoryByName(@Argument String name){
+    public Category GetCategoryByName(@Argument String name) {
         return categoryService.findCategoryByName(name);
     }
 }

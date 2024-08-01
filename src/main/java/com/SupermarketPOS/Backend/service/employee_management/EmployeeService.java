@@ -7,54 +7,55 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
-import com.SupermarketPOS.Backend.service.common_services.AddressService;
-
-import com.SupermarketPOS.Backend.service.common_services.BranchService;
+import com.SupermarketPOS.Backend.service.common.AddressService;
+import com.SupermarketPOS.Backend.service.common.BranchService;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+
     private final SalaryTypeService salaryTypeService;
-    private  final AddressService addressService;
+
+    private final AddressService addressService;
+
     private final PasswordEncoder passwordEncoder;
+
     private final BranchService branchService;
 
     public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, PasswordEncoder passwordEncoder, BranchService branchService) {
 //    public EmployeeService(EmployeeRepository employeeRepository, SalaryTypeService salaryTypeService, AddressService addressService, BranchService branchService) {
         this.employeeRepository = employeeRepository;
         this.salaryTypeService = salaryTypeService;
-        this.addressService = addressService ;
+        this.addressService = addressService;
         this.passwordEncoder = passwordEncoder;
         this.branchService = branchService;
     }
 
-
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    public Branch getBranchByEmployeeId(Integer id){
+    public Branch getBranchByEmployeeId(Integer id) {
         return employeeRepository.findById(id).get().getBranch();
     }
 
-    public Employee getByEmail(String email){
+    public Employee getByEmail(String email) {
         return employeeRepository.findByEmail(email).get();
     }
 
     @Transactional
-    public Employee AddNewEmployee(EmployeeInput employeeInput){
+    public Employee AddNewEmployee(EmployeeInput employeeInput) {
         EmployeeValidationReport validationReport = Validate(employeeInput);
         System.out.println(validationReport);
-        if(validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()){
+        if (validationReport.isEmailOkay() && validationReport.isNameOkay() && validationReport.isNumberOkay()) {
             Address newEmployeeAddress;
-            if (employeeInput.city() != null || employeeInput.street() !=null || employeeInput.houseNumber() != null || employeeInput.district()!= null ||employeeInput.postalCode()!=null){
+            if (employeeInput.city() != null || employeeInput.street() != null || employeeInput.houseNumber() != null || employeeInput.district() != null || employeeInput.postalCode() != null) {
 
                 newEmployeeAddress = addressService.SaveAddress(
                         new Address(
@@ -65,80 +66,78 @@ public class EmployeeService {
                                 employeeInput.postalCode()
                         )
                 );
-            }
-            else newEmployeeAddress = null;
+            } else newEmployeeAddress = null;
 
+            SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
 
-                 SalaryType availableSalaryType = salaryTypeService.FindById(employeeInput.salaryTypeId());
+            Branch branch = branchService.findBranchById(employeeInput.branchId());
 
-                Branch branch = branchService.findBranchById(employeeInput.branchId());
-
-                Employee newEmployee = new Employee(
-                        employeeInput.title(),
-                        employeeInput.firstName(),
-                        employeeInput.middleName(),
-                        employeeInput.lastName(),
-                        employeeInput.email(),
-                        newEmployeeAddress,
-                        employeeInput.phoneNumber(),
-                        employeeInput.jobRole(),
-                        availableSalaryType,
-                        true,
+            Employee newEmployee = new Employee(
+                    employeeInput.title(),
+                    employeeInput.firstName(),
+                    employeeInput.middleName(),
+                    employeeInput.lastName(),
+                    employeeInput.email(),
+                    newEmployeeAddress,
+                    employeeInput.phoneNumber(),
+                    employeeInput.jobRole(),
+                    availableSalaryType,
+                    true,
 //                        employeeInput.password(),
-                        passwordEncoder.encode(employeeInput.password()),
-                        branch,
-                        new Timestamp(System.currentTimeMillis())
-                );
-                System.out.println(employeeInput);
-                return employeeRepository.save(newEmployee);
+                    passwordEncoder.encode(employeeInput.password()),
+                    branch,
+                    new Timestamp(System.currentTimeMillis())
+            );
+            System.out.println(employeeInput);
+            return employeeRepository.save(newEmployee);
         }
         throw new RuntimeException("User is already there");
 
     }
 
-    public Employee UpdateTheEmployee(EmployeeInput employeeInputDetails){
-        Employee employeeToBeUpdated = employeeRepository.findById(employeeInputDetails.id()).orElseThrow(()->new RuntimeException("no such employee"));
+    public Employee UpdateTheEmployee(EmployeeInput employeeInputDetails) {
+        Employee employeeToBeUpdated = employeeRepository.findById(employeeInputDetails.id()).orElseThrow(() -> new RuntimeException("no such employee"));
 
-        if (employeeInputDetails.title() != null){
+        if (employeeInputDetails.title() != null) {
             employeeToBeUpdated.setTitle(employeeInputDetails.title());
         }
-        if (employeeInputDetails.firstName() != null){
+        if (employeeInputDetails.firstName() != null) {
             employeeToBeUpdated.setFirstName(employeeInputDetails.firstName());
         }
 
-        if (employeeInputDetails.middleName() != null){
+        if (employeeInputDetails.middleName() != null) {
             employeeToBeUpdated.setMiddleName(employeeInputDetails.middleName());
         }
-        if (employeeInputDetails.lastName() != null){
+        if (employeeInputDetails.lastName() != null) {
             employeeToBeUpdated.setLastName(employeeInputDetails.lastName());
         }
         Address employeeAddress = employeeToBeUpdated.getAddress();
-        if (employeeInputDetails.houseNumber() != null){
+        if (employeeInputDetails.houseNumber() != null) {
             employeeAddress.setHouseNumber(employeeInputDetails.houseNumber());
         }
-        if (employeeInputDetails.street() != null){
+        if (employeeInputDetails.street() != null) {
             employeeAddress.setStreet(employeeInputDetails.street());
         }
-        if (employeeInputDetails.city() != null){
+        if (employeeInputDetails.city() != null) {
             employeeAddress.setCity(employeeInputDetails.city());
         }
-        if (employeeInputDetails.district() != null){
+        if (employeeInputDetails.district() != null) {
             employeeAddress.setDistrict(employeeInputDetails.district());
         }
-        if (employeeInputDetails.postalCode()!= null){
+        if (employeeInputDetails.postalCode() != null) {
             employeeAddress.setPostalCode(employeeInputDetails.postalCode());
         }
-        if (employeeInputDetails.password() !=null){
+        if (employeeInputDetails.password() != null) {
             employeeToBeUpdated.setPassword(passwordEncoder.encode(employeeInputDetails.password()));
         }
-        if (employeeInputDetails.salaryTypeId()!= null){
+        if (employeeInputDetails.salaryTypeId() != null) {
             SalaryType newSalaryType = salaryTypeService.FindById(employeeInputDetails.salaryTypeId());
             employeeToBeUpdated.setSalaryType(newSalaryType);
         }
-        if (employeeInputDetails.jobRole()!= null){
+        if (employeeInputDetails.jobRole() != null) {
             employeeToBeUpdated.setJobRole(employeeInputDetails.jobRole());
         }
-        if(employeeInputDetails.phoneNumber()!= null){
+        if (employeeInputDetails.phoneNumber() != null) {
             employeeToBeUpdated.setNumber(employeeInputDetails.phoneNumber());
         }
         addressService.SaveAddress(employeeAddress);
@@ -146,16 +145,13 @@ public class EmployeeService {
 
     }
 
-
-
-
-    public EmployeeValidationReport Validate(EmployeeInput employeeInput){
+    public EmployeeValidationReport Validate(EmployeeInput employeeInput) {
         //  validation criteria
         // no employee have the same 3 names (first, middle, last)
         //phone should be unique
         // email should be unique
 
-        boolean isNameOkay =  !employeeRepository.isEmployeeNameTaken(
+        boolean isNameOkay = !employeeRepository.isEmployeeNameTaken(
                 employeeInput.firstName(),
                 employeeInput.middleName(),
                 employeeInput.lastName()
@@ -175,11 +171,11 @@ public class EmployeeService {
     }
 
     public Employee findById(Integer id) {
-        return  employeeRepository.findById(id).get();
+        return employeeRepository.findById(id).get();
     }
 
     //delete employee using id
-    public Employee DeleteEmployee(Integer id){
+    public Employee DeleteEmployee(Integer id) {
         Employee employee = employeeRepository.findById(id).get();
         employee.setActive(false);
         return employeeRepository.save(employee);
@@ -187,13 +183,12 @@ public class EmployeeService {
 
     public String InActivateEmployee(EmployeeInput employeeInput) {
         try {
-            Employee employee = employeeRepository.findById(employeeInput.id()).orElseThrow(()->new RuntimeException("no such employee"));
+            Employee employee = employeeRepository.findById(employeeInput.id()).orElseThrow(() -> new RuntimeException("no such employee"));
             employee.setActive(false);
             employeeRepository.save(employee);
             return "In activate the user";
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("couldnt in activete");
         }
 

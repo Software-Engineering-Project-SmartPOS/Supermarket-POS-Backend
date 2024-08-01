@@ -1,6 +1,9 @@
 package com.SupermarketPOS.Backend.service.customer_management;
 
-import com.SupermarketPOS.Backend.dto.customer_management.*;
+import com.SupermarketPOS.Backend.dto.customer_management.CustomerInput;
+import com.SupermarketPOS.Backend.dto.customer_management.CustomerOutput;
+import com.SupermarketPOS.Backend.dto.customer_management.CustomerOutputMapper;
+import com.SupermarketPOS.Backend.dto.customer_management.CustomerValidationReport;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.customer_management.Customer;
 import com.SupermarketPOS.Backend.repository.common.AddressRepository;
@@ -16,23 +19,24 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+
     private final AddressRepository addressRepository;
+
     private final CustomerOutputMapper customerOutputMapper;
 
-    public CustomerService(CustomerRepository customerRepository,AddressRepository addressRepository, CustomerOutputMapper customerOutputMapper) {
+    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, CustomerOutputMapper customerOutputMapper) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
         this.customerOutputMapper = customerOutputMapper;
     }
 
-
     @Transactional
-    public Optional<CustomerOutput> addCustomer(CustomerInput customerInput){
+    public Optional<CustomerOutput> addCustomer(CustomerInput customerInput) {
         //check whether there are customers for the given customerInput /get the validation report
         CustomerValidationReport customerInputValidationReport = Validate(customerInput);
 
         //if not previously saved customer create new customer
-        if(customerInputValidationReport.isEmailOkay() && customerInputValidationReport.isTelephoneOkay()){// if valid (customer in not already added/ email and the telephone is unique)
+        if (customerInputValidationReport.isEmailOkay() && customerInputValidationReport.isTelephoneOkay()) {// if valid (customer in not already added/ email and the telephone is unique)
             //create new address & save
             Address customerAddress = new Address(
                     customerInput.houseNumber(),
@@ -59,22 +63,21 @@ public class CustomerService {
             );
             customerRepository.save(newCustomer);
             return GetCustomerById(newCustomer.getId());
-        }
-        else
+        } else
             throw new RuntimeException("customer is allready added");
 //                throw  new GraphQLException("customer is already there");
     }
 
-    public Optional<CustomerOutput> UpdateCustomer(CustomerInput customerUpdateDetails){
+    public Optional<CustomerOutput> UpdateCustomer(CustomerInput customerUpdateDetails) {
 
         //only the name, address and the customer type can be changed. No the email and the telephone number can be changed
         Optional<Customer> customer = customerRepository.findById(customerUpdateDetails.id());
-        if(customer.get() == null){
+        if (customer.get() == null) {
             throw new RuntimeException("no customer on that id");
         }
         //updating the customer details
         Customer c = customer.get();
-        c.UpdateNameAndCustomerType(customerUpdateDetails.name(),customerUpdateDetails.customerType());
+        c.UpdateNameAndCustomerType(customerUpdateDetails.name(), customerUpdateDetails.customerType());
         //update the customer address details
         c.getCustomerAddress().UpdateAddress(
                 customerUpdateDetails.houseNumber(),
@@ -89,8 +92,7 @@ public class CustomerService {
         return Optional.of(customerOutputMapper.apply(c));
     }
 
-
-    public CustomerValidationReport Validate(CustomerInput customerInputDetail){
+    public CustomerValidationReport Validate(CustomerInput customerInputDetail) {
         Boolean isTelephoneOkay = !customerRepository.isTelephoneTaken(customerInputDetail.telephone());
         Boolean isEmailOkay = !customerRepository.isEmailTaken(customerInputDetail.email());
 
@@ -101,12 +103,12 @@ public class CustomerService {
 
     }
 
-    public Optional<CustomerOutput> GetCustomerById(Integer id){
+    public Optional<CustomerOutput> GetCustomerById(Integer id) {
         return customerRepository.findById(id)
                 .map(customerOutputMapper);
     }
 
-    public List<CustomerOutput> getAllCustomers(){
+    public List<CustomerOutput> getAllCustomers() {
         return customerRepository.findAll()
                 .stream()
                 .map(customerOutputMapper)
@@ -114,24 +116,20 @@ public class CustomerService {
 
     }
 
-
     ///
-    public Customer getCustomerByCustomerId(Integer id){
+    public Customer getCustomerByCustomerId(Integer id) {
         return customerRepository.findById(id).orElse(null);
     }
 
     public String InActivate(Integer customerId) {
         try {
-            Customer customer = customerRepository.findById(customerId).orElseThrow(()->new RuntimeException("customer not found"));
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("customer not found"));
             customer.setActive(false);
             customerRepository.save(customer);
             return "Customer In Activated";
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("couldn't delete customer");
         }
     }
-
-
 
 }

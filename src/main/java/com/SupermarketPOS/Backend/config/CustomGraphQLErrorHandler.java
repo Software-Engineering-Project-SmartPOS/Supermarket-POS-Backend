@@ -1,11 +1,12 @@
-package com.SupermarketPOS.Backend.Config;
-        import com.SupermarketPOS.Backend.Config.security.Exception.UserNotFoundException;
-        import graphql.GraphQLError;
-        import graphql.servlet.GenericGraphQLError;
-        import graphql.servlet.GraphQLErrorHandler;
-        import org.springframework.stereotype.Component;
+package com.SupermarketPOS.Backend.config;
 
-        import java.util.List;
+import com.SupermarketPOS.Backend.config.security.Exception.UserNotFoundException;
+import graphql.GraphQLError;
+import graphql.servlet.GenericGraphQLError;
+import graphql.servlet.GraphQLErrorHandler;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CustomGraphQLErrorHandler implements GraphQLErrorHandler {

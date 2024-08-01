@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BranchRepository extends JpaRepository<Branch,Integer> {
+public interface BranchRepository extends JpaRepository<Branch, Integer> {
     @Query("SELECT br FROM Branch br WHERE br.id = ?1")
     Branch getById(Integer id);
 }

@@ -6,5 +6,5 @@ public record RefundInput(
         Integer salesId,
         Float total,
         List<RefundItemInput> refundItemList
-){
+) {
 }

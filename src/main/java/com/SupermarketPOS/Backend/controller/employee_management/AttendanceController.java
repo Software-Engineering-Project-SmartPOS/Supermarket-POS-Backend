@@ -19,17 +19,16 @@ public class AttendanceController {
         this.attendanceService = attendanceService;
     }
 
-
     @MutationMapping
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
-    public Boolean MarKEmployeeAttendance(@Argument EmployeeAttendenceDetails employeeAttendanceDetails, Principal principal){
+    public Boolean MarKEmployeeAttendance(@Argument EmployeeAttendenceDetails employeeAttendanceDetails, Principal principal) {
         System.out.println("inside the markEmployeeAttendance");
-        return attendanceService.MarkAttendance(employeeAttendanceDetails,principal);
+        return attendanceService.MarkAttendance(employeeAttendanceDetails, principal);
     }
 
     @QueryMapping
     @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_STORE_MANAGER"})
-    public double GetWorkingHours(@Argument WorkingHoursRequest workingHoursRequest){
+    public double GetWorkingHours(@Argument WorkingHoursRequest workingHoursRequest) {
         return attendanceService.GetTotalWorkingHoursForEmployeeInDateRange(
                 workingHoursRequest.employeeId(),
                 workingHoursRequest.from(),

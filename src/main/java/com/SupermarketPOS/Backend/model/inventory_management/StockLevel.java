@@ -1,14 +1,13 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import com.SupermarketPOS.Backend.model.common.Branch;
-
 import jakarta.persistence.*;
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -35,8 +34,8 @@ public class StockLevel {
     @ManyToOne
     @JoinColumn(name = "branchId")
     private Branch branch;
-    private LocalDate expiryDate;
 
+    private LocalDate expiryDate;
 
 //    @ManyToOne
 //    @JoinColumn(name = "inventoryLocationId")
@@ -45,17 +44,19 @@ public class StockLevel {
     private Float totalQuantity;
 
     private Float inventoryQuantity;
+
     private Float soldQuantity;
 
-
-//    @ManyToOne
+    //    @ManyToOne
 //    @JoinColumn(name = "stallLocationId")
 //    private Location stallLocation;
     private Float stallQuantity;
 
-//    private Double cost;
+    //    private Double cost;
     private Float sellingPrice;
+
     private StockLevelStatus status;
+
     private Float discount;
 
     public StockLevel(Item item, Branch branch, LocalDate expiryDate, Float inventoryQuantity, Float sellingPrice, StockLevelStatus status, StockArrival stockArrival) {
@@ -66,9 +67,9 @@ public class StockLevel {
         this.inventoryQuantity = inventoryQuantity;
         this.sellingPrice = sellingPrice;
         this.status = status;
-        this.stallQuantity =0F;
+        this.stallQuantity = 0F;
         this.soldQuantity = 0F;
-        this.discount=0F;
+        this.discount = 0F;
         this.stockArrival = stockArrival;
     }
 }

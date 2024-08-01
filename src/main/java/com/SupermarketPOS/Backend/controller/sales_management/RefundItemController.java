@@ -17,11 +17,10 @@ public class RefundItemController {
         this.refundItemService = refundItemService;
     }
 
-    @Secured({"ROLE_MANAGER","ROLE_ADMIN","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+    @Secured({"ROLE_MANAGER", "ROLE_ADMIN", "ROLE_STORE_MANAGER", "ROLE_CASHIER"})
     @QueryMapping
     public RefundItem GetRefundItemById(@Argument Integer id, Principal principal) {
-        return refundItemService.GetRefundItemById(id,principal);
+        return refundItemService.GetRefundItemById(id, principal);
     }
-
 
 }

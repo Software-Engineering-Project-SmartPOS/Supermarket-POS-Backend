@@ -1,6 +1,6 @@
 extend type Mutation {
     CreateItem(itemInput: ItemInput!): Item
-    UpdateItem(itemDetail: ItemInput): Item
+    UpdateItem(itemInput: ItemInput): Item
 
     AddSupplier(supplierInput: SupplierInput) : Supplier
     UpdateSupplier(supplierDetail: SupplierInput): Supplier
@@ -20,19 +20,13 @@ extend type Mutation {
     DeletePurchaseOrder(id: ID!): Boolean
 
     PurchaseOrderItemArrival(arrivalDetails: PurchaseOrderItemArrivalInput) : PurchaseOrderItem
-
-
     AddToStockLevel(stockLevelInput : StockLevelInput): StockLevel
     TransferToStall(transferDetails: StockTransferInput): Boolean
-
-
 }
 input StockTransferInput{
     stockLevelId : ID!
     transferQuantity: Float
-
 }
-
 
 type StockLevel {
     id: Int!
@@ -50,10 +44,12 @@ input StockLevelInput {
     sellingPrice: Float!
     quantity: Float!
 }
+
 input StockLevelDetailInput{
     id: ID
     status: StockLevelStatus
 }
+
 enum StockLevelStatus {
     IN_INVENTORY
     IN_BOTH
@@ -84,6 +80,7 @@ extend type Query{
     GetCategoryById(id: ID) : Category
     GetCategoryByName(name: String): Category
     GetAllCategories : [Category]!
+    GetAllItems : [Item]!
 
     GetActiveItemSupplyById(id: ID!): ItemSupply
     GetActiveItemSuppliesBySupplierId(supplierId: ID!): [ItemSupply]
@@ -97,10 +94,6 @@ extend type Query{
     AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrder]
 
     GetAllStockArrivals(transferred: Boolean): [StockArrival!]
-
-
-
-
 }
 
 type StockArrival {
@@ -114,12 +107,10 @@ type StockArrival {
     arrivedAt: String # You can format the timestamp as a string if needed
 }
 
-
 input PurchaseOrderItemArrivalInput{
     purchaseOrderItemId: ID!
     receivedQuantity: Float
 }
-
 
 type PurchaseOrder {
     id: ID!
@@ -134,7 +125,6 @@ type PurchaseOrder {
     orderStatus: PurchaseOrderStatus! # Now using the enum type
 }
 
-
 type PurchaseOrderItem {
     id: ID!
     purchaseOrder: PurchaseOrder!
@@ -147,6 +137,7 @@ type PurchaseOrderItem {
     purchaseOrderItemStatus: PurchaseOrderStatus
 #    orderArrivals: [StockArrival!]
 }
+
 input PurchaseOrderInput {
     id: ID
     SupplierId: ID
@@ -166,7 +157,6 @@ input PurchaseOrderItemInput {
     totalCost: Float
     receivedQuantity: Float
 }
-
 
 enum PurchaseOrderStatus {
     CREATE
@@ -188,7 +178,6 @@ type ItemSupply {
     unitCost: Float!
     active: Boolean!
 }
-
 
 input ItemSupplyInput {
     id: Int # used when updating
@@ -212,6 +201,7 @@ input ItemInput {
     reorderLevel: Int!
     returnable: Boolean!
 }
+
 type Item {
     id: Int!
     itemCode: String!
@@ -238,7 +228,6 @@ enum UnitOfMeasure {
     COUNT
 }
 
-
 input SupplierInput {
     id: Int # Used when updating supplier details
     name: String
@@ -255,7 +244,6 @@ input SupplierInput {
     branchId: Int
 }
 
-
 type Supplier {
     id: Int
     name: String
@@ -269,10 +257,7 @@ type Supplier {
     createdAt: String
     updatedAt: String
     active: Boolean
-
-
 }
-
 
 input CategoryInput {
     id: ID
@@ -290,7 +275,6 @@ type Category {
     updatedDate: String
     #itemList: [Item]
 }
-
 
 input BrandInput {
     id: ID   # used when updating the brand

@@ -1,14 +1,14 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -18,9 +18,13 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String itemCode;
+
     private String name;
+
     private String barcodeNo;
+
     private String description;
 
     @ManyToOne
@@ -30,14 +34,19 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "brandId")
     private Brand brand;
+
     private UnitOfMeasure unitOfMeasure;
 
     @Column(name = "createdAt", updatable = false, nullable = false)
     private Timestamp createdAt;
+
     @Column(name = "updatedAt")
     private Timestamp updatedAt;
+
     private Boolean active;
+
     private Integer reorderLevel;
+
     private Boolean returnable;
 
     @ManyToOne

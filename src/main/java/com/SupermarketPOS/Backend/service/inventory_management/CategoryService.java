@@ -4,9 +4,8 @@ import com.SupermarketPOS.Backend.dto.inventory_management.CategoryInput;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.inventory_management.Category;
 import com.SupermarketPOS.Backend.repository.inventory_management.CategoryRepository;
-import com.SupermarketPOS.Backend.service.common_services.DateTimeService;
+import com.SupermarketPOS.Backend.service.common.DateTimeService;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,9 @@ import java.util.Optional;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+
     private final EmployeeService employeeService;
+
     private final DateTimeService dateTimeService;
 
     // Inject dependencies
@@ -63,7 +64,7 @@ public class CategoryService {
         }
         //update the name and the description
         Category category = categoryOptional.get();
-        if (categoryInput.name() != null){
+        if (categoryInput.name() != null) {
             category.setName(categoryInput.name());
         }
         if (categoryInput.description() != null) {
@@ -78,7 +79,7 @@ public class CategoryService {
         return categoryRepository.existsByName(name);
     }
 
-    public Category findCategoryByName(String name){
+    public Category findCategoryByName(String name) {
         return categoryRepository.findByName(name);
     }
 }

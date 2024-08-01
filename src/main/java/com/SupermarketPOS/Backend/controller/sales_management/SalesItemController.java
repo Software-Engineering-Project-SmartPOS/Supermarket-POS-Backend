@@ -20,29 +20,25 @@ public class SalesItemController {
         this.salesItemService = salesItemService;
     }
 
-
-    @Secured({"ROLE_MANAGER","ROLE_STORE_MANAGER","ROLE_CASHIER"})
+    @Secured({"ROLE_MANAGER", "ROLE_STORE_MANAGER", "ROLE_CASHIER"})
     @QueryMapping
     public List<SalesItem> GetAllSalesItems(Principal principal) {
-        return salesItemService.GetAllTheSalesItem(principal) ;
+        return salesItemService.GetAllTheSalesItem(principal);
     }
-
 
     @Secured({"ROLE_OWNER"})
     @QueryMapping
     public List<SalesItem> GetAllSalesItems1() {
-        return salesItemService.GetAllTheSalesItem() ;
+        return salesItemService.GetAllTheSalesItem();
     }
 
-
     @SchemaMapping(typeName = "SalesItem", field = "sales")
-    public Sale mapSalesInSalesItem(SalesItem salesItem){
+    public Sale mapSalesInSalesItem(SalesItem salesItem) {
         return salesItemService.GetSalesItemById(salesItem.getId()).getSales();
     }
 
-
     @SchemaMapping(typeName = "SalesItem", field = "stockLevel")
-    public StockLevel mapStockLevelInSalesItem(SalesItem salesItem){
+    public StockLevel mapStockLevelInSalesItem(SalesItem salesItem) {
         return salesItemService.GetSalesItemById(salesItem.getId()).getStockLevel();
     }
 }

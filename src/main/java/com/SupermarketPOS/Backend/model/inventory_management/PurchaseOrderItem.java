@@ -1,12 +1,13 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
-import java.util.List;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -31,9 +32,12 @@ public class PurchaseOrderItem {
     private ItemSupply itemSupply;
 
     private Float quantity;
+
     private Float purchaseItemUnitCost;
+
     private Float totalCost;
-    private Float receivedQuantity ; // when stock arrived based on the purchase order this recievedQuantity is updated
+
+    private Float receivedQuantity; // when stock arrived based on the purchase order this recievedQuantity is updated
 
     @OneToMany(mappedBy = "purchaseOrderItem") // Referring to the field name in the StockArrival class
     private List<StockArrival> orderArrivals;

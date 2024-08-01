@@ -24,10 +24,15 @@ public class LeaveRequest {
     private Employee employee;
 
     private String leaveType;
+
     private LocalDate startDate;
+
     private LocalDate endDate;
+
     private LocalTime startTime;
+
     private LocalTime endTime;
+
     private String status;
 
 }

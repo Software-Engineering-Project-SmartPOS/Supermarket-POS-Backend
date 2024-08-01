@@ -1,18 +1,13 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
-import lombok.Data;
-
 import jakarta.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.engine.transaction.internal.TransactionImpl;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 @Setter
 @Getter
@@ -33,9 +28,13 @@ public class StockArrival {
     private PurchaseOrderItem purchaseOrderItem; // Name of the field, it can have a different name
 
     private Float unitPrice;
+
     private Float quantity;
+
     private Float cost;
+
     private Boolean isTransferredToStore;
+
     private Integer branchId;
 
     @Column(name = "ArrivedAt", updatable = false, nullable = false)
@@ -52,6 +51,5 @@ public class StockArrival {
         this.branchId = purchaseOrderItem.getPurchaseOrder().getBranch().getId();
         this.isTransferredToStore = false;
     }
-
 
 }

@@ -3,7 +3,7 @@ package com.SupermarketPOS.Backend.controller.common;
 import com.SupermarketPOS.Backend.dto.common.BranchInput;
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.model.common.Branch;
-import com.SupermarketPOS.Backend.service.common_services.BranchService;
+import com.SupermarketPOS.Backend.service.common.BranchService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -16,40 +16,40 @@ import java.util.List;
 @Controller
 public class BranchController {
     private final BranchService branchService;
+
     public BranchController(BranchService branchService) {
         this.branchService = branchService;
     }
 
     @Secured({"ROLE_OWNER"})
     @MutationMapping
-    public Branch addBranch(@Argument BranchInput branchInputDetails){
+    public Branch addBranch(@Argument BranchInput branchInputDetails) {
         return branchService.addNewBranch(branchInputDetails);
     }
 
-
-//    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
+    //    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
     //mapping the address field of the Branch
     @SchemaMapping(typeName = "Branch", field = "address")
-    public Address getAddressByBranch(Branch branch){
+    public Address getAddressByBranch(Branch branch) {
         return branchService.findBranchById(branch.getId()).getBranchAddress();
     }
 
-    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER","ROLE_CASHIER","ROLE_CUSTOMER","ROLE_STORE_MANAGER","ROLE_SALES_ASSISTANT"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER", "ROLE_CASHIER", "ROLE_CUSTOMER", "ROLE_STORE_MANAGER", "ROLE_SALES_ASSISTANT"})
     //mapping the address field of the Branch
     @QueryMapping
-    public List<Branch> getAllBranch(){
-        return  branchService.GetAllBranches();
+    public List<Branch> getAllBranch() {
+        return branchService.GetAllBranches();
     }
 
-    @Secured({"ROLE_OWNER" ,"ROLE_MANAGER","ROLE_ADMIN"})
+    @Secured({"ROLE_OWNER", "ROLE_MANAGER", "ROLE_ADMIN"})
     @MutationMapping
-    public Branch updateBranch(@Argument BranchInput branchDetails){
-        return  branchService.UpdateTheBranch(branchDetails);
+    public Branch updateBranch(@Argument BranchInput branchDetails) {
+        return branchService.UpdateTheBranch(branchDetails);
     }
 
-    @Secured({"ROLE_OWNER", "ROLE_MANAGER","ROLE_ADMIN"})
+    @Secured({"ROLE_OWNER", "ROLE_MANAGER", "ROLE_ADMIN"})
     @MutationMapping
-    public String deleteBranch(@Argument Integer id){
-        return  branchService.DeleteBranchById(id);
+    public String deleteBranch(@Argument Integer id) {
+        return branchService.DeleteBranchById(id);
     }
 }

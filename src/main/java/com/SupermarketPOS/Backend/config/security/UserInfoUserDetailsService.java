@@ -1,4 +1,4 @@
-package com.SupermarketPOS.Backend.Config.security;
+package com.SupermarketPOS.Backend.config.security;
 
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
 
 import java.util.Optional;
 
@@ -41,9 +40,6 @@ public class UserInfoUserDetailsService implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException("User not found");
         }
-
-
-
 
 //        Optional<Owner> owner = ownerRepository.findByEmail(username);
 //        if (owner.isPresent()) {

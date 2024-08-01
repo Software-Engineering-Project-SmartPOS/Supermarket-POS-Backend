@@ -1,12 +1,11 @@
 package com.SupermarketPOS.Backend.model.sales_management;
 
-import com.SupermarketPOS.Backend.model.inventory_management.Item;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 @Setter
 @Getter
 @AllArgsConstructor
@@ -26,6 +25,7 @@ public class RefundItem {
     private SalesItem salesItem;
 
     private Float quantity;
+
     private Float unitPrice;
 
     // Getters and setters

@@ -1,6 +1,7 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -16,7 +17,7 @@ public class DamageStock {
 
     private Integer quantity;
 
-//    @Column(name = "createdAt")
+    //    @Column(name = "createdAt")
     private Timestamp createdAt;
 
     private String reason;

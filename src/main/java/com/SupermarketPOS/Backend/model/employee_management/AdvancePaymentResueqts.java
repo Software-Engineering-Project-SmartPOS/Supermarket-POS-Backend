@@ -28,11 +28,15 @@ public class AdvancePaymentResueqts {
     private Employee employee;
 
     private String reason;
+
     private double Amount;
+
     private AdvancePaymentRequestStatus status;
 
     private LocalDateTime createdAt;
+
     private LocalDate dueDate;
+
     private Month month;
 
 }

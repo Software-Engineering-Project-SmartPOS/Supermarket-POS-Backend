@@ -6,21 +6,17 @@ import com.SupermarketPOS.Backend.model.common.Branch;
 import com.SupermarketPOS.Backend.model.common.JobRole;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.model.employee_management.SalaryType;
-import com.SupermarketPOS.Backend.service.employee_management.SalaryTypeService;
 
 import com.SupermarketPOS.Backend.model.common.Title;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
 
-import com.SupermarketPOS.Backend.service.common_services.AddressService;
-import com.SupermarketPOS.Backend.service.common_services.BranchService;
-import org.junit.jupiter.api.AfterEach;
+import com.SupermarketPOS.Backend.service.common.AddressService;
+import com.SupermarketPOS.Backend.service.common.BranchService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.sql.Timestamp;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,6 +1,6 @@
 package com.SupermarketPOS.Backend.dto.common;
 
-public record BranchInput (
+public record BranchInput(
         Integer id,
         String name,
         String telephone,
@@ -10,4 +10,5 @@ public record BranchInput (
         String city,
         String district,
         String postalCode
-    ){}
+) {
+}

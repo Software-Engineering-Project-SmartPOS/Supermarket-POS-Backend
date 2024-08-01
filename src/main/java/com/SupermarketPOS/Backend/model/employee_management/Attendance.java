@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -21,7 +20,9 @@ public class Attendance {
     private Integer id;
 
     private LocalDateTime timeIn;
+
     private LocalDateTime timeOut;
+
     private LocalDate date;
 
     @ManyToOne

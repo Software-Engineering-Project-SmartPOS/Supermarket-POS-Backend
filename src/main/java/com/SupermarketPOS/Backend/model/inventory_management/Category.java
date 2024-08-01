@@ -1,15 +1,15 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.List;
-
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.*;
+
+import java.sql.Timestamp;
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -19,13 +19,19 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
+
     private String description;
+
     private Timestamp createAt;
+
     private Timestamp updateAt;
+
     @ManyToOne
     @JoinColumn(name = "updatedEmployeeId")
     private Employee updatedEmployee;
+
     @OneToMany(mappedBy = "category")
     private List<Item> itemList;
 

@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class StockArrivalService {
     private final StockArrivalRepository stockArrivalRepository;
+
     private final EmployeeService employeeService;
 
     public StockArrivalService(StockArrivalRepository stockArrivalRepository, EmployeeService employeeService) {
@@ -21,7 +22,7 @@ public class StockArrivalService {
         this.employeeService = employeeService;
     }
 
-    public StockArrival CreateNewStockArrival(PurchaseOrderItem purchaseOrderItem, Float quantity,  Timestamp arrivedAt){
+    public StockArrival CreateNewStockArrival(PurchaseOrderItem purchaseOrderItem, Float quantity, Timestamp arrivedAt) {
         StockArrival newStockArrival = new StockArrival(
                 purchaseOrderItem,
                 quantity,
@@ -31,15 +32,15 @@ public class StockArrivalService {
         return stockArrivalRepository.save(newStockArrival);
     }
 
-    public List<StockArrival> GetAllStockArrivals(Boolean transferred,Principal principal){
+    public List<StockArrival> GetAllStockArrivals(Boolean transferred, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
-        if (transferred == null){
+        if (transferred == null) {
             return stockArrivalRepository.findAllByBranchId(caller.getBranch().getId());
         }
-        return stockArrivalRepository.findAllByBranchIdAndIsTransferredToStore(caller.getBranch().getId(),transferred);
+        return stockArrivalRepository.findAllByBranchIdAndIsTransferredToStore(caller.getBranch().getId(), transferred);
     }
 
-    public PurchaseOrderItem GetPurchaseOrderItemByStockArrivalId(Integer id){
+    public PurchaseOrderItem GetPurchaseOrderItemByStockArrivalId(Integer id) {
         return stockArrivalRepository.findById(id).get().getPurchaseOrderItem();
     }
 

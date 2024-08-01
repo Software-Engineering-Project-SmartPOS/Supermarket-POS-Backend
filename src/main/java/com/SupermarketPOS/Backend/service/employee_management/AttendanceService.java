@@ -5,25 +5,25 @@ import com.SupermarketPOS.Backend.model.employee_management.Attendance;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
 import com.SupermarketPOS.Backend.repository.employee_management.AttendenceRepository;
 import com.SupermarketPOS.Backend.repository.employee_management.EmployeeRepository;
-import com.SupermarketPOS.Backend.service.common_services.DateTimeService;
+import com.SupermarketPOS.Backend.service.common.DateTimeService;
 import jakarta.transaction.Transactional;
-import org.hibernate.id.IdentifierGeneratorAggregator;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AttendanceService {
     private final AttendenceRepository attendenceRepository;
+
     private final EmployeeService employeeService;
+
     private final EmployeeRepository employeeRepository;
+
     private final DateTimeService dateTimeService;
 
     public AttendanceService(AttendenceRepository attendenceRepository, EmployeeService employeeService, EmployeeRepository employeeRepository, DateTimeService dateTimeService) {
@@ -34,7 +34,7 @@ public class AttendanceService {
     }
 
     @Transactional
-    public Boolean MarkAttendance(EmployeeAttendenceDetails employeeAttendenceDetails , Principal principal) {
+    public Boolean MarkAttendance(EmployeeAttendenceDetails employeeAttendenceDetails, Principal principal) {
         System.out.println("inside the service");
 
         Employee caller = employeeService.getByEmail(principal.getName());
@@ -44,7 +44,7 @@ public class AttendanceService {
         LocalDate timeInDate = dateTimeService.convertStringIntoLocalDate(employeeAttendenceDetails.timeInDate());
         LocalDate timeOutDate = dateTimeService.convertStringIntoLocalDate(employeeAttendenceDetails.timeOutDate());
 
-        Integer dayCount = (int) ChronoUnit.DAYS.between(timeInDate,timeOutDate) + 1;
+        Integer dayCount = (int) ChronoUnit.DAYS.between(timeInDate, timeOutDate) + 1;
 
         System.out.println(timeIn);
         System.out.println(timeOut);
@@ -59,7 +59,7 @@ public class AttendanceService {
                             employee
                     ));
         }
-        return  true;
+        return true;
     }
 
     public Double GetTotalWorkingHoursForEmployeeInDateRange(Integer employeeId, String fromDate, String toDate) {
@@ -67,20 +67,16 @@ public class AttendanceService {
         Double workingHours = 0d;
         LocalDate theFromDate = dateTimeService.convertStringIntoLocalDate(fromDate);
         LocalDate theToDate = dateTimeService.convertStringIntoLocalDate(toDate);
-        for (Attendance attendance : allAttendance){
-            if( attendance.getDate().isBefore(theToDate.plusDays(1)) && attendance.getDate().isAfter(theFromDate.minusDays(1))){
-                Duration duration = Duration.between(attendance.getTimeIn(),attendance.getTimeOut());
+        for (Attendance attendance : allAttendance) {
+            if (attendance.getDate().isBefore(theToDate.plusDays(1)) && attendance.getDate().isAfter(theFromDate.minusDays(1))) {
+                Duration duration = Duration.between(attendance.getTimeIn(), attendance.getTimeOut());
                 workingHours = workingHours + duration.toHours();
             }
         }
         return workingHours;
 
-
-
-
 //        Optional<Double> totalWorkingHours = attendenceRepository.getTotalWorkingHoursForEmployeeInDateRange(employeeId, fromDate, toDate);
 //        return totalWorkingHours.orElse(0.0); // Default to 0 if no records found.
     }
-
 
 }

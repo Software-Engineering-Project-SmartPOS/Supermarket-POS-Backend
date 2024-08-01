@@ -1,11 +1,9 @@
 package com.SupermarketPOS.Backend.controller.inventory_management;
 
-import com.SupermarketPOS.Backend.dto.inventory_management.PurchaseOrderItemArrivalInput;
 import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrderItem;
 import com.SupermarketPOS.Backend.model.inventory_management.StockArrival;
 import com.SupermarketPOS.Backend.service.inventory_management.StockArrivalService;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.security.access.annotation.Secured;

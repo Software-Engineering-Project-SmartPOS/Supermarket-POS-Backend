@@ -31,7 +31,4 @@ public class SalaryPayment {
     @JoinColumn(name = "salaryTypeId")
     private SalaryType salaryType;
 
-
-
-
 }

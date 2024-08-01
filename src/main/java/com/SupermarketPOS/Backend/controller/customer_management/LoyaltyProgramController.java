@@ -15,32 +15,32 @@ import java.util.Optional;
 public class LoyaltyProgramController {
     private final LoyaltyProgramService loyaltyProgramService;
 
-    public LoyaltyProgramController(LoyaltyProgramService loyaltyProgramService){
+    public LoyaltyProgramController(LoyaltyProgramService loyaltyProgramService) {
         this.loyaltyProgramService = loyaltyProgramService;
     }
 
-
     @MutationMapping
-    public LoyaltyProgram createLoyaltyProgram(@Argument LoyaltyProgramInput newProgramInput){
+    public LoyaltyProgram createLoyaltyProgram(@Argument LoyaltyProgramInput newProgramInput) {
         return loyaltyProgramService.AddNewLoyaltyProgram(newProgramInput);
     }
 
     @QueryMapping
-    public List<LoyaltyProgram> getAllLoyaltyPrograms(){
+    public List<LoyaltyProgram> getAllLoyaltyPrograms() {
         return loyaltyProgramService.getAllLoyaltyPrograms();
     }
 
     @QueryMapping
-    public Optional<LoyaltyProgram> getLoyaltyProgramById(@Argument Integer loyaltyProgramId){
+    public Optional<LoyaltyProgram> getLoyaltyProgramById(@Argument Integer loyaltyProgramId) {
         return loyaltyProgramService.findLoyaltyProgramById(loyaltyProgramId);
     }
 
     @MutationMapping
-    public LoyaltyProgram updateLoyaltyProgram(@Argument LoyaltyProgramInput updateDetail){
+    public LoyaltyProgram updateLoyaltyProgram(@Argument LoyaltyProgramInput updateDetail) {
         return loyaltyProgramService.UpdateLoyaltyProgram(updateDetail);
     }
+
     @MutationMapping
-    public String InActivateLoyaltyProgram(@Argument Integer loyaltyProgramId){
+    public String InActivateLoyaltyProgram(@Argument Integer loyaltyProgramId) {
         return loyaltyProgramService.InActivate(loyaltyProgramId);
     }
 

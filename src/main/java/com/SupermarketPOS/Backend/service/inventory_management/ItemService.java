@@ -8,7 +8,7 @@ import com.SupermarketPOS.Backend.model.inventory_management.Item;
 import com.SupermarketPOS.Backend.repository.inventory_management.BrandRepository;
 import com.SupermarketPOS.Backend.repository.inventory_management.CategoryRepository;
 import com.SupermarketPOS.Backend.repository.inventory_management.ItemRepository;
-import com.SupermarketPOS.Backend.service.common_services.DateTimeService;
+import com.SupermarketPOS.Backend.service.common.DateTimeService;
 import com.SupermarketPOS.Backend.service.employee_management.EmployeeService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,13 @@ import java.util.List;
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
+
     private final EmployeeService employeeService;
+
     private final DateTimeService dateTimeService;
+
     private final BrandRepository brandRepository;
+
     private final CategoryRepository categoryRepository;
 
     // Inject dependencies
@@ -44,8 +48,8 @@ public class ItemService {
             throw new IllegalArgumentException("An item with the same barcode already exists.");
         }
 
-        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElseThrow(()-> new IllegalArgumentException("Category not found with id"));
-        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElseThrow(()-> new IllegalArgumentException("Brand not found with id"));
+        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElseThrow(() -> new IllegalArgumentException("Category not found with id"));
+        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElseThrow(() -> new IllegalArgumentException("Brand not found with id"));
 //
 //        Category itemCategory = categoryRepository.findById(itemInput.categoryId()).orElse(null);
 //        Brand itemBrand = brandRepository.findById(itemInput.brandId()).orElse(null);
@@ -89,7 +93,6 @@ public class ItemService {
         if (itemInput.description() != null) {
             itemToUpdate.setDescription(itemInput.description());
         }
-
 
         if (itemInput.categoryId() != null) {
             Category newCategory = categoryRepository.findById(itemInput.categoryId()).get();

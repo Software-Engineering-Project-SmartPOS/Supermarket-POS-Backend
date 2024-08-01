@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer,Integer> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("SELECT COUNT(c) > 0 FROM Customer c WHERE c.telephone = ?1")
     Boolean isTelephoneTaken(String telephone);
 
@@ -19,6 +19,5 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     Customer findById(String id);
 
     List<Customer> getByName(String name);
-
 
 }

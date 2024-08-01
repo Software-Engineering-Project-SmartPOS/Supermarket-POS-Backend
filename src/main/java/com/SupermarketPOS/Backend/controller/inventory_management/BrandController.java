@@ -16,44 +16,39 @@ import java.util.List;
 public class BrandController {
     private final BrandService brandService;
 
-    public BrandController(BrandService brandService){
+    public BrandController(BrandService brandService) {
         this.brandService = brandService;
     }
 
-
     //creating the brand
-    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
     @MutationMapping
-    public Brand CreateBrand(@Argument BrandInput brandInput, Principal principal){
-        return brandService.AddBrand(brandInput,principal);
+    public Brand CreateBrand(@Argument BrandInput brandInput, Principal principal) {
+        return brandService.AddBrand(brandInput, principal);
     }
 
     // Updating a brand
-    @Secured({"ROLE_ADMIN","ROLE_MANAGER","ROLE_OWNER"})
+    @Secured({"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_OWNER"})
     @MutationMapping
-    public Brand UpdateBrand(@Argument BrandInput brandInput, Principal principal){
-        return brandService.Update(brandInput,principal);
+    public Brand UpdateBrand(@Argument BrandInput brandInput, Principal principal) {
+        return brandService.Update(brandInput, principal);
     }
 
-
     @QueryMapping
-    public Brand GetBrandById(@Argument Integer id){
+    public Brand GetBrandById(@Argument Integer id) {
         return brandService.FindBrandById(id);
     }
 
     // Getting a brand by name
     @QueryMapping
-    public Brand GetBrandByName(@Argument String name){
+    public Brand GetBrandByName(@Argument String name) {
         return brandService.FindByName(name);
     }
 
     // Getting all the brands
     @QueryMapping
-    public List<Brand> GetAllBrands(@Argument String name){
+    public List<Brand> GetAllBrands(@Argument String name) {
         return brandService.AllBrands();
     }
-
-
-
 
 }

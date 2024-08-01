@@ -17,10 +17,15 @@ import java.util.Objects;
 @Service
 public class PurchaseOrderItemService {
     private final PurchaseOrderItemRepository purchaseOrderItemRepository;
+
     private final ItemService itemService;
+
     private final ItemSupplyService itemSupplyService;
+
     private final EmployeeService employeeService;
+
     private final PurchaseOrderService purchaseOrderService;
+
     private final StockArrivalService stockArrivalService;
 
     public PurchaseOrderItemService(PurchaseOrderItemRepository purchaseOrderItemRepository, ItemService itemService, ItemSupplyService itemSupplyService, EmployeeService employeeService, PurchaseOrderService purchaseOrderService, StockArrivalService stockArrivalService) {
@@ -32,25 +37,24 @@ public class PurchaseOrderItemService {
         this.stockArrivalService = stockArrivalService;
     }
 
-    public PurchaseOrderItem HandleItemArrival(PurchaseOrderItemArrivalInput arrivalInput , Principal principal){
+    public PurchaseOrderItem HandleItemArrival(PurchaseOrderItemArrivalInput arrivalInput, Principal principal) {
         // get the caller of the function
         Employee caller = employeeService.getByEmail(principal.getName());
         // get the PurchaseOrderItem
-        PurchaseOrderItem orderItem = purchaseOrderItemRepository.findById(arrivalInput.purchaseOrderItemId()).orElseThrow(()-> new EntityNotFoundException("PurchaseOrderItem not found"));
+        PurchaseOrderItem orderItem = purchaseOrderItemRepository.findById(arrivalInput.purchaseOrderItemId()).orElseThrow(() -> new EntityNotFoundException("PurchaseOrderItem not found"));
         //check if the caller is changing a purchaseOrderItem in the same branch
-        if(orderItem.getPurchaseOrder().getBranch() != caller.getBranch() ){
+        if (orderItem.getPurchaseOrder().getBranch() != caller.getBranch()) {
             throw new RuntimeException("Trying to change the purchaseOrderItem in another branch");
         }
 
-        orderItem.setReceivedQuantity(orderItem.getReceivedQuantity()+arrivalInput.receivedQuantity());
-        orderItem.setTotalCost(orderItem.getPurchaseItemUnitCost()*orderItem.getReceivedQuantity());
+        orderItem.setReceivedQuantity(orderItem.getReceivedQuantity() + arrivalInput.receivedQuantity());
+        orderItem.setTotalCost(orderItem.getPurchaseItemUnitCost() * orderItem.getReceivedQuantity());
 
         //check if the all the items form that order item received
-        if (Objects.equals(orderItem.getReceivedQuantity(), orderItem.getQuantity())){
+        if (Objects.equals(orderItem.getReceivedQuantity(), orderItem.getQuantity())) {
             orderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.COMPLETED);
             // this completed check whether the order is completed(all times are received )
-        }
-        else if(orderItem.getReceivedQuantity()>0){
+        } else if (orderItem.getReceivedQuantity() > 0) {
             orderItem.setPurchaseOrderItemStatus(PurchaseOrderStatus.CONFIRMED);
         }
 
@@ -66,13 +70,11 @@ public class PurchaseOrderItemService {
         return orderItem;
     }
 
-
-    public boolean DeletePurchaseOrderItem(Integer id ) {
+    public boolean DeletePurchaseOrderItem(Integer id) {
         try {
             purchaseOrderItemRepository.deleteById(id);
-            return  true;
-        }
-        catch (Exception e){
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }

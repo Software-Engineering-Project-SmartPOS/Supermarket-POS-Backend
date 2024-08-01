@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StockLevelRepository extends JpaRepository<StockLevel,Integer> {
+public interface StockLevelRepository extends JpaRepository<StockLevel, Integer> {
 
     List<StockLevel> findAllByBranchId(Integer id);
 
@@ -16,7 +16,7 @@ public interface StockLevelRepository extends JpaRepository<StockLevel,Integer> 
 
     List<StockLevel> findAllByBranchIdAndItemIdAndStatus(Integer id, Integer id1, StockLevelStatus status);
 
-    List<StockLevel> findAllByBranchIdAndStatus(Integer branchId,  StockLevelStatus status);
+    List<StockLevel> findAllByBranchIdAndStatus(Integer branchId, StockLevelStatus status);
 
     StockLevel findByBranchIdAndId(Integer id, Integer id1);
 

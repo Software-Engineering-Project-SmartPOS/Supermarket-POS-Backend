@@ -1,11 +1,11 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor

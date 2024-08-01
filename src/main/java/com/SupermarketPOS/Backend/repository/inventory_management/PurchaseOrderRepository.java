@@ -3,7 +3,6 @@ package com.SupermarketPOS.Backend.repository.inventory_management;
 import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrder;
 import com.SupermarketPOS.Backend.model.inventory_management.PurchaseOrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,6 +18,5 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, In
     List<PurchaseOrder> findAllBySupplierIdAndBranchId(Integer supplierId, Integer id);
 
     List<PurchaseOrder> findAllByOrderStatusAndBranchId(PurchaseOrderStatus status, Integer id);
-
 
 }

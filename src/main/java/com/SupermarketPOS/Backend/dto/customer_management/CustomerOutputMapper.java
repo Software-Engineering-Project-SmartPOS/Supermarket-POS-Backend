@@ -6,14 +6,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
-
-
 @Service
 public class CustomerOutputMapper implements Function<Customer, CustomerOutput> {
 
     @Override
     public CustomerOutput apply(Customer customer) {
-        if(customer == null){
+        if (customer == null) {
             throw new GraphQLException("customer is nullllllllllllllll");
         }
         //this will give an exception if the customer is null

@@ -1,8 +1,7 @@
-package com.SupermarketPOS.Backend.service.common_services;
+package com.SupermarketPOS.Backend.service.common;
 
 import com.SupermarketPOS.Backend.model.common.Address;
 import com.SupermarketPOS.Backend.repository.common.AddressRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,9 @@ import java.util.List;
 @Service
 public class AddressService {
     private final AddressRepository addressRepository;
-    public AddressService (AddressRepository addressRepository){
-        this.addressRepository =addressRepository;
+
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
     }
 
     //add new address (input must be a addressInput)
@@ -19,7 +19,7 @@ public class AddressService {
     //     Address address = new Address(
     //         addressInput.getHouseNumber(),
     //         addressInput.getStreetName(),
-    //         addressInput.get         
+    //         addressInput.get
     //     );
     //     // save the Address and return
     //     return addressRepository.save(address);
@@ -49,33 +49,27 @@ public class AddressService {
     //     }
     // }
 
-
-
-
-    public List<Address> allTheAddresses(){
+    public List<Address> allTheAddresses() {
         return addressRepository.findAll();
     }
 
     //function to get the address by the id
-    public Address getByTheId(Integer id){
-        try{
-        Address theAddress = addressRepository.getById(id);
-        if (theAddress == null){
+    public Address getByTheId(Integer id) {
+        try {
+            Address theAddress = addressRepository.getById(id);
+            if (theAddress == null) {
 //            return null;
-            throw new IllegalArgumentException("No address for that id");
-        }
+                throw new IllegalArgumentException("No address for that id");
+            }
             System.out.println(theAddress);
-        return theAddress;
-        }
-        catch (Exception e){
+            return theAddress;
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public Address SaveAddress(Address address){
+    public Address SaveAddress(Address address) {
         return addressRepository.save(address);
     }
 
-
-    
 }

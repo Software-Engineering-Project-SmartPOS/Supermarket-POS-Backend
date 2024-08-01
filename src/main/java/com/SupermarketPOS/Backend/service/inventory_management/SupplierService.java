@@ -18,11 +18,13 @@ import java.util.Optional;
 @Service
 public class SupplierService {
     private final AddressRepository addressRepository;
+
     private final SupplierRepository supplierRepository;
+
     private final EmployeeService employeeService;
 
     @Autowired
-    public SupplierService(SupplierRepository supplierRepository, EmployeeService employeeService,AddressRepository addressRepository) {
+    public SupplierService(SupplierRepository supplierRepository, EmployeeService employeeService, AddressRepository addressRepository) {
         this.supplierRepository = supplierRepository;
         this.employeeService = employeeService;
         this.addressRepository = addressRepository;
@@ -52,8 +54,6 @@ public class SupplierService {
         return supplierRepository.save(newSupplier);
     }
 
-
-
     public Supplier UpdateSupplier(SupplierInput supplierInput, Principal principal) {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(supplierInput.id());
         if (optionalSupplier.isPresent()) {
@@ -62,33 +62,35 @@ public class SupplierService {
 
             // Update supplier details based on SupplierInput
 
-            if(supplierInput.name() != null){supplierObj.setName(supplierInput.name());}
+            if (supplierInput.name() != null) {
+                supplierObj.setName(supplierInput.name());
+            }
 
-            if (supplierInput.landPhone() != null){
+            if (supplierInput.landPhone() != null) {
                 supplierObj.setLandPhone(supplierInput.landPhone());
             }
-            if (supplierInput.mobilePhone() != null){
+            if (supplierInput.mobilePhone() != null) {
                 supplierObj.setMobilePhone(supplierInput.mobilePhone());
             }
-            if (supplierInput.email() != null){
+            if (supplierInput.email() != null) {
                 supplierObj.setEmail(supplierInput.email());
             }
 
             // Update supplier address
             Address supplierAddress = supplierObj.getAddress();
-            if ( supplierInput.houseNumber()!= null){
+            if (supplierInput.houseNumber() != null) {
                 supplierAddress.setHouseNumber(supplierInput.houseNumber());
             }
-            if ( supplierInput.street() != null){
+            if (supplierInput.street() != null) {
                 supplierAddress.setStreet(supplierInput.street());
             }
-            if ( supplierInput.city()!= null){
+            if (supplierInput.city() != null) {
                 supplierAddress.setCity(supplierInput.city());
             }
-            if ( supplierInput.district() != null){
+            if (supplierInput.district() != null) {
                 supplierAddress.setDistrict(supplierInput.district());
             }
-            if ( supplierInput.postalCode()!= null){
+            if (supplierInput.postalCode() != null) {
                 supplierAddress.setPostalCode(supplierInput.postalCode());
             }
 
@@ -97,11 +99,11 @@ public class SupplierService {
             supplierObj.setUpdatedEmployee(updatedBy);
             supplierObj.setActive(supplierInput.active());
 
-
             return supplierRepository.save(supplierObj);
         }
         return null;
     }
+
     //delete the supplier (only by the owner)
     public void deleteSupplier(Integer id) {
         supplierRepository.deleteById(id);
@@ -116,13 +118,11 @@ public class SupplierService {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
         return optionalSupplier.orElse(null);
     }
+
     public Supplier GetSupplierByEmail(String name) {
         Optional<Supplier> optionalSupplier = supplierRepository.findByEmail(name);
         return optionalSupplier.orElse(null);
     }
-
-
-
 
 //    // this funtions only return data related to the callers branch
 //    public Supplier GetSupplierById(Integer id, Principal principal) {

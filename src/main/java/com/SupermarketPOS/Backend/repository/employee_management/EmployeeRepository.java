@@ -1,12 +1,11 @@
 package com.SupermarketPOS.Backend.repository.employee_management;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
@@ -19,7 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             String lastName
     );
 
-        @Query("SELECT e FROM Employee e WHERE e.email = ?1 ")
+    @Query("SELECT e FROM Employee e WHERE e.email = ?1 ")
     Optional<Employee> findByEmail(String email);
 
     @Query("SELECT COUNT(e) > 0 FROM Employee e WHERE e.firstName = ?1 and e.middleName = ?2 and e.lastName = ?3")

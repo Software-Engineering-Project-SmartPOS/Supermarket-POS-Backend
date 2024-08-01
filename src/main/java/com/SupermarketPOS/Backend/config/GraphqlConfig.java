@@ -1,4 +1,4 @@
-package com.SupermarketPOS.Backend.Config;
+package com.SupermarketPOS.Backend.config;
 
 import graphql.scalars.ExtendedScalars;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class GraphqlConfig {
     @Bean
-    RuntimeWiringConfigurer runtimeWiringConfigurer(){
-        return wiringBuilder->
+    RuntimeWiringConfigurer runtimeWiringConfigurer() {
+        return wiringBuilder ->
                 wiringBuilder.scalar(ExtendedScalars.LocalTime);
     }
 
@@ -23,16 +23,15 @@ public class GraphqlConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/graphql") // Configure the specific path of your GraphQL endpoint
-                        .allowedOrigins("http://localhost:5173","https://supermarket-pos-webapp.vercel.app") // Add the origin that is allowed to access your GraphQL server
+                        .allowedOrigins("http://localhost:5173", "https://supermarket-pos-webapp.vercel.app") // Add the origin that is allowed to access your GraphQL server
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow specific HTTP methods
                         .allowedHeaders("*"); // Allow specific headers
 
                 registry.addMapping("/authenticate")
-                        .allowedOrigins("http://localhost:5173","https://supermarket-pos-webapp.vercel.app")
-                        .allowedMethods( "POST")
+                        .allowedOrigins("http://localhost:5173", "https://supermarket-pos-webapp.vercel.app")
+                        .allowedMethods("POST")
                         .allowedHeaders("*");
             }
-
 
         };
     }

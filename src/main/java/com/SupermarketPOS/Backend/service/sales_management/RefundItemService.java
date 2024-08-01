@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class RefundItemService {
     private final RefundItemRepository refundItemRepository;
+
     public final EmployeeService employeeService;
 
     public RefundItemService(RefundItemRepository refundItemRepository, EmployeeService employeeService) {
@@ -19,7 +20,7 @@ public class RefundItemService {
         this.employeeService = employeeService;
     }
 
-    public RefundItem GetRefundItemById(Integer id,Principal principal) {
+    public RefundItem GetRefundItemById(Integer id, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
         return refundItemRepository.findById(id).stream()
                 .filter(refundItem -> refundItem.getSalesItem().getSales().getBranch() == caller.getBranch())

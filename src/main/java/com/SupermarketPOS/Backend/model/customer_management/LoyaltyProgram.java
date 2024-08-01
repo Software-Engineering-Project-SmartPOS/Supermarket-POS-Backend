@@ -19,10 +19,15 @@ public class LoyaltyProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String loyaltyProgramName;
+
     private String description;
+
     private Integer pointsThreshold;
+
     private Float discountPercentage;
+
     private Boolean status;
 
     public LoyaltyProgram(String loyaltyProgramName, String description, Integer pointsThreshold, Float discountPercentage) {

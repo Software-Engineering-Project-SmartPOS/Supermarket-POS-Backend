@@ -1,12 +1,11 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import com.SupermarketPOS.Backend.model.common.Branch;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -30,6 +29,7 @@ public class CreditAmount {
     private Branch branch;
 
     private BigDecimal creditLimit;
+
     private BigDecimal credit;
 }
 

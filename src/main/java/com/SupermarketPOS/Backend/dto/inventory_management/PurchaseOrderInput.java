@@ -1,6 +1,5 @@
 package com.SupermarketPOS.Backend.dto.inventory_management;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public record PurchaseOrderInput(

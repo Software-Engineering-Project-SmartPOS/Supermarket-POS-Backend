@@ -8,14 +8,11 @@ extend type Query {
     GetRefundById(id: ID!): Refund
     GetAllRefunds: [Refund!]
     GetRefundItem(id: ID!): RefundItem
-
-
 }
 
 extend type Mutation {
     CreateSales(salesInput: SaleInput): Sales
 #    UpdateSales(input: SaleInput): Sales
-
     CreateRefund(refundDetails: RefundInput) : Refund
 
 }
@@ -46,7 +43,6 @@ input RefundItemInput {
     quantity: Float!
 }
 
-
 type Sales {
     id: ID!
     customer: Customer
@@ -70,7 +66,6 @@ type SalesItem {
 
 }
 
-
 input SaleInput {
     id: ID # used when updating the data
     barcodeNo: String # used when updating / returning
@@ -87,6 +82,7 @@ input SalesItemInput {
     stockLevelId: ID
     quantity: Float
 }
+
 enum PaymentType{
     CASH
     ONLINE

@@ -1,14 +1,15 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import com.SupermarketPOS.Backend.model.common.Branch;
-import java.sql.Timestamp;
 import com.SupermarketPOS.Backend.model.employee_management.Employee;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -28,6 +29,7 @@ public class ItemSupply {
     private Item item;
 
     private Timestamp createdDate;
+
     private Timestamp updatedDate;
 
     @ManyToOne
@@ -41,7 +43,9 @@ public class ItemSupply {
     @ManyToOne
     @JoinColumn(name = "branchId")
     private Branch branch;
+
     private Float unitCost;
+
     private Boolean active;
 
     public ItemSupply(Supplier supplier, Item item, Timestamp createdDate, Employee createdBy, Branch branch, Float unitCost, Boolean active) {

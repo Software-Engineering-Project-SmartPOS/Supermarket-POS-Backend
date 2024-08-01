@@ -16,10 +16,7 @@ public class LoyaltyProgramService {
         this.loyaltyProgramRepository = loyaltyProgramRepository;
     }
 
-
-
-
-    public LoyaltyProgram AddNewLoyaltyProgram(LoyaltyProgramInput loyaltyProgramInput){
+    public LoyaltyProgram AddNewLoyaltyProgram(LoyaltyProgramInput loyaltyProgramInput) {
         LoyaltyProgram newProgram = new LoyaltyProgram(
                 loyaltyProgramInput.loyaltyProgramName(),
                 loyaltyProgramInput.description(),
@@ -29,9 +26,10 @@ public class LoyaltyProgramService {
         );
         return loyaltyProgramRepository.save(newProgram);
     }
-    public LoyaltyProgram UpdateLoyaltyProgram(LoyaltyProgramInput updateDetail){
+
+    public LoyaltyProgram UpdateLoyaltyProgram(LoyaltyProgramInput updateDetail) {
         Optional<LoyaltyProgram> existingProgram = findLoyaltyProgramById(updateDetail.id());
-        if (existingProgram.isPresent()){
+        if (existingProgram.isPresent()) {
             LoyaltyProgram lp = existingProgram.get();
             lp.setLoyaltyProgramName(updateDetail.loyaltyProgramName());
             lp.setDescription(updateDetail.description());
@@ -39,23 +37,22 @@ public class LoyaltyProgramService {
             lp.setDiscountPercentage(updateDetail.discountPercentage());
 
             return loyaltyProgramRepository.save(lp);
-        }
-        else {
+        } else {
             return null;
         }
 
     }
 
-    public List<LoyaltyProgram> getAllLoyaltyPrograms(){
+    public List<LoyaltyProgram> getAllLoyaltyPrograms() {
         return loyaltyProgramRepository.findAll();
     }
 
-    public Optional<LoyaltyProgram> findLoyaltyProgramById(Integer id){
+    public Optional<LoyaltyProgram> findLoyaltyProgramById(Integer id) {
         return loyaltyProgramRepository.findById(id);
     }
 
     public String InActivate(Integer loyaltyProgramId) {
-        LoyaltyProgram loyaltyProgram = loyaltyProgramRepository.findById(loyaltyProgramId).orElseThrow(()->new RuntimeException("loyalty program is not found"));
+        LoyaltyProgram loyaltyProgram = loyaltyProgramRepository.findById(loyaltyProgramId).orElseThrow(() -> new RuntimeException("loyalty program is not found"));
         loyaltyProgram.setStatus(false);
         return "loyalty Program was In Activated";
     }

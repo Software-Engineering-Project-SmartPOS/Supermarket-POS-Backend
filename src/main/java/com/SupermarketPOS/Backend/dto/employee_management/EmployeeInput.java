@@ -21,4 +21,5 @@ public record EmployeeInput(
         Integer salaryTypeId,
         String password,
         Integer branchId
-) {}
+) {
+}

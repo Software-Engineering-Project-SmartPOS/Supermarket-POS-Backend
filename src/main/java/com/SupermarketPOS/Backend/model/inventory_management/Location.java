@@ -1,7 +1,6 @@
 package com.SupermarketPOS.Backend.model.inventory_management;
 
 import com.SupermarketPOS.Backend.model.common.Branch;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +23,9 @@ public class Location {
     private Branch branch;
 
     private String section;
+
     private String subSection;
+
     private Integer maxSpace;
 
     // Constructors, getters, and setters

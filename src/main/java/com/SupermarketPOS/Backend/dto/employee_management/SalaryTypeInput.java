@@ -7,4 +7,5 @@ public record SalaryTypeInput(
         Float overTimeSalary,
         Float bonus
 
-) {}
+) {
+}

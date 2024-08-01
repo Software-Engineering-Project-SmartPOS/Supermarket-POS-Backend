@@ -1,6 +1,5 @@
 package com.SupermarketPOS.Backend.dto.common;
 
-
 public record AddressOutput(
         Integer id,
         String HouseNumber,

@@ -1,12 +1,12 @@
 package com.SupermarketPOS.Backend.model.sales_management;
 
 import com.SupermarketPOS.Backend.model.inventory_management.StockLevel;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import jakarta.persistence.*;
 public class SalesItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer     id;
+    private Integer id;
 
     @ManyToOne(
             fetch = FetchType.LAZY,
@@ -29,12 +29,14 @@ public class SalesItem {
     private StockLevel stockLevel;
 
     private Float quantity;
+
     private Float unitPrice;
+
     private Float subtotal;
+
     private Float discountGiven;
+
     private Float total;
-
-
 
     // Getters and setters
 
@@ -43,8 +45,8 @@ public class SalesItem {
         this.stockLevel = stockLevel;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-        this.subtotal = quantity*unitPrice;
+        this.subtotal = quantity * unitPrice;
         this.discountGiven = discountGiven;
-        this.total = this.subtotal*(1-discountGiven);
+        this.total = this.subtotal * (1 - discountGiven);
     }
 }

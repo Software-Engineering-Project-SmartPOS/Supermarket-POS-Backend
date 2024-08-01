@@ -25,9 +25,13 @@ import java.util.List;
 @Service
 public class SalesService {
     private final SalesRepository salesRepository;
+
     private final SalesItemRepository salesItemRepository;
+
     private final EmployeeService employeeService;
+
     private final CustomerService customerService;
+
     private final StockLevelService stockLevelService;
 
     public SalesService(SalesRepository salesRepository, SalesItemRepository salesItemRepository, EmployeeService employeeService, CustomerService customerService, StockLevelService stockLevelService) {
@@ -39,7 +43,7 @@ public class SalesService {
     }
 
     @Transactional
-    public Sale CreateSales(SalesInput salesInput, Principal principal){
+    public Sale CreateSales(SalesInput salesInput, Principal principal) {
         System.out.println("in the Create sales in sales service");
         Employee caller = employeeService.getByEmail(principal.getName());
         Customer customer = customerService.getCustomerByCustomerId(salesInput.customerId());
@@ -51,37 +55,36 @@ public class SalesService {
                         salesInput.paymentType()
                 )
         );
-        Float total =0F;
-        for(SalesItemInput salesItemInput : salesInput.salesItemsInput()){
-            StockLevel stockLevel = stockLevelService.getStockLevelById(salesItemInput.stockLevelId(),principal);
+        Float total = 0F;
+        for (SalesItemInput salesItemInput : salesInput.salesItemsInput()) {
+            StockLevel stockLevel = stockLevelService.getStockLevelById(salesItemInput.stockLevelId(), principal);
 
             total = salesItemInput.quantity() * stockLevel.getSellingPrice();
 
-
             // save the new sales item
-             salesItemRepository.save(
+            salesItemRepository.save(
                     new SalesItem(
                             newSales,
                             stockLevel,
                             salesItemInput.quantity(),
                             stockLevel.getSellingPrice(),
-                            (stockLevel.getDiscount() != null ) ? stockLevel.getDiscount() : 0
+                            (stockLevel.getDiscount() != null) ? stockLevel.getDiscount() : 0
                     )
-             );
+            );
 
-             if(stockLevel.getStallQuantity() < salesItemInput.quantity()){
-                 throw new RuntimeException("not enough stocks in the stall");
-             }
-             stockLevel.setStallQuantity(stockLevel.getStallQuantity()  - salesItemInput.quantity());
-             stockLevel.setSoldQuantity(stockLevel.getSoldQuantity() + salesItemInput.quantity());
+            if (stockLevel.getStallQuantity() < salesItemInput.quantity()) {
+                throw new RuntimeException("not enough stocks in the stall");
+            }
+            stockLevel.setStallQuantity(stockLevel.getStallQuantity() - salesItemInput.quantity());
+            stockLevel.setSoldQuantity(stockLevel.getSoldQuantity() + salesItemInput.quantity());
 
-             if (stockLevel.getSoldQuantity() ==  stockLevel.getTotalQuantity()){
-                 stockLevel.setStatus(StockLevelStatus.SOLD_OUT);
-             }
+            if (stockLevel.getSoldQuantity() == stockLevel.getTotalQuantity()) {
+                stockLevel.setStatus(StockLevelStatus.SOLD_OUT);
+            }
         }
         newSales.setTotal(total);
         return salesRepository.save(newSales);
-    };
+    }
 
     public Sale GetSalesById(Integer id, Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
@@ -89,18 +92,17 @@ public class SalesService {
     }
 
     public Sale GetSalesById(Integer id) {
-        return salesRepository.findById(id).orElseThrow(()-> new RuntimeException("Sales with given id is not found"));
+        return salesRepository.findById(id).orElseThrow(() -> new RuntimeException("Sales with given id is not found"));
     }
 
-    public List<Sale> GetAllSales(Principal principal){
+    public List<Sale> GetAllSales(Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
         return salesRepository.findAllByBranchId(caller.getBranch().getId());
     }
 
-
     public List<Sale> GetAllSalesForOwner(Principal principal) {
         Employee caller = employeeService.getByEmail(principal.getName());
-        if (caller.getJobRole() != JobRole.OWNER){
+        if (caller.getJobRole() != JobRole.OWNER) {
             throw new UsernameNotFoundException("only owner can access ");
         }
         return salesRepository.findAll();
