@@ -3,22 +3,31 @@ schema {
   mutation: Mutation
 }
 
-
 type Query {
      AuthenticateUser(authRequest : AuthRequest): AuthPayload!
-
 }
 type Mutation {
     registerOwner(ownerDetail : EmployeeInput) : String
-}
-input AuthRequest{
-  username: String
-  password: String
 }
 
 type AuthPayload {
   token: String
   user: Employee
+}
+
+type Owner{
+    id: ID
+    title: Title
+    firstName: String
+    middleName: String
+    lastName: String
+    number: String
+    email: String
+}
+
+input AuthRequest{
+  username: String
+  password: String
 }
 
 input OwnerInput {
@@ -31,16 +40,3 @@ input OwnerInput {
     password: String
     email: String
 }
-type Owner{
-    id: ID
-    title: Title
-    firstName: String
-    middleName: String
-    lastName: String
-    number: String
-    email: String
-}
-
-
-
-

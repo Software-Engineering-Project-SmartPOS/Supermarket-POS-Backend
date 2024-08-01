@@ -10,6 +10,7 @@ extend type Query {
 
     GetWorkingHours( workingHoursRequest : WorkingHoursRequest) : String
 }
+
 extend type Mutation {
     #    here the input for the mutations must be defined in the graphql schema
     #    all the inputs must be in json
@@ -35,55 +36,10 @@ type FailedPayLoad{
     errorMessage: String!
 }
 
-input WorkingHoursRequest{
-    employeeId: ID
-    from : String #here is the from date
-    to: String # here is the to date
-}
-
-input  EmployeeAttendanceDetails{
-    employeeId: ID
-    timeIn : String
-    timeOut: String
-    timeInDate: String
-    timeOutDate: String
-}
-
-input LoginDetails{
-    userName: String
-    password: String
-}
-
 type EmployeeValidationReport {
     isNameOkay: Boolean
     isNumberOkay: Boolean
     isEmailOkay: Boolean
-}
-
-input AddressInput {
-    streetName: String!
-    houseNumber: String!
-    zipcode: String!
-}
-
-input EmployeeInput {
-    id: ID
-    title: Title
-    firstName: String
-    middleName: String
-    lastName: String
-    email: String
-    addressId: Int # Updated field name and type
-    houseNumber: String
-    street: String
-    city: String
-    district: String
-    postalCode: String
-    phoneNumber: String # Added phoneNumber field
-    jobRole: JobRole
-    salaryTypeId: Int
-    password: String
-    branchId : ID
 }
 
 type Employee {
@@ -121,6 +77,51 @@ type SalaryType {
     employees: [Employee]
 }
 
+input WorkingHoursRequest{
+    employeeId: ID
+    from : String #here is the from date
+    to: String # here is the to date
+}
+
+input  EmployeeAttendanceDetails{
+    employeeId: ID
+    timeIn : String
+    timeOut: String
+    timeInDate: String
+    timeOutDate: String
+}
+
+input LoginDetails{
+    userName: String
+    password: String
+}
+
+input AddressInput {
+    streetName: String!
+    houseNumber: String!
+    zipcode: String!
+}
+
+input EmployeeInput {
+    id: ID
+    title: Title
+    firstName: String
+    middleName: String
+    lastName: String
+    email: String
+    addressId: Int # Updated field name and type
+    houseNumber: String
+    street: String
+    city: String
+    district: String
+    postalCode: String
+    phoneNumber: String # Added phoneNumber field
+    jobRole: JobRole
+    salaryTypeId: Int
+    password: String
+    branchId : ID
+}
+
 input SalaryTypeInput {
     id: ID # used when updating
     basicSalary: Float
@@ -134,6 +135,7 @@ enum Title {
     MRS
     MISS
 }
+
 enum JobRole {
     CASHIER,
     OWNER,

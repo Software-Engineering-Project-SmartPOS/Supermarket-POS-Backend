@@ -23,39 +23,6 @@ extend type Mutation {
     AddToStockLevel(stockLevelInput : StockLevelInput): StockLevel
     TransferToStall(transferDetails: StockTransferInput): Boolean
 }
-input StockTransferInput{
-    stockLevelId : ID!
-    transferQuantity: Float
-}
-
-type StockLevel {
-    id: Int!
-    item: Item!
-    branch: Branch!
-    expiryDate: String!
-    inventoryQuantity: Int!
-    stallQuantity: Int!
-    sellingPrice: Float!
-}
-
-input StockLevelInput {
-    stockArrivalId: ID!
-    expiryDate: String
-    sellingPrice: Float!
-    quantity: Float!
-}
-
-input StockLevelDetailInput{
-    id: ID
-    status: StockLevelStatus
-}
-
-enum StockLevelStatus {
-    IN_INVENTORY
-    IN_BOTH
-    IN_STALL
-    SOLD_OUT
-}
 
 extend type Query{
     AllStockLevels:[StockLevel]
@@ -87,13 +54,23 @@ extend type Query{
     GetActiveItemSuppliesByItemId(itemId: ID!): [ItemSupply]
     GetActiveItemSuppliesByBranchId(branchId: ID!): [ItemSupply]
 
-#    all these give only the data related to the callers branch
+    #    all these give only the data related to the callers branch
     AllPurchaseOrders: [PurchaseOrder!]!
     PurchaseOrderById(id: ID!): PurchaseOrder
     AllPurchaseOrdersBySupplierId(supplierId: ID!) :[PurchaseOrder!]
     AllPurchaseOrdersByStatus(status: PurchaseOrderStatus): [PurchaseOrder]
 
     GetAllStockArrivals(transferred: Boolean): [StockArrival!]
+}
+
+type StockLevel {
+    id: Int!
+    item: Item!
+    branch: Branch!
+    expiryDate: String!
+    inventoryQuantity: Int!
+    stallQuantity: Int!
+    sellingPrice: Float!
 }
 
 type StockArrival {
@@ -105,11 +82,6 @@ type StockArrival {
     isTransferredToStore: Boolean
     branchId: Int
     arrivedAt: String # You can format the timestamp as a string if needed
-}
-
-input PurchaseOrderItemArrivalInput{
-    purchaseOrderItemId: ID!
-    receivedQuantity: Float
 }
 
 type PurchaseOrder {
@@ -135,7 +107,99 @@ type PurchaseOrderItem {
     totalCost: Float!
     receivedQuantity: Float!
     purchaseOrderItemStatus: PurchaseOrderStatus
-#    orderArrivals: [StockArrival!]
+    #    orderArrivals: [StockArrival!]
+}
+
+type ItemSupply {
+    id: ID!
+    supplier: Supplier!
+    item: Item!
+    createdDate: String!
+    modifiedDate: String
+    createdBy: Employee!
+    updatedEmployee: Employee
+    branch: Branch!
+    unitCost: Float!
+    active: Boolean!
+}
+
+type Item {
+    id: Int!
+    itemCode: String!
+    name: String!
+    barcodeNo: String!
+    description: String!
+    category: Category!
+    brand: Brand!
+    unitOfMeasure: UnitOfMeasure!
+    createdAt: String!
+    updatedAt: String
+    active: Boolean!
+    reorderLevel: Int!
+    returnable: Boolean!
+}
+
+type Brand {
+    id: ID!
+    name: String!
+    description: String
+    updateAt : String
+    createAt : String
+}
+
+type Supplier {
+    id: Int
+    name: String
+    landPhone: String
+    mobilePhone: String
+    email: String
+    address: Address
+    branchId: Int
+    createdBy: Employee
+    updatedEmployee: Employee
+    createdAt: String
+    updatedAt: String
+    active: Boolean
+}
+
+type Category {
+    id: ID!
+    name: String!
+    description: String
+    createAt: String
+    updateAt: String
+    updatedEmployee: Employee!
+    updatedDate: String
+    #itemList: [Item]
+}
+
+input StockTransferInput{
+    stockLevelId : ID!
+    transferQuantity: Float
+}
+
+input StockLevelInput {
+    stockArrivalId: ID!
+    expiryDate: String
+    sellingPrice: Float!
+    quantity: Float!
+}
+
+input StockLevelDetailInput{
+    id: ID
+    status: StockLevelStatus
+}
+
+enum StockLevelStatus {
+    IN_INVENTORY
+    IN_BOTH
+    IN_STALL
+    SOLD_OUT
+}
+
+input PurchaseOrderItemArrivalInput{
+    purchaseOrderItemId: ID!
+    receivedQuantity: Float
 }
 
 input PurchaseOrderInput {
@@ -156,27 +220,6 @@ input PurchaseOrderItemInput {
     purchaseItemUnitCost: Float
     totalCost: Float
     receivedQuantity: Float
-}
-
-enum PurchaseOrderStatus {
-    CREATE
-    CONFIRMED
-    HALF_RECEIVED
-    COMPLETED
-    CANCELLED
-}
-
-type ItemSupply {
-    id: ID!
-    supplier: Supplier!
-    item: Item!
-    createdDate: String!
-    modifiedDate: String
-    createdBy: Employee!
-    updatedEmployee: Employee
-    branch: Branch!
-    unitCost: Float!
-    active: Boolean!
 }
 
 input ItemSupplyInput {
@@ -202,32 +245,6 @@ input ItemInput {
     returnable: Boolean!
 }
 
-type Item {
-    id: Int!
-    itemCode: String!
-    name: String!
-    barcodeNo: String!
-    description: String!
-    category: Category!
-    brand: Brand!
-    unitOfMeasure: UnitOfMeasure!
-    createdAt: String!
-    updatedAt: String
-    active: Boolean!
-    reorderLevel: Int!
-    returnable: Boolean!
-}
-
-enum UnitOfMeasure {
-    KILOGRAM
-    GRAMS
-    LITERS
-    MILLILITERS
-    METERS
-    MILLIMETERS
-    COUNT
-}
-
 input SupplierInput {
     id: Int # Used when updating supplier details
     name: String
@@ -244,36 +261,10 @@ input SupplierInput {
     branchId: Int
 }
 
-type Supplier {
-    id: Int
-    name: String
-    landPhone: String
-    mobilePhone: String
-    email: String
-    address: Address
-    branchId: Int
-    createdBy: Employee
-    updatedEmployee: Employee
-    createdAt: String
-    updatedAt: String
-    active: Boolean
-}
-
 input CategoryInput {
     id: ID
     name: String
     description: String
-}
-
-type Category {
-    id: ID!
-    name: String!
-    description: String
-    createAt: String
-    updateAt: String
-    updatedEmployee: Employee!
-    updatedDate: String
-    #itemList: [Item]
 }
 
 input BrandInput {
@@ -282,12 +273,20 @@ input BrandInput {
     description: String
 }
 
-type Brand {
-    id: ID!
-    name: String!
-    description: String
-    updateAt : String
-    createAt : String
+enum UnitOfMeasure {
+    KILOGRAM
+    GRAMS
+    LITERS
+    MILLILITERS
+    METERS
+    MILLIMETERS
+    COUNT
 }
 
-
+enum PurchaseOrderStatus {
+    CREATE
+    CONFIRMED
+    HALF_RECEIVED
+    COMPLETED
+    CANCELLED
+}

@@ -15,26 +15,22 @@ public class GraphqlConfig {
                 wiringBuilder.scalar(ExtendedScalars.LocalTime);
     }
 
-    //test
     // CORS configuration
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/graphql") // Configure the specific path of your GraphQL endpoint
-                        .allowedOrigins("http://localhost:5173", "https://supermarket-pos-webapp.vercel.app") // Add the origin that is allowed to access your GraphQL server
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow specific HTTP methods
-                        .allowedHeaders("*"); // Allow specific headers
+                registry.addMapping("/graphql")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
 
                 registry.addMapping("/authenticate")
-                        .allowedOrigins("http://localhost:5173", "https://supermarket-pos-webapp.vercel.app")
+                        .allowedOrigins("*")
                         .allowedMethods("POST")
                         .allowedHeaders("*");
             }
-
         };
     }
 }
-
-
