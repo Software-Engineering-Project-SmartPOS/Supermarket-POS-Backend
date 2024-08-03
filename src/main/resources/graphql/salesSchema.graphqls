@@ -1,4 +1,4 @@
-extend type Query {
+type Query {
     GetSale(id: ID!): Sales
     GetAllSales: [Sales]
     GetSalesItem(id: ID!): SalesItem
@@ -10,7 +10,7 @@ extend type Query {
     GetRefundItem(id: ID!): RefundItem
 }
 
-extend type Mutation {
+type Mutation {
     CreateSales(salesInput: SaleInput): Sales
 #    UpdateSales(input: SaleInput): Sales
     CreateRefund(refundDetails: RefundInput) : Refund

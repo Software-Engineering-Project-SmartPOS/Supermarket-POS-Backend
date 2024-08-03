@@ -1,4 +1,4 @@
-extend type Mutation {
+type Mutation {
     CreateItem(itemInput: ItemInput!): Item
     UpdateItem(itemInput: ItemInput): Item
 
@@ -24,7 +24,7 @@ extend type Mutation {
     TransferToStall(transferDetails: StockTransferInput): Boolean
 }
 
-extend type Query{
+type Query{
     AllStockLevels:[StockLevel]
     AllStockLevelsByStatus(status: StockLevelStatus) : [StockLevel]
     AllStockLevelsByItemId(itemDetail: StockLevelDetailInput): [StockLevel]

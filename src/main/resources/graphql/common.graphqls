@@ -1,8 +1,8 @@
-extend type Query {
+type Query {
     getAllBranch: [Branch]
 }
 
-extend type Mutation {
+type Mutation {
     addBranch( branchInputDetails: BranchInput): Branch
     updateBranch(branchDetails: BranchInput!): Branch
     deleteBranch(id: ID!): String

@@ -21,7 +21,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private String barcodeNo;
 
     @ManyToOne

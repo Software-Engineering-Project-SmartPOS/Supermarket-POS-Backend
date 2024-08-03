@@ -1,4 +1,4 @@
-extend type Query {
+type Query {
     validateNewCustomerDetail(newCustomerDetail: CustomerInput): CustomerValidationReport
     customerById(customerId :ID):Customer
     allCustomer: [Customer]
@@ -7,7 +7,7 @@ extend type Query {
     getLoyaltyProgramById(loyaltyProgramId: ID!): LoyaltyProgram
 }
 
-extend type Mutation {
+type Mutation {
     addCustomer(customerInput: CustomerInput): Customer
     updateCustomer(customerUpdateInput : CustomerInput) : Customer
     InActivateCustomer(customerId : ID!): String
